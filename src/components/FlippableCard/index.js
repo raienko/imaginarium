@@ -1,5 +1,5 @@
 import React from 'react';
-import {Animated, StyleSheet, Easing} from 'react-native';
+import {Animated, StyleSheet, Easing, TouchableOpacity} from 'react-native';
 import Card from 'src/components/Card';
 import PropTypes from 'prop-types';
 
@@ -7,14 +7,12 @@ export default class FlippableCard extends React.PureComponent {
   static propTypes = {
     source: PropTypes.any.isRequired,
     flipped: PropTypes.bool,
-    perspective: PropTypes.number,
     duration: PropTypes.number,
   };
 
   static defaultProps = {
-    flipped: true,
-    perspective: 800,
-    duration: 1000,
+    flipped: false,
+    duration: 400,
   };
 
   _animation;
@@ -28,10 +26,6 @@ export default class FlippableCard extends React.PureComponent {
     this.state = {
       flipped,
     };
-  }
-
-  componentDidMount() {
-    setInterval(this.flip, 2000);
   }
 
   flip = () => {
@@ -76,7 +70,7 @@ export default class FlippableCard extends React.PureComponent {
   };
 
   render() {
-    const {source, perspective} = this.props;
+    const {source} = this.props;
     const {flipped} = this.state;
 
     const scale = {
@@ -84,7 +78,7 @@ export default class FlippableCard extends React.PureComponent {
         {
           scale: this._progress.interpolate({
             inputRange: [0, 0.5, 1],
-            outputRange: [1, 1.2, 1],
+            outputRange: [1, 1.009, 1],
           }),
         },
       ],
@@ -100,12 +94,9 @@ export default class FlippableCard extends React.PureComponent {
       transform: [
         {
           rotateY: this._progress.interpolate({
-            inputRange: [0, 0.33, 0.66, 1],
-            outputRange: ['0deg', '180deg', '0deg', '-180deg'],
+            inputRange: [0, 1],
+            outputRange: ['0deg', '180deg'],
           }),
-        },
-        {
-          perspective,
         },
       ],
     };
@@ -120,12 +111,9 @@ export default class FlippableCard extends React.PureComponent {
       transform: [
         {
           rotateY: this._progress.interpolate({
-            inputRange: [0, 0.5, 0.66, 1],
-            outputRange: ['0deg', '-180deg', '0deg', '180deg'],
+            inputRange: [0, 1],
+            outputRange: ['0deg', '180deg'],
           }),
-        },
-        {
-          perspective: -perspective,
         },
       ],
     };
@@ -138,6 +126,7 @@ export default class FlippableCard extends React.PureComponent {
         <Animated.View style={frontSide}>
           <Card source={source} />
         </Animated.View>
+        <TouchableOpacity onPress={this.flip} style={styles.overlay} />
       </Animated.View>
     );
   }
@@ -154,5 +143,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: 0,
     top: 0,
+  },
+  overlay: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    top: 0,
+    zIndex: 2,
   },
 });
