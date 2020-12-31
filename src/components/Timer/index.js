@@ -1,18 +1,19 @@
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import {rem} from 'src/utils/units';
 import Text from 'src/components/Text';
 
 export default class Button extends React.PureComponent {
   static propTypes = {
     timeout: PropTypes.number,
     onTimeout: PropTypes.func,
+    style: PropTypes.any,
   };
 
   static defaultProps = {
     timeout: 60000,
     onTimeout: () => {},
+    style: undefined,
   };
 
   _timer;
@@ -61,9 +62,10 @@ export default class Button extends React.PureComponent {
   };
 
   render() {
+    const {style} = this.props;
     const {timeLeft} = this.state;
     return (
-      <Text value={timeLeft} style={styles.text} />
+      <Text value={timeLeft} style={[styles.text].concat(style)} />
     );
   }
 }

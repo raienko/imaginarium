@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import Text from 'src/components/Text';
-import Button from 'src/components/Button';
+import H1 from 'src/components/H1';
+import HomeButton from 'src/components/HomeButton';
 import navigation from 'src/navigation';
 import cards from 'src/cards';
 import Header from 'src/components/Header';
@@ -17,9 +17,9 @@ export default class SoloGame extends React.PureComponent {
     return (
       <View style={styles.wrapper}>
         <Header style={styles.header}>
-          <Button text="back" onPress={navigation.back} />
-          <Text text={association} style={styles.association} />
-          <Timer />
+          <HomeButton onPress={navigation.back} style={styles.back} />
+          <H1 text={association} />
+          <Timer style={styles.timer} />
         </Header>
         <CardsList cards={set} />
         <Footer />
@@ -38,10 +38,17 @@ const styles = StyleSheet.create({
   header: {
     justifyContent: 'center',
   },
-  association: {
-    marginRight: rem(10),
+  back: {
+    position: 'absolute',
+    left: rem(10),
+    alignSelf: 'center',
   },
   card: {
     margin: 10,
+  },
+  timer: {
+    position: 'absolute',
+    right: rem(10),
+    alignSelf: 'center',
   },
 });
