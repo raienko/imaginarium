@@ -1,5 +1,5 @@
 import React from 'react';
-import {Animated, StyleSheet, Easing, TouchableOpacity} from 'react-native';
+import {Animated, StyleSheet, Easing} from 'react-native';
 import Card from 'src/components/Card';
 import PropTypes from 'prop-types';
 
@@ -126,7 +126,6 @@ export default class FlippableCard extends React.PureComponent {
         <Animated.View style={frontSide}>
           <Card source={source} />
         </Animated.View>
-        <TouchableOpacity onPress={this.flip} style={styles.overlay} />
       </Animated.View>
     );
   }

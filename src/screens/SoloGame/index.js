@@ -8,7 +8,7 @@ import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import Timer from 'src/components/Timer';
 import {rem} from 'src/utils/units';
-import CardsStack from 'src/components/CardsStack';
+import CardsList from 'src/components/CardsList';
 
 export default class SoloGame extends React.PureComponent {
   render() {
@@ -21,7 +21,7 @@ export default class SoloGame extends React.PureComponent {
           <Text text={association} style={styles.association} />
           <Timer />
         </Header>
-        <CardsStack cards={set} />
+        <CardsList cards={set} />
         <Footer />
       </View>
     );
