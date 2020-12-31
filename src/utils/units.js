@@ -6,4 +6,4 @@ export const vw = (size = 0) => Math.floor((screenWidth / 100) * size);
 
 export const vh = (size = 0) => Math.floor((screenHeight / 100) * size);
 
-export const rem = (size = 0) => Math.floor((screenWidth / 380) * size);
+export const rem = (size = 0) => Math.floor((screenHeight / 380) * size);

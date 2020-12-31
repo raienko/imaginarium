@@ -18,9 +18,9 @@ export default class CustomText extends React.PureComponent {
   };
 
   render() {
-    const { text, value, children, options } = this.props;
+    const { text, value, children, options, ...rest } = this.props;
     return (
-      <Text>
+      <Text {...rest}>
         {text}
         {value}
         {children}
