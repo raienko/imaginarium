@@ -1,5 +1,6 @@
 import image from './image.jpg';
 export default {
+  id: 'lovers',
   image,
   associations: [
     'couple',

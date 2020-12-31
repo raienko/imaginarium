@@ -23,8 +23,8 @@ export default class Card extends React.PureComponent {
   }
 }
 
-const width = rem(180);
-const height = width * 1.5;
+export const width = rem(150);
+export const height = width * 1.5;
 
 const styles = StyleSheet.create({
   wrapper: {
