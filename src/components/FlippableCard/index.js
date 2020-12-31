@@ -37,11 +37,21 @@ export default class FlippableCard extends React.PureComponent {
   };
 
   show = () => {
+    const {flipped} = this.state;
+    if (!flipped) {
+      return;
+    }
+
     this.setState({flipped: false});
     return this._animate(0);
   };
 
   hide = () => {
+    const {flipped} = this.state;
+    if (flipped) {
+      return;
+    }
+
     this.setState({flipped: true});
     return this._animate(1);
   };
@@ -70,7 +80,7 @@ export default class FlippableCard extends React.PureComponent {
   };
 
   render() {
-    const {source} = this.props;
+    const {source, ...rest} = this.props;
     const {flipped} = this.state;
 
     const scale = {
@@ -121,10 +131,10 @@ export default class FlippableCard extends React.PureComponent {
     return (
       <Animated.View style={[styles.wrapper, scale]}>
         <Animated.View style={[styles.back, backSide]}>
-          <Card source="https://i.pinimg.com/originals/4a/2a/ef/4a2aef1bb8dd0d8a04492475f81d8588.png" />
+          <Card {...rest} source="https://i.pinimg.com/originals/4a/2a/ef/4a2aef1bb8dd0d8a04492475f81d8588.png" />
         </Animated.View>
         <Animated.View style={frontSide}>
-          <Card source={source} />
+          <Card {...rest} source={source} />
         </Animated.View>
       </Animated.View>
     );

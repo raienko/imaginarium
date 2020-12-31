@@ -6,15 +6,26 @@ import {rem} from 'src/utils/units';
 export default class Card extends React.PureComponent {
   static propTypes = {
     source: PropTypes.any.isRequired,
+    scale: PropTypes.number,
+  };
+
+  static defaultProps = {
+    scale: 1,
   };
 
   render() {
-    const {source} = this.props;
+    const {source, scale} = this.props;
+
+    const size = {
+      width: width * scale,
+      height: height * scale,
+    };
+
     const image = typeof source === 'string' ? {uri: source} : source;
     return (
       <View style={styles.wrapper}>
         <Image
-          style={styles.image}
+          style={[size, styles.image]}
           source={image}
           resizeMode="cover"
         />
@@ -41,8 +52,6 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   image: {
-    width,
-    height,
     borderRadius: rem(6),
   },
 });

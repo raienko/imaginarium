@@ -16,20 +16,25 @@ export default class CardsList extends React.PureComponent {
   };
 
   componentDidMount() {
-    setTimeout(this.showAll, 1000);
-    setTimeout(this.hideAll, 5000);
+    this.timer = setTimeout(this.showAll, 1000);
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer);
   }
 
   renderCard = (card, index) => {
     return (
       <TouchableOpacity
-        onPress={this.show(index)} style={styles.container}
+        onPress={this.show(index)} style={styles.card}
         activeOpacity={1}
+        key={card.id}
       >
         <FlippableCard
           ref={this.registerCard(index)}
           source={card.image}
           flipped
+          scale={0.8}
         />
       </TouchableOpacity>
     );
@@ -57,7 +62,9 @@ export default class CardsList extends React.PureComponent {
     const {cards} = this.props;
     return (
       <View style={styles.wrapper}>
-        {cards.map(this.renderCard)}
+        <View style={styles.container}>
+          {cards.map(this.renderCard)}
+        </View>
       </View>
     );
   }
@@ -66,15 +73,16 @@ export default class CardsList extends React.PureComponent {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    flexWrap: 'wrap',
     justifyContent: 'center',
-    paddingBottom: rem(40),
   },
   container: {
-    transform: [
-      {scale: 0.9},
-    ],
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
+  card: {
+    marginTop: rem(10),
+    marginHorizontal: rem(10),
   },
 });
