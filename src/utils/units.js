@@ -1,7 +1,6 @@
 import {Dimensions} from 'react-native';
 
 export const {width: screenWidth, height: screenHeight} = Dimensions.get('screen');
-export const {width: windowWidth, height: windowHeight} = Dimensions.get('window');
 
 export const vw = (size = 0) => Math.floor((screenWidth / 100) * size);
 
