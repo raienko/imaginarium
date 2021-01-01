@@ -9,6 +9,7 @@ import Home from 'src/screens/Home';
 import HowToPlay from 'src/screens/HowToPlay';
 import Settings from 'src/screens/Settings';
 import SoloGame from 'src/screens/SoloGame';
+import Store from 'src/screens/Store';
 import Multiplayer from 'src/screens/Multiplayer';
 
 const Stack = createStackNavigator();
@@ -24,6 +25,7 @@ export default class Navigation extends React.PureComponent {
           <Stack.Screen name="HowToPlay" component={HowToPlay} />
           <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen name="SoloGame" component={SoloGame} />
+          <Stack.Screen name="Store" component={Store} />
           <Stack.Screen name="Multiplayer" component={Multiplayer} />
         </Stack.Navigator>
       </NavigationContainer>

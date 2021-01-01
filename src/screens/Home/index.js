@@ -14,6 +14,7 @@ export default class Home extends React.PureComponent {
         <Button text="multiplayer" onPress={() => navigation.navigate('Multiplayer')} />
         <Button text="how to play" onPress={() => navigation.navigate('HowToPlay')} />
         <Button text="settings" onPress={() => navigation.navigate('Settings')} />
+        <Button text="store" onPress={() => navigation.navigate('Store')} />
       </View>
     );
   }
