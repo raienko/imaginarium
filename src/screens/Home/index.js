@@ -10,7 +10,7 @@ export default class Home extends React.PureComponent {
     return (
       <View style={styles.wrapper}>
         <Text text="Imaginarium" />
-        <Button text="play solo" onPress={() => navigation.navigate('SoloGame')} />
+        <Button text="play solo" onPress={() => navigation.navigate('Singleplayer')} />
         <Button text="multiplayer" onPress={() => navigation.navigate('Multiplayer')} />
         <Button text="how to play" onPress={() => navigation.navigate('HowToPlay')} />
         <Button text="settings" onPress={() => navigation.navigate('Settings')} />

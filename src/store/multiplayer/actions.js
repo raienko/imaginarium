@@ -6,10 +6,16 @@ const game = {
   map: 'some_map',
 };
 
-export const createGame = (config) => {
+export const createGame = (type, config) => {
   return store.dispatch({
     type: types.createGame,
-    payload: {game},
+    payload: {
+      type,
+      game: {
+        ...game,
+        ...config,
+      },
+    },
   });
 };
 

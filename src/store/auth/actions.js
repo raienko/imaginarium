@@ -16,6 +16,7 @@ export const fetchProfile = () => {
       profile: {
         name: 'John',
         birthday: '2020.01.92',
+        role: 'player',
       },
     },
   });
