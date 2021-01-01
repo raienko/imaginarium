@@ -26,7 +26,6 @@ export default class Lives extends React.PureComponent {
 
   renderLife = (life, index) => {
     const {value} = this.props;
-    console.log(`${index}_${value}`);
     const active = index < value;
     const transform = [{translateX: -index * rem(30)}]
     return (

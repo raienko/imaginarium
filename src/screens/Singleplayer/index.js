@@ -43,6 +43,22 @@ export default connect(mapStateToProps)(class Singleplayer extends React.PureCom
     this.setState({loading: false});
   };
 
+  addLife = () => {
+    const { lives, maxLives } = this.state;
+    if (lives >= maxLives) {
+      return;
+    }
+    this.setState({ lives: lives + 1 });
+  }
+
+  removeLife = () => {
+    const { lives } = this.state;
+    if (lives <= 0) {
+      return;
+    }
+    this.setState({ lives: lives - 1 });
+  }
+
   render() {
     const {loading, lives} = this.state;
     return (
@@ -51,8 +67,8 @@ export default connect(mapStateToProps)(class Singleplayer extends React.PureCom
           <HomeButton onPress={navigation.back} style={styles.back} />
           <Lives value={lives} total={5} />
         </Header>
-        <Button text="+" onPress={() => this.setState({ lives: lives+1 })} />
-        <Button text="-" onPress={() => this.setState({ lives: lives-1 })} />
+        <Button text="+" onPress={this.addLife} />
+        <Button text="-" onPress={this.removeLife} />
         <Spinner visible={loading} />
       </View>
     );
