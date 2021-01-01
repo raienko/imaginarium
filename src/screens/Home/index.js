@@ -1,21 +1,22 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {ImageBackground, View, StyleSheet} from 'react-native';
 import {rem} from 'src/utils/units';
 import Text from 'src/components/Text';
 import Button from 'src/components/Button';
 import navigation from 'src/navigation';
+import background from './background.jpg';
 
 export default class Home extends React.PureComponent {
   render() {
     return (
-      <View style={styles.wrapper}>
+      <ImageBackground source={background} style={styles.wrapper}>
         <Text text="Imaginarium" />
         <Button text="play solo" onPress={() => navigation.navigate('Singleplayer')} />
         <Button text="multiplayer" onPress={() => navigation.navigate('Multiplayer')} />
         <Button text="how to play" onPress={() => navigation.navigate('HowToPlay')} />
         <Button text="settings" onPress={() => navigation.navigate('Settings')} />
         <Button text="store" onPress={() => navigation.navigate('Store')} />
-      </View>
+      </ImageBackground>
     );
   }
 }
@@ -26,5 +27,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingBottom: rem(40),
+    backgroundColor: '#DDBE9C',
   },
 });

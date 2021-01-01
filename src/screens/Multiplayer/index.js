@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
+import Board from 'src/components/Board';
 import H1 from 'src/components/H1';
 import HomeButton from 'src/components/HomeButton';
 import navigation from 'src/navigation';
@@ -15,26 +16,20 @@ export default class Multiplayer extends React.PureComponent {
     const set = cards;
     const association = set[0].associations[2];
     return (
-      <View style={styles.wrapper}>
+      <Board>
+        <CardsStack cards={set} />
         <Header style={styles.header}>
-          <HomeButton onPress={navigation.back} style={styles.back} />
           <H1 text={association} />
           <Timer style={styles.timer} />
+          <HomeButton onPress={navigation.back} style={styles.back} />
         </Header>
-        <CardsStack cards={set} />
         <Footer />
-      </View>
+      </Board>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
-  container: {
-    flexDirection: 'row',
-  },
   header: {
     justifyContent: 'center',
   },
@@ -42,12 +37,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     left: rem(10),
     alignSelf: 'center',
-  },
-  association: {
-    marginRight: rem(10),
-  },
-  card: {
-    margin: 10,
   },
   timer: {
     position: 'absolute',

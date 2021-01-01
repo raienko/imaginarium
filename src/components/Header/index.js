@@ -29,7 +29,10 @@ export default class Header extends React.PureComponent {
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fdea33',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
   },
   container: {
     padding: rem(10),

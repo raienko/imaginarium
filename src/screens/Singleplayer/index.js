@@ -1,89 +1,74 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from 'src/components/Spinner';
+import Board from 'src/components/Board';
 import HomeButton from 'src/components/HomeButton';
 import navigation from 'src/navigation';
 import Header from 'src/components/Header';
-import Button from 'src/components/Button';
 import Score from 'src/components/Score';
-import Lives from 'src/components/Lives';
+import LivesCounter from 'src/components/LivesCounter';
 import {rem} from 'src/utils/units';
 import * as gameActions from 'src/store/singleplayer/actions';
+import Timer from 'src/components/Timer';
 
 const mapStateToProps = (state) => ({
   game: state.singleplayer.game,
 });
 
-export default connect(mapStateToProps)(class Singleplayer extends React.PureComponent {
-  static propTypes = {
-    game: PropTypes.object,
-  }
+export default connect(mapStateToProps)(
+  class Singleplayer extends React.PureComponent {
+    static propTypes = {
+      game: PropTypes.object,
+    };
 
-  static defaultProps = {
-    game: null,
-  }
+    static defaultProps = {
+      game: null,
+    };
 
-  state = {
-    loading: true,
-    lives: 3,
-    maxLives: 5,
-  }
+    state = {
+      loading: true,
+      lives: 3,
+      score: 30,
+    };
 
-  async componentDidMount() {
-    await this.start();
-  }
-
-  start = async () => {
-    const {game} = this.props;
-    if (!game) {
-      await gameActions.createGame();
+    async componentDidMount() {
+      await this.start();
     }
-    this.setState({loading: false});
-  };
 
-  addLife = () => {
-    const { lives, maxLives } = this.state;
-    if (lives >= maxLives) {
-      return;
+    start = async () => {
+      const {game} = this.props;
+      if (!game) {
+        await gameActions.createGame();
+      }
+      this.setState({loading: false});
+    };
+
+    render() {
+      const {loading, lives, score} = this.state;
+      return (
+        <Board>
+          <Header style={styles.header}>
+            <HomeButton onPress={navigation.back} style={styles.back} />
+            <LivesCounter value={lives} />
+            <Score value={score} />
+            <Timer />
+          </Header>
+          <Spinner visible={loading} />
+        </Board>
+      );
     }
-    this.setState({ lives: lives + 1 });
-  }
-
-  removeLife = () => {
-    const { lives } = this.state;
-    if (lives <= 0) {
-      return;
-    }
-    this.setState({ lives: lives - 1 });
-  }
-
-  render() {
-    const {loading, lives} = this.state;
-    return (
-      <View style={styles.wrapper}>
-        <Header style={styles.header}>
-          <HomeButton onPress={navigation.back} style={styles.back} />
-          <Lives value={lives} total={5} />
-        </Header>
-        <Button text="+" onPress={this.addLife} />
-        <Button text="-" onPress={this.removeLife} />
-        <Spinner visible={loading} />
-      </View>
-    );
-  }
-});
+  },
+);
 
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
   },
-  container: {
-    flexDirection: 'row',
-  },
   header: {
     justifyContent: 'center',
+    alignItems: 'center',
   },
   back: {
     position: 'absolute',

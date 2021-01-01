@@ -1,7 +1,9 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {View, Image, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import Text from 'src/components/Text';
+import {rem} from 'src/utils/units';
+import icon from './icon.png';
 
 export default class Button extends React.PureComponent {
   static propTypes = {
@@ -65,13 +67,27 @@ export default class Button extends React.PureComponent {
     const {style} = this.props;
     const {timeLeft} = this.state;
     return (
-      <Text value={timeLeft} style={[styles.text].concat(style)} />
+      <View style={[styles.wrapper].concat(style)}>
+        <Image source={icon} style={styles.icon} resizeMode="stretch" />
+        <Text value={timeLeft} style={styles.text} />
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   text: {
     fontWeight: 'bold',
+    fontSize: 24,
+    width: rem(35),
+    textAlign: 'left',
+  },
+  icon: {
+    width: rem(30),
+    height: rem(30),
   },
 });
