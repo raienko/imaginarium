@@ -38,10 +38,10 @@ const styles = StyleSheet.create({
     height,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: rem(5),
-    borderWidth: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.3)',
   },
   text: {
-
+    fontWeight: 'bold',
+    fontSize: 20,
   },
 });

@@ -1,7 +1,6 @@
 import React from 'react';
-import {ImageBackground, View, StyleSheet} from 'react-native';
+import {ImageBackground, StyleSheet} from 'react-native';
 import {rem} from 'src/utils/units';
-import Text from 'src/components/Text';
 import Button from 'src/components/Button';
 import PrimaryBtn from 'src/components/PrimaryBtn';
 import SecondaryBtn from 'src/components/SecondaryBtn';
@@ -12,7 +11,7 @@ export default class Home extends React.PureComponent {
   render() {
     return (
       <ImageBackground source={background} style={styles.wrapper}>
-        {/*<Text text="Imaginarium" />*/}
+        <Button text="Ranked" disabled onPress={() => navigation.navigate('Ranked')} />
         <PrimaryBtn text="singleplayer" onPress={() => navigation.navigate('Singleplayer')} />
         <SecondaryBtn text="multiplayer" onPress={() => navigation.navigate('Multiplayer')} />
         {/*<Button text="how to play" onPress={() => navigation.navigate('HowToPlay')} />*/}
