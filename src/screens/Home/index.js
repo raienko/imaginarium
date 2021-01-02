@@ -11,7 +11,7 @@ export default class Home extends React.PureComponent {
   render() {
     return (
       <ImageBackground source={background} style={styles.wrapper}>
-        <Button text="Ranked" disabled onPress={() => navigation.navigate('Ranked')} />
+        <SecondaryBtn text="Ranked" disabled onPress={() => navigation.navigate('Ranked')} />
         <PrimaryBtn text="singleplayer" onPress={() => navigation.navigate('Singleplayer')} />
         <SecondaryBtn text="multiplayer" onPress={() => navigation.navigate('Multiplayer')} />
         {/*<Button text="how to play" onPress={() => navigation.navigate('HowToPlay')} />*/}
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingBottom: rem(40),
+    paddingHorizontal: rem(10),
     backgroundColor: '#DDBE9C',
   },
 });
