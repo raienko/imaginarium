@@ -1,7 +1,7 @@
 import store from 'src/store';
 import types from './types';
 
-export const auth = (credentials) => {
+export const auth = async (credentials) => {
   const token = 'fake_token';
   return store.dispatch({
     type: types.authorize,

@@ -5,13 +5,14 @@ import Button from 'src/components/Button';
 import PrimaryBtn from 'src/components/PrimaryBtn';
 import SecondaryBtn from 'src/components/SecondaryBtn';
 import navigation from 'src/navigation';
+import * as authActions from 'src/store/auth/actions';
 import background from './background.jpg';
 
 export default class Home extends React.PureComponent {
   render() {
     return (
       <ImageBackground source={background} style={styles.wrapper}>
-        <SecondaryBtn text="Ranked" disabled onPress={() => navigation.navigate('Ranked')} />
+        <SecondaryBtn text="Ranked" onPress={authActions.auth} />
         <PrimaryBtn text="singleplayer" onPress={() => navigation.navigate('Singleplayer')} />
         <SecondaryBtn text="multiplayer" onPress={() => navigation.navigate('Multiplayer')} />
         {/*<Button text="how to play" onPress={() => navigation.navigate('HowToPlay')} />*/}

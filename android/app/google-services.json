@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "52027154451",
+    "project_id": "imaginarium-c4fb9",
+    "storage_bucket": "imaginarium-c4fb9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:52027154451:android:58c869a565bea6b1c2dfe6",
+        "android_client_info": {
+          "package_name": "com.imaginarium"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "52027154451-uum9k9p0ij4crvgo6ho3h9aq9usts8v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpeRRa6gXOLnikR-PcpZ__zaNfYAIpsk8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "52027154451-uum9k9p0ij4crvgo6ho3h9aq9usts8v4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

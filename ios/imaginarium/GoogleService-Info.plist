@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>52027154451-lf3dkrn8obcvjpgjfnjci96tr6u17ic6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.52027154451-lf3dkrn8obcvjpgjfnjci96tr6u17ic6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBRRYwppcpLO4oPF5syh9bJyZjZGc2zhpw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>52027154451</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.imaginarium</string>
+	<key>PROJECT_ID</key>
+	<string>imaginarium-c4fb9</string>
+	<key>STORAGE_BUCKET</key>
+	<string>imaginarium-c4fb9.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:52027154451:ios:1faf87c446dbf92ac2dfe6</string>
+</dict>
+</plist>
