@@ -6,14 +6,24 @@ import SecondaryBtn from 'src/components/SecondaryBtn';
 import navigation from 'src/navigation';
 import * as authActions from 'src/store/auth/actions';
 import background from './background.jpg';
-import * as multiplayerActions from 'src/store/multiplayer/actions';
+import {isAuthorized} from 'src/utils/helpers';
+import AuthorizationPopup from 'src/components/AuthorizationPopup';
 
 export default class Home extends React.PureComponent {
   state = {
     loading: false,
   };
 
-  searchGame = async () => {
+  playSingleplayer = () => {
+    return navigation.navigate('Singleplayer');
+  };
+
+  searchMultiplayer = async () => {
+    const authorized = isAuthorized();
+    if (!authorized) {
+      this.setState({authPopup: true})
+      return;
+    }
     this.setState({loading: true});
   };
 
@@ -22,19 +32,19 @@ export default class Home extends React.PureComponent {
   };
 
   render() {
-    const {loading} = this.state;
     return (
       <ImageBackground source={background} style={styles.wrapper}>
         <SecondaryBtn text="Ranked" onPress={authActions.auth} />
-        <PrimaryBtn text="singleplayer" onPress={() => navigation.navigate('Singleplayer')} />
-        <SecondaryBtn text="multiplayer" onPress={multiplayerActions.searchGame} />
-        {/*<Button text="how to play" onPress={() => navigation.navigate('HowToPlay')} />*/}
-        {/*<Button text="settings" onPress={() => navigation.navigate('Settings')} />*/}
-        {/*<Button text="store" onPress={() => navigation.navigate('Store')} />*/}
+        <PrimaryBtn text="singleplayer" onPress={this.playSingleplayer} />
+        <SecondaryBtn text="multiplayer" onPress={this.searchMultiplayer} />
+        <AuthorizationPopup
+          visible={this.state.authPopup}
+          onSuccess={() => this.setState({authPopup: false})}
+        />
       </ImageBackground>
     );
   }
-}
+};
 
 const styles = StyleSheet.create({
   wrapper: {
