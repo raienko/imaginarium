@@ -1,4 +1,7 @@
 export default {
+  searchGame: 'searchGame',
+  cancelSearch: 'cancelSearch',
+
   createGame: 'createGame',
   dealCards: 'dealCards',
   playCard: 'playCard',

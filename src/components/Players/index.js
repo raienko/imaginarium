@@ -7,14 +7,16 @@ import {rem} from 'src/utils/units';
 export default class Players extends React.PureComponent {
   static propTypes = {
     players: PropTypes.array.isRequired,
+    score: PropTypes.object.isRequired,
   };
 
   renderPlayer = (player, index) => {
+    const {score} = this.props;
     return (
       <View style={styles.container} key={`${index}`}>
         <Image source={{uri: player.avatar}} style={styles.avatar} resizeMode="contain" />
         <View style={styles.scoreBox}>
-          <Text value={player.score} style={styles.score} />
+          <Text value={score?.[player.id] || 0} style={styles.score} />
         </View>
       </View>
     );
@@ -24,7 +26,7 @@ export default class Players extends React.PureComponent {
     const {players} = this.props;
     return (
       <View style={styles.wrapper}>
-        {players.map(this.renderPlayer)}
+        {players?.map(this.renderPlayer)}
       </View>
     );
   }

@@ -1,18 +1,28 @@
 import store from 'src/store';
 import types from './types';
 
-const game = {
-  id: 'fake_game_id',
-  map: 'some_map',
+export const searchGame = (params) => {
+  return store.dispatch({
+    type: types.searchGame,
+    payload: params,
+  });
 };
 
-export const createGame = (type, config) => {
+export const cancelSearch = () => {
+  return store.dispatch({
+    type: types.cancelSearch,
+  });
+};
+
+export const createGame = (config) => {
+  const game = {
+    id: 'asdasd',
+  };
+
   return store.dispatch({
     type: types.createGame,
     payload: {
-      type,
       game: {
-        ...game,
         ...config,
       },
     },
