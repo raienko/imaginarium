@@ -20,7 +20,7 @@ export default class Navigation extends React.PureComponent {
   render() {
     return (
       <NavigationContainer ref={navigationRef}>
-        <Stack.Navigator headerMode="none" mode="modal">
+        <Stack.Navigator headerMode="none">
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="HowToPlay" component={HowToPlay} />
           <Stack.Screen name="Settings" component={Settings} />

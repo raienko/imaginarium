@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
 import Popup from 'src/components/Popup';
@@ -29,37 +29,21 @@ export default class AuthorizationPopup extends React.PureComponent {
   };
 
   render() {
-    const {visible} = this.props;
+    const {visible, onDismiss} = this.props;
     return (
-      <Popup visible={visible}>
-        <Button text="Google" onPres={this.auth} />
-        <Button text="Apple" onPress={this.auth} />
-        <Button text="Phone number" onPress={this.auth} />
-        <Button text="Play center" onPress={this.auth} />
-        <Button text="Games center" onPress={this.auth} />
+      <Popup visible={visible} onDismiss={onDismiss}>
+        <Button text="Google" onPress={this.auth} />
+        <Button text="Apple" onPress={this.auth} style={styles.btn} />
+        <Button text="Phone number" onPress={this.auth} style={styles.btn} />
+        <Button text="Play center" onPress={this.auth} style={styles.btn} />
+        <Button text="Games center" onPress={this.auth} style={styles.btn} />
       </Popup>
     );
   }
 }
 
-export const width = rem(150);
-export const height = width * 1.5;
-
 const styles = StyleSheet.create({
-  wrapper: {
-    backgroundColor: '#fff',
-    borderRadius: rem(10),
-    borderWidth: rem(5),
-    borderColor: '#fff',
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowRadius: 2,
-    shadowOpacity: 1,
-    elevation: 4,
-  },
-  image: {
-    borderRadius: rem(6),
+  btn: {
+    marginTop: rem(10),
   },
 });

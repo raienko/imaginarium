@@ -29,7 +29,7 @@ export default class Button extends React.PureComponent {
   }
 }
 
-export const width = rem(180);
+export const width = rem(280);
 export const height = rem(40);
 
 const styles = StyleSheet.create({
@@ -38,10 +38,12 @@ const styles = StyleSheet.create({
     height,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backgroundColor: 'rgba(0, 0, 0, 0.03)',
+    borderRadius: rem(10),
   },
   text: {
     fontWeight: 'bold',
     fontSize: 20,
+    // textTransform: 'uppercase',
   },
 });

@@ -6,6 +6,7 @@ import Button from 'src/components/Button';
 import {connect} from 'react-redux';
 import {rem} from 'src/utils/units';
 import H1 from 'src/components/H1';
+import navigation from 'src/navigation';
 import * as multiplayerActions from 'src/store/multiplayer/actions';
 
 const mapStateToProps = (state) => ({
@@ -21,6 +22,16 @@ export default connect(mapStateToProps)(
     static defaultProps = {
       searching: false,
     };
+
+    componentDidUpdate(prevProps) {
+      const {searching} = this.props;
+      if (searching && !prevProps.searching) {
+        setTimeout(() => {
+          multiplayerActions.cancelSearch();
+          navigation.navigate('Multiplayer');
+        }, 2000);
+      }
+    }
 
     render() {
       const {searching} = this.props;
