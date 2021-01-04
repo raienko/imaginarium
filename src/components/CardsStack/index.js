@@ -5,7 +5,7 @@ import Card, {width} from 'src/components/Card';
 import {rem} from 'src/utils/units';
 import hands from './hands.png';
 
-const scale = 0.5;
+const scale = 0.9;
 
 const transforms = [
   [{rotate: '-10deg'}, {translateX: width * scale * 1.6}, {translateY: width * scale * 0.3}],
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'center',
-    paddingBottom: rem(40),
+    paddingBottom: rem(20),
   },
   hands: {
     position: 'absolute',

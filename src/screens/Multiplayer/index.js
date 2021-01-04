@@ -47,13 +47,13 @@ export default connect(mapStateToProps)(
       const association = 'Some long asdasd as das dasdas as dasd asd';
       return (
         <Screen style={styles.wrapper}>
-          <CardsStack cards={cards} />
           <Header style={styles.header}>
             <H1 text={association} style={styles.association} />
             <HomeButton onPress={navigation.back} style={styles.back} />
           </Header>
           <Table />
           <Players players={players} />
+          <CardsStack cards={cards} />
           <Timer style={styles.timer} />
           <Footer />
           <Spinner visible={loading} />
