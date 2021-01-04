@@ -10,6 +10,7 @@ export default class Button extends React.PureComponent {
     value: PropTypes.any,
     options: PropTypes.object,
     style: PropTypes.any,
+    disabled: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -17,12 +18,17 @@ export default class Button extends React.PureComponent {
     value: undefined,
     options: undefined,
     style: undefined,
+    disabled: false,
   };
 
   render() {
-    const {text, value, options, style, ...rest} = this.props;
+    const {text, value, options, style, disabled, ...rest} = this.props;
     return (
-      <TouchableOpacity {...rest} style={[styles.wrapper].concat(style)}>
+      <TouchableOpacity
+        {...rest}
+        disabled={disabled}
+        style={[styles.wrapper, disabled && styles.disabled].concat(style)}
+      >
         <Text text={text} value={value} options={options} style={styles.text} />
       </TouchableOpacity>
     );
@@ -40,6 +46,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.03)',
     borderRadius: rem(10),
+  },
+  disabled: {
+    opacity: 0.1,
   },
   text: {
     fontWeight: 'bold',

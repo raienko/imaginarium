@@ -1,5 +1,6 @@
 import React from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
 import {rem} from 'src/utils/units';
 import Button from 'src/components/Button';
 import PrimaryBtn from 'src/components/PrimaryBtn';
@@ -11,7 +12,11 @@ import {isAuthorized} from 'src/utils/helpers';
 import AuthorizationPopup from 'src/components/AuthorizationPopup';
 import {searchGame} from 'src/store/multiplayer/actions';
 
-export default class Home extends React.PureComponent {
+const mapStateToProps = (state) => ({
+  searching: state.multiplayer.searching,
+});
+
+export default connect(mapStateToProps)(class Home extends React.PureComponent {
   state = {
     loading: false,
   };
@@ -32,9 +37,14 @@ export default class Home extends React.PureComponent {
   render() {
     return (
       <ImageBackground source={background} style={styles.wrapper}>
-        <Button text="Ranked" onPress={authActions.auth} style={styles.btn} />
+        <Button text="Ranked" onPress={authActions.auth} style={styles.btn} disabled />
         <Button text="singleplayer" onPress={this.playSingleplayer} style={styles.btn} />
-        <Button text="multiplayer" onPress={this.searchMultiplayer} style={styles.btn} />
+        <Button
+          text="multiplayer"
+          onPress={this.searchMultiplayer}
+          style={styles.btn}
+          disabled={this.props.searching}
+        />
         <AuthorizationPopup
           visible={this.state.authPopup}
           onSuccess={this.searchMultiplayer}
@@ -43,7 +53,7 @@ export default class Home extends React.PureComponent {
       </ImageBackground>
     );
   }
-};
+});
 
 const styles = StyleSheet.create({
   wrapper: {
