@@ -1,9 +1,9 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import Text from 'src/components/Text';
+import Icon from 'src/components/Icon';
 import {rem} from 'src/utils/units';
-import icon from './icon.png';
 
 export default class Button extends React.PureComponent {
   static propTypes = {
@@ -68,7 +68,7 @@ export default class Button extends React.PureComponent {
     const {timeLeft} = this.state;
     return (
       <View style={[styles.wrapper].concat(style)}>
-        <Image source={icon} style={styles.icon} resizeMode="stretch" />
+        <Icon name="clock-o" />
         <Text value={timeLeft} style={styles.text} />
       </View>
     );
@@ -85,9 +85,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     width: rem(35),
     textAlign: 'left',
-  },
-  icon: {
-    width: rem(30),
-    height: rem(30),
+    marginLeft: rem(5),
   },
 });

@@ -3,6 +3,8 @@ import {TouchableOpacity, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
 import Text from 'src/components/Text';
+import shadow from 'src/constants/shadow';
+import {borderRadius} from 'src/constants/sizes';
 
 export default class Button extends React.PureComponent {
   static propTypes = {
@@ -10,7 +12,9 @@ export default class Button extends React.PureComponent {
     value: PropTypes.any,
     options: PropTypes.object,
     style: PropTypes.any,
+    textStyle: PropTypes.any,
     disabled: PropTypes.bool,
+    children: PropTypes.node,
   };
 
   static defaultProps = {
@@ -18,25 +22,43 @@ export default class Button extends React.PureComponent {
     value: undefined,
     options: undefined,
     style: undefined,
+    textStyle: undefined,
     disabled: false,
+    children: null,
   };
 
   render() {
-    const {text, value, options, style, disabled, ...rest} = this.props;
+    const {
+      text,
+      value,
+      style,
+      options,
+      disabled,
+      children,
+      textStyle,
+      ...rest
+    } = this.props;
+
     return (
       <TouchableOpacity
         {...rest}
         disabled={disabled}
-        style={[styles.wrapper, disabled && styles.disabled].concat(style)}
+        style={[styles.wrapper, shadow, disabled && styles.disabled].concat(style)}
       >
-        <Text text={text} value={value} options={options} style={styles.text} />
+        <Text
+          text={text}
+          value={value}
+          options={options}
+          style={[styles.text].concat(textStyle)}
+        />
+        {children}
       </TouchableOpacity>
     );
   }
 }
 
 export const width = rem(280);
-export const height = rem(40);
+export const height = width * 0.23;
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -44,15 +66,17 @@ const styles = StyleSheet.create({
     height,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.03)',
-    borderRadius: rem(10),
+    flexDirection: 'row',
+    backgroundColor: '#fff',
+    borderRadius,
+    paddingHorizontal: borderRadius + rem(5),
   },
   disabled: {
     opacity: 0.1,
   },
   text: {
     fontWeight: 'bold',
-    fontSize: 20,
-    // textTransform: 'uppercase',
+    fontSize: 25,
+    textTransform: 'uppercase',
   },
 });

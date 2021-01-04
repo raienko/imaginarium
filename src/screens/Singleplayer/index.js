@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from 'src/components/Spinner';
-import Board from 'src/components/Board';
+import Board from 'src/components/Screen';
 import HomeButton from 'src/components/HomeButton';
 import navigation from 'src/navigation';
 import Header from 'src/components/Header';

@@ -6,3 +6,5 @@ export const hitSlop = {
   left: rem(10),
   width: rem(10),
 };
+
+export const borderRadius = rem(15);

@@ -2,12 +2,12 @@ import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import Button from 'src/components/Button';
 import {connect} from 'react-redux';
 import {rem} from 'src/utils/units';
 import H1 from 'src/components/H1';
 import navigation from 'src/navigation';
 import * as multiplayerActions from 'src/store/multiplayer/actions';
+import TouchableIcon from 'src/components/TouchableIcon';
 
 const mapStateToProps = (state) => ({
   searching: state.multiplayer.searching,
@@ -46,7 +46,7 @@ export default connect(mapStateToProps)(
               searching && (
                 <>
                   <H1 text="Searching..." />
-                  <Button text="Cancel" onPress={multiplayerActions.cancelSearch} />
+                  <TouchableIcon name="times" onPress={multiplayerActions.cancelSearch} />
                 </>
               )
             }
@@ -74,5 +74,6 @@ const styles = StyleSheet.create({
     paddingVertical: rem(10),
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
   },
 });
