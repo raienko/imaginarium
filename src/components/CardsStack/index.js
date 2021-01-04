@@ -5,12 +5,14 @@ import Card, {width} from 'src/components/Card';
 import {rem} from 'src/utils/units';
 import hands from './hands.png';
 
+const scale = 0.5;
+
 const transforms = [
-  [{rotate: '-10deg'}, {translateX: width * 1.6}, {translateY: width * 0.3}],
-  [{rotate: '-5deg'}, {translateX: width * 0.8}, {translateY: width * 0.1}],
+  [{rotate: '-10deg'}, {translateX: width * scale * 1.6}, {translateY: width * scale * 0.3}],
+  [{rotate: '-5deg'}, {translateX: width * scale * 0.8}, {translateY: width * scale * 0.1}],
   [{rotate: '0deg'}],
-  [{rotate: '5deg'}, {translateX: -width * 0.8}, {translateY: width * 0.15}],
-  [{rotate: '10deg'}, {translateX: -width * 1.6}, {translateY: width * 0.4}],
+  [{rotate: '5deg'}, {translateX: -width * scale * 0.8}, {translateY: width * scale * 0.15}],
+  [{rotate: '10deg'}, {translateX: -width * scale * 1.6}, {translateY: width * scale * 0.4}],
 ];
 
 export default class CardsStack extends React.PureComponent {
@@ -27,7 +29,7 @@ export default class CardsStack extends React.PureComponent {
     return (
       <View key={card.id} style={{transform}}>
         <Animated.View style={styles.draggable}>
-          <Card source={card.image} />
+          <Card source={card.image} scale={scale} />
         </Animated.View>
       </View>
     );

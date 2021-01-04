@@ -12,6 +12,7 @@ import LivesCounter from 'src/components/LivesCounter';
 import {rem} from 'src/utils/units';
 import * as gameActions from 'src/store/singleplayer/actions';
 import Timer from 'src/components/Timer';
+import Table from 'src/components/Table';
 
 const mapStateToProps = (state) => ({
   game: state.singleplayer.game,
@@ -55,6 +56,7 @@ export default connect(mapStateToProps)(
             <Score value={score} />
             <Timer />
           </Header>
+          <Table />
           <Spinner visible={loading} />
         </Board>
       );

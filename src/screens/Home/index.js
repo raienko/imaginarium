@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { rem } from 'src/utils/units';
 import navigation from 'src/navigation';
-import * as authActions from 'src/store/auth/actions';
+import H1 from 'src/components/H1';
 import { isAuthorized } from 'src/utils/helpers';
 import AuthorizationPopup from 'src/components/AuthorizationPopup';
 import { searchGame } from 'src/store/multiplayer/actions';
@@ -37,11 +37,13 @@ export default connect(mapStateToProps)(
     render() {
       return (
         <Screen style={styles.wrapper}>
+          <H1 text="Imaginarium" />
           <ButtonWithIcon
             text="ranked"
             onPress={() => this.searchMultiplayer(true)}
             style={styles.btn}
             iconName="trophy"
+            disabled={this.props.searching}
             primaryColor={colors.blue}
           />
           <ButtonWithIcon

@@ -1,8 +1,41 @@
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import Text from 'src/components/Text';
+import Userpick from 'src/components/Userpick';
 import {rem} from 'src/utils/units';
+import colors from 'src/constants/colors';
+const colorsOrder = [
+  colors.yellow,
+  colors.purple,
+  colors.blue,
+  colors.red,
+  colors.dark,
+];
+
+const positions = [
+  {},
+  {
+    left: rem(10),
+    top: rem(100),
+  },
+  {
+    right: rem(10),
+    top: rem(100),
+  },
+  {
+    left: rem(40),
+    top: rem(20),
+  },
+  {
+    right: rem(40),
+    top: rem(20),
+  },
+  {
+    left: rem(10),
+    top: rem(100),
+  },
+]
 
 export default class Players extends React.PureComponent {
   static propTypes = {
@@ -12,9 +45,10 @@ export default class Players extends React.PureComponent {
 
   renderPlayer = (player, index) => {
     const {score} = this.props;
+    const position = positions[index];
     return (
-      <View style={styles.container} key={`${index}`}>
-        <Image source={{uri: player.avatar}} style={styles.avatar} resizeMode="contain" />
+      <View style={[styles.container].concat(position)} key={`${index}`}>
+        <Userpick source={player.avatar} color={colorsOrder[index]} />
         <View style={styles.scoreBox}>
           <Text value={score?.[player.id] || 0} style={styles.score} />
         </View>
@@ -41,13 +75,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    top: rem(90),
+    flexWrap: 'wrap',
+    top: rem(320),
     left: 0,
     right: 0,
   },
   container: {
     alignItems: 'center',
-    margin: rem(10),
+    margin: rem(5),
+    position: 'absolute',
   },
   avatar: {
     borderRadius: rem(20),
