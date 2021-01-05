@@ -1,6 +1,7 @@
 import types from './types';
 
 export const initialState = {
+  authorized: false,
   token: '',
   profile: null,
 };
@@ -11,6 +12,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         token: action.payload.token,
+        authorized: true,
       };
     case types.fetchProfile:
       return {

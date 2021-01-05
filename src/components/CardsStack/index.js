@@ -1,9 +1,8 @@
 import React from 'react';
-import {Animated, View, Image, StyleSheet} from 'react-native';
+import {Animated, View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import Card, {width} from 'src/components/Card';
 import {rem} from 'src/utils/units';
-import hands from './hands.png';
 
 const scale = 0.9;
 
@@ -39,7 +38,6 @@ export default class CardsStack extends React.PureComponent {
     const {cards} = this.props;
     return (
       <View style={styles.wrapper}>
-        {/*<Image source={hands} style={styles.hands} resizeMode="contain" />*/}
         {cards.map(this.renderCard)}
       </View>
     );
@@ -48,18 +46,13 @@ export default class CardsStack extends React.PureComponent {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    position: 'absolute',
+    bottom: rem(80),
+    zIndex: 999999,
+    alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'flex-end',
     justifyContent: 'center',
     paddingBottom: rem(20),
-  },
-  hands: {
-    position: 'absolute',
-    width: rem(370),
-    height: rem(300),
-    bottom: -rem(100),
-    marginRight: rem(20),
-    alignSelf: 'center',
   },
 });

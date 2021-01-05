@@ -11,12 +11,14 @@ export default class Popup extends React.PureComponent {
     visible: PropTypes.bool,
     children: PropTypes.node,
     onDismiss: PropTypes.func,
+    style: PropTypes.any,
   };
 
   static defaultProps = {
     visible: false,
     children: null,
     onDismiss: () => {},
+    style: undefined,
   };
 
   constructor(props) {
@@ -52,7 +54,7 @@ export default class Popup extends React.PureComponent {
   };
 
   render() {
-    const {children, onDismiss} = this.props;
+    const {children, onDismiss, style} = this.props;
     const {visible} = this.state;
 
     return (
@@ -64,7 +66,7 @@ export default class Popup extends React.PureComponent {
         animationType="slide">
         <SafeAreaView style={styles.wrapper} edges="bottom" mode="padding">
           <TouchableOpacity style={styles.overlay} onPress={onDismiss} />
-          <View style={[styles.container, shadow]}>
+          <View style={[styles.container, shadow].concat(style)}>
             {children}
           </View>
         </SafeAreaView>
@@ -80,10 +82,10 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   container: {
-    borderRadius: rem(10),
+    borderRadius,
     backgroundColor: '#fff',
     marginBottom: rem(40),
-    padding: borderRadius * 2,
+    padding: borderRadius,
   },
   overlay: {
     position: 'absolute',

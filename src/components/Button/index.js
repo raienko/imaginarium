@@ -57,7 +57,7 @@ export default class Button extends React.PureComponent {
   }
 }
 
-export const width = rem(280);
+export const width = rem(320);
 export const height = width * 0.23;
 
 const styles = StyleSheet.create({
@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff',
     borderRadius,
+    marginTop: rem(10),
     paddingHorizontal: borderRadius + rem(5),
   },
   disabled: {

@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
-import { connect } from 'react-redux';
-import { rem } from 'src/utils/units';
+import {StyleSheet} from 'react-native';
+import {connect} from 'react-redux';
+import {rem} from 'src/utils/units';
 import navigation from 'src/navigation';
 import H1 from 'src/components/H1';
-import { isAuthorized } from 'src/utils/helpers';
+import {isAuthorized} from 'src/utils/helpers';
 import AuthorizationPopup from 'src/components/AuthorizationPopup';
-import { searchGame } from 'src/store/multiplayer/actions';
+import {searchGame} from 'src/store/multiplayer/actions';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import colors from 'src/constants/colors';
 import Screen from 'src/components/Screen';
@@ -25,44 +25,50 @@ export default connect(mapStateToProps)(
       return navigation.navigate('Singleplayer');
     };
 
-    searchMultiplayer = async (ranked) => {
+    playMultiplayer = async (ranked) => {
       const authorized = isAuthorized();
-      this.setState({ authPopup: !authorized });
+      this.setState({authPopup: !authorized});
       if (!authorized) {
         return;
       }
-      searchGame({ranked});
+
+      if (ranked) {
+        // search for game
+      }
+
+      navigation.navigate('Lobby');
     };
 
     render() {
       return (
         <Screen style={styles.wrapper}>
-          <H1 text="Imaginarium" />
+          <H1 text="app_name" />
           <ButtonWithIcon
-            text="ranked"
-            onPress={() => this.searchMultiplayer(true)}
+            text="button.ranked"
+            onPress={() => this.playMultiplayer(true)}
             style={styles.btn}
             iconName="trophy"
-            disabled={this.props.searching}
+            disabled
             primaryColor={colors.blue}
           />
           <ButtonWithIcon
-            text="singleplayer"
+            text="button.singleplayer"
             onPress={this.playSingleplayer}
             style={styles.btn}
             iconName="play"
             primaryColor={colors.red}
+            disabled
           />
           <ButtonWithIcon
-            text="multiplayer"
-            onPress={() => this.searchMultiplayer(false)}
+            text="button.multiplayer"
+            onPress={() => this.playMultiplayer(false)}
             style={styles.btn}
             primaryColor={colors.purple}
             disabled={this.props.searching}
             iconName="users"
           />
           <ButtonWithIcon
-            text="settings"
+            text="button.settings"
             onPress={() => navigation.navigate('Settings')}
             style={styles.btn}
             primaryColor={colors.yellow}
@@ -71,12 +77,13 @@ export default connect(mapStateToProps)(
           <AuthorizationPopup
             visible={this.state.authPopup}
             onSuccess={this.searchMultiplayer}
-            onDismiss={() => this.setState({ authPopup: false })}
+            onDismiss={() => this.setState({authPopup: false})}
           />
         </Screen>
       );
     }
-  });
+  },
+);
 
 const styles = StyleSheet.create({
   wrapper: {

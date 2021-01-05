@@ -1,0 +1,17 @@
+{
+    "app_name": "Имаджинариум",
+    "button": {
+        "singleplayer": "Одиночная",
+        "multiplayer": "Мультиплеер",
+        "ranked": "Рейтинговая",
+        "settings": "Настройки",
+        "sign_in_google": "Google",
+        "sign_in_apple": "Apple ID",
+        "sign_in_phone": "По CMC",
+        "sign_out": "Выйти",
+        "remove_account": "Удалить аккаунт"
+    },
+    "title": {
+        "sign_in": "Выберите способ входа"
+    }
+}

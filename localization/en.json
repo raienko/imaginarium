@@ -1,0 +1,17 @@
+{
+    "app_name": "Imaginarium",
+    "button": {
+        "singleplayer": "Singleplayer",
+        "multiplayer": "Multiplayer",
+        "ranked": "Ranked",
+        "settings": "Settings",
+        "sign_in_google": "Google",
+        "sign_in_apple": "Apple ID",
+        "sign_in_phone": "Use phonenumber",
+        "sign_out": "Logout",
+        "remove_account": "Remove Account"
+    },
+    "title": {
+        "sign_in": "Please sign in to proceed"
+    }
+}

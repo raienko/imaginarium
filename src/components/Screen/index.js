@@ -2,6 +2,7 @@ import React from 'react';
 import {ImageBackground, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
+import {rem} from 'src/utils/units';
 import defaultBackground from './background.jpg';
 
 export default class Screen extends React.PureComponent {
@@ -34,5 +35,6 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: '#DDBE9C',
+    paddingBottom: rem(20),
   },
 });

@@ -1,30 +1,33 @@
 import React from 'react';
 import {Text} from 'react-native';
 import PropTypes from 'prop-types';
+import localization, {updateOnLanguageChange} from 'localization';
 
-export default class CustomText extends React.PureComponent {
-  static propTypes = {
-    text: PropTypes.string,
-    value: PropTypes.any,
-    children: PropTypes.node,
-    options: PropTypes.object,
-  };
+export default updateOnLanguageChange(
+  class CustomText extends React.PureComponent {
+    static propTypes = {
+      text: PropTypes.string,
+      value: PropTypes.any,
+      children: PropTypes.node,
+      options: PropTypes.object,
+    };
 
-  static defaultProps = {
-    text: '',
-    value: undefined,
-    children: null,
-    options: undefined,
-  };
+    static defaultProps = {
+      text: '',
+      value: undefined,
+      children: null,
+      options: undefined,
+    };
 
-  render() {
-    const { text, value, children, options, ...rest } = this.props;
-    return (
-      <Text {...rest}>
-        {text}
-        {value}
-        {children}
-      </Text>
-    );
-  }
-};
+    render() {
+      const {text, value, children, options, ...rest} = this.props;
+      return (
+        <Text {...rest}>
+          {text && localization.t(text, options)}
+          {value}
+          {children}
+        </Text>
+      );
+    }
+  },
+);

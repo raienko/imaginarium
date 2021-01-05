@@ -3,7 +3,9 @@ import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
 import Popup from 'src/components/Popup';
-import Button from 'src/components/Button';
+import H1 from 'src/components/H1';
+import ButtonWithIcon from 'src/components/ButtonWithIcon';
+import * as authActions from 'src/store/auth/actions';
 
 export default class AuthorizationPopup extends React.PureComponent {
   static propTypes = {
@@ -22,6 +24,7 @@ export default class AuthorizationPopup extends React.PureComponent {
     const {onDismiss, onSuccess} = this.props;
     const authorized = true;
     if (authorized) {
+      await authActions.auth();
       return onSuccess();
     } else {
       return onDismiss();
@@ -32,11 +35,10 @@ export default class AuthorizationPopup extends React.PureComponent {
     const {visible, onDismiss} = this.props;
     return (
       <Popup visible={visible} onDismiss={onDismiss}>
-        <Button text="Google" onPress={this.auth} />
-        <Button text="Apple" onPress={this.auth} style={styles.btn} />
-        <Button text="Phone number" onPress={this.auth} style={styles.btn} />
-        <Button text="Play center" onPress={this.auth} style={styles.btn} />
-        <Button text="Games center" onPress={this.auth} style={styles.btn} />
+        <H1 text="title.sign_in" />
+        <ButtonWithIcon iconName="google" text="button.sign_in_google" onPress={this.auth} style={styles.btn} />
+        <ButtonWithIcon iconName="apple" text="button.sign_in_apple" onPress={this.auth} style={styles.btn} />
+        <ButtonWithIcon iconName="phone" text="button.sign_in_phone" onPress={this.auth} style={styles.btn} />
       </Popup>
     );
   }

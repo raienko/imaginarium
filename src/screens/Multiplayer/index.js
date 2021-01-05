@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Screen from 'src/components/Screen';
 import H1 from 'src/components/H1';
-import HomeButton from 'src/components/HomeButton';
+import BackButton from 'src/components/BackButton';
 import navigation from 'src/navigation';
 import cards from 'src/cards';
 import Header from 'src/components/Header';
@@ -48,9 +48,9 @@ export default connect(mapStateToProps)(
       return (
         <Screen style={styles.wrapper}>
           <Header style={styles.header}>
-            <H1 text={association} style={styles.association} />
-            <HomeButton onPress={navigation.back} style={styles.back} />
+            <BackButton onPress={navigation.back} style={styles.back} />
           </Header>
+          <H1 text={association} style={styles.association} />
           <Table />
           <Players players={players} />
           <CardsStack cards={cards} />

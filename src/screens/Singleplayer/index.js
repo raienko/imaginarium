@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Spinner from 'src/components/Spinner';
 import Board from 'src/components/Screen';
-import HomeButton from 'src/components/HomeButton';
+import BackButton from 'src/components/BackButton';
 import navigation from 'src/navigation';
 import Header from 'src/components/Header';
 import Score from 'src/components/Score';
@@ -51,7 +51,7 @@ export default connect(mapStateToProps)(
       return (
         <Board>
           <Header style={styles.header}>
-            <HomeButton onPress={navigation.back} style={styles.back} />
+            <BackButton onPress={navigation.back} style={styles.back} />
             <LivesCounter value={lives} />
             <Score value={score} />
             <Timer />
