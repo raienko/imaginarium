@@ -8,7 +8,6 @@ import colors from 'src/constants/colors';
 
 export default class ButtonWithIcon extends React.PureComponent {
   static propTypes = {
-    primaryColor: PropTypes.string,
     secondaryColor: PropTypes.string,
     iconName: PropTypes.string,
     iconFont: PropTypes.any,
@@ -24,18 +23,9 @@ export default class ButtonWithIcon extends React.PureComponent {
   };
 
   render() {
-    const {
-      primaryColor,
-      secondaryColor,
-      iconName,
-      iconFont,
-      style,
-    } = this.props;
+    const {secondaryColor, iconName, iconFont, style} = this.props;
     return (
-      <Button
-        {...this.props}
-        style={[styles.wrapper, {backgroundColor: primaryColor}].concat(style)}
-        textStyle={{color: secondaryColor}}>
+      <Button {...this.props} style={[styles.wrapper].concat(style)}>
         <Icon
           style={[styles.icon, {color: secondaryColor}]}
           name={iconName}
@@ -52,7 +42,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row-reverse',
   },
   icon: {
-    width: rem(55),
+    width: rem(50),
     textAlign: 'left',
   },
 });

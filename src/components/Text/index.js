@@ -22,7 +22,7 @@ export default updateOnLanguageChange(
     render() {
       const {text, value, children, options, ...rest} = this.props;
       return (
-        <Text {...rest}>
+        <Text {...rest} allowFontScaling={false}>
           {text && localization.t(text, options)}
           {value}
           {children}

@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
 import shadow from 'src/constants/shadow';
 import {borderRadius} from 'src/constants/sizes';
+import KeyboardAvoidingView from 'src/components/KeyboardAvoidingView';
 
 export default class Popup extends React.PureComponent {
   static propTypes = {
@@ -64,12 +65,14 @@ export default class Popup extends React.PureComponent {
         onRequestClose={onDismiss}
         statusBarTranslucent
         animationType="slide">
-        <SafeAreaView style={styles.wrapper} edges="bottom" mode="padding">
-          <TouchableOpacity style={styles.overlay} onPress={onDismiss} />
-          <View style={[styles.container, shadow].concat(style)}>
-            {children}
-          </View>
-        </SafeAreaView>
+        <KeyboardAvoidingView>
+          <SafeAreaView style={styles.wrapper} edges="bottom" mode="padding">
+            <TouchableOpacity style={styles.overlay} onPress={onDismiss} />
+            <View style={[styles.container, shadow].concat(style)}>
+              {children}
+            </View>
+          </SafeAreaView>
+        </KeyboardAvoidingView>
       </Modal>
     );
   }

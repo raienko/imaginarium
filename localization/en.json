@@ -13,5 +13,11 @@
     },
     "title": {
         "sign_in": "Please sign in to proceed"
+    },
+    "form": {
+        "phonenumber": "Phonenumber (+XXX-XX-XXX)",
+        "send_code": "Send code",
+        "confirmation_code": "Confirmation code",
+        "verify": "Verify"
     }
 }
