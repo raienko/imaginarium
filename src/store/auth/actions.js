@@ -24,6 +24,6 @@ export const fetchProfile = () => {
 };
 
 export const logout = async () => {
-  await api.signOut();
+  await api.signOut().catch(() => {});
   return store.dispatch({type: types.logout});
 };
