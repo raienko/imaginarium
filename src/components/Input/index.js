@@ -19,6 +19,7 @@ export default updateOnLanguageChange(
       placeholder: PropTypes.string,
       onRef: PropTypes.func,
       editable: PropTypes.bool,
+      error: PropTypes.string,
     };
 
     static defaultProps = {
@@ -26,17 +27,21 @@ export default updateOnLanguageChange(
       placeholder: '',
       onRef: () => {},
       editable: true,
+      error: '',
     };
 
     render() {
-      const {style, placeholder, onRef, editable, ...rest} = this.props;
+      const {style, placeholder, onRef, editable, error, ...rest} = this.props;
 
       return (
         <TextInput
           {...rest}
-          style={[styles.input, shadow, !editable && styles.disabled].concat(
-            style,
-          )}
+          style={[
+            styles.input,
+            shadow,
+            !editable && styles.disabled,
+            error && styles.error,
+          ].concat(style)}
           ref={onRef}
           placeholder={placeholder ? localization.t(placeholder) : ''}
           allowFontScaling={false}
@@ -58,8 +63,13 @@ const styles = StyleSheet.create({
     fontSize: elementFontSize,
     fontWeight: 'bold',
     color: colors.dark,
+    borderWidth: 2,
+    borderColor: colors.white,
   },
   disabled: {
     opacity: 0.3,
+  },
+  error: {
+    borderColor: colors.red,
   },
 });

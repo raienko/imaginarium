@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Input from 'src/components/Input';
 import Popup from 'src/components/Popup';
 import H1 from 'src/components/H1';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
-import Button from 'src/components/Button';
 import * as authActions from 'src/store/auth/actions';
+import PhoneVerificationPopup from 'src/components/PhoneVerificationPopup';
 
 export default class AuthorizationPopup extends React.PureComponent {
   popup;
@@ -23,10 +22,6 @@ export default class AuthorizationPopup extends React.PureComponent {
 
   state = {
     visible: false,
-    phoneNumber: '',
-    confirmationCode: '',
-    phoneCodeValidator: null,
-    codeSent: false,
   };
 
   show = () => {
@@ -34,7 +29,6 @@ export default class AuthorizationPopup extends React.PureComponent {
   };
 
   hide = () => {
-    this.hidePhoneVerification();
     this.setState({visible: false});
   };
 
@@ -52,22 +46,12 @@ export default class AuthorizationPopup extends React.PureComponent {
   };
 
   showPhoneVerification = () => {
-    this.popup.hide();
+    this.hide();
     this.phoneVerification.show();
   };
 
   hidePhoneVerification = () => {
     this.phoneVerification.hide();
-    this.setState({
-      phoneNumber: '',
-      confirmationCode: '',
-      codeSent: false,
-    });
-  };
-
-  stepBack = () => {
-    this.hidePhoneVerification();
-    this.show();
   };
 
   register = (key) => (ref) => {
@@ -76,25 +60,9 @@ export default class AuthorizationPopup extends React.PureComponent {
     }
   };
 
-  setPhoneNumber = (phoneNumber) => {
-    this.setState({phoneNumber});
-  };
-
-  setConfirmationCode = (confirmationCode) => {
-    this.setState({confirmationCode});
-  };
-
-  sendCode = () => {
-    this.setState({codeSent: true});
-  };
-
-  verifyCode = () => {
-    return this.auth();
-  };
-
   render() {
-    const {onDismiss} = this.props;
-    const {visible, phoneNumber, confirmationCode, codeSent} = this.state;
+    const {onDismiss, onSuccess} = this.props;
+    const {visible} = this.state;
     return (
       <>
         <Popup
@@ -118,43 +86,11 @@ export default class AuthorizationPopup extends React.PureComponent {
             onPress={this.showPhoneVerification}
           />
         </Popup>
-
-        <Popup
+        <PhoneVerificationPopup
           ref={this.register('phoneVerification')}
-          onDismiss={this.stepBack}>
-          <Input
-            value={phoneNumber}
-            editable={!codeSent}
-            placeholder="form.phonenumber"
-            onChangeText={this.setPhoneNumber}
-            autoFocus={!codeSent}
-            keyboardType="phone-pad"
-          />
-          {!codeSent && (
-            <Button
-              iconName="phone"
-              text="form.send_code"
-              disabled={!phoneNumber}
-              onPress={this.sendCode}
-            />
-          )}
-          {codeSent && (
-            <>
-              <Input
-                value={confirmationCode}
-                onChangeText={this.setConfirmationCode}
-                placeholder="form.confirmation_code"
-                autoFocus
-                keyboardType="phone-pad"
-              />
-              <Button
-                iconName="phone"
-                text="form.verify"
-                onPress={this.verifyCode}
-              />
-            </>
-          )}
-        </Popup>
+          onSuccess={onSuccess}
+          onDismiss={this.show}
+        />
       </>
     );
   }
