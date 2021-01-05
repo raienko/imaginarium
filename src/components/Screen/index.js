@@ -20,12 +20,8 @@ export default class Screen extends React.PureComponent {
       <ImageBackground
         style={styles.wrapper}
         source={background}
-      >
-        <SafeAreaView
-          {...rest}
-          edges={['top', 'bottom']}
-          mode="padding"
-        />
+        blurRadius={20}>
+        <SafeAreaView {...rest} edges={['top', 'bottom']} mode="padding" />
       </ImageBackground>
     );
   }

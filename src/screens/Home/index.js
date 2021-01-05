@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 import {rem} from 'src/utils/units';
 import navigation from 'src/navigation';
 import H1 from 'src/components/H1';
+import Logo from 'src/components/Logo';
 import {isAuthorized} from 'src/utils/helpers';
 import AuthorizationPopup from 'src/components/AuthorizationPopup';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
@@ -49,11 +50,10 @@ export default class Home extends React.PureComponent {
   render() {
     return (
       <Screen style={styles.wrapper}>
-        <H1 text="app_name" />
+        <Logo style={styles.logo} />
         <ButtonWithIcon
           text="button.ranked"
           onPress={() => this.playMultiplayer(true)}
-          style={styles.btn}
           iconName="trophy"
           disabled
           primaryColor={colors.blue}
@@ -61,7 +61,6 @@ export default class Home extends React.PureComponent {
         <ButtonWithIcon
           text="button.singleplayer"
           onPress={this.playSingleplayer}
-          style={styles.btn}
           iconName="play"
           primaryColor={colors.red}
           disabled
@@ -69,14 +68,12 @@ export default class Home extends React.PureComponent {
         <ButtonWithIcon
           text="button.multiplayer"
           onPress={() => this.playMultiplayer(false)}
-          style={styles.btn}
           primaryColor={colors.purple}
           iconName="users"
         />
         <ButtonWithIcon
           text="button.settings"
           onPress={() => navigation.navigate('Settings')}
-          style={styles.btn}
           primaryColor={colors.yellow}
           iconName="cog"
         />
@@ -97,7 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingHorizontal: rem(10),
   },
-  btn: {
-    marginTop: rem(10),
+  logo: {
+    marginBottom: rem(30),
   },
 });

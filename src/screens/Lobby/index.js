@@ -14,7 +14,10 @@ export default class Lobby extends React.PureComponent {
         <Header>
           <BackButton onPress={navigation.back} />
         </Header>
-        <Button />
+        <Button
+          text="Start"
+          onPress={() => navigation.navigate('Multiplayer')}
+        />
       </Screen>
     );
   }
