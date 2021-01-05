@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Popup from 'src/components/Popup';
 import H1 from 'src/components/H1';
+import ErrorText from 'src/components/ErrorText';
+import IfIOS from 'src/components/IfIOS';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import * as authActions from 'src/store/auth/actions';
+import * as authApi from 'src/store/auth/api';
 import PhoneVerificationPopup from 'src/components/PhoneVerificationPopup';
 import colors from 'src/constants/colors';
 
@@ -47,6 +50,7 @@ export default class AuthorizationPopup extends React.PureComponent {
   };
 
   showPhoneVerification = () => {
+    this.clearError();
     this.hide();
     this.phoneVerification.show();
   };
@@ -61,9 +65,36 @@ export default class AuthorizationPopup extends React.PureComponent {
     }
   };
 
+  appleAuth = async () => {
+    this.clearError();
+    try {
+      const authorized = await authApi.signInWithApple();
+      if (!authorized) {
+        this.setError('error.sign_in_failed');
+        return;
+      }
+      await this.auth();
+    } catch (err) {
+      this.setError('error.sign_in_failed');
+    }
+  };
+
+  clearError = () => {
+    this.setState({error: ''});
+  };
+
+  setError = (error) => {
+    this.setState({error});
+  };
+
+  stepBack = () => {
+    this.phoneVerification.hide();
+    this.show();
+  };
+
   render() {
     const {onDismiss, onSuccess} = this.props;
-    const {visible} = this.state;
+    const {visible, error} = this.state;
     return (
       <>
         <Popup
@@ -71,18 +102,21 @@ export default class AuthorizationPopup extends React.PureComponent {
           onDismiss={onDismiss}
           ref={this.register('popup')}>
           <H1 text="title.sign_in" />
+          <ErrorText text={error} />
           <ButtonWithIcon
             iconName="google"
             text="button.sign_in_google"
             onPress={this.auth}
             primaryColor={colors.purple}
           />
-          <ButtonWithIcon
-            iconName="apple"
-            text="button.sign_in_apple"
-            primaryColor={colors.black}
-            onPress={this.auth}
-          />
+          <IfIOS>
+            <ButtonWithIcon
+              iconName="apple"
+              text="button.sign_in_apple"
+              primaryColor={colors.black}
+              onPress={this.appleAuth}
+            />
+          </IfIOS>
           <ButtonWithIcon
             iconName="phone"
             text="button.sign_in_phone"
@@ -92,7 +126,7 @@ export default class AuthorizationPopup extends React.PureComponent {
         <PhoneVerificationPopup
           ref={this.register('phoneVerification')}
           onSuccess={onSuccess}
-          onDismiss={this.show}
+          onDismiss={this.stepBack}
         />
       </>
     );

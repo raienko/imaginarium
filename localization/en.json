@@ -19,5 +19,8 @@
         "send_code": "Send code",
         "confirmation_code": "Confirmation code",
         "verify": "Verify"
+    },
+    "error": {
+        "sign_in_failed": "Failed to sign in"
     }
 }

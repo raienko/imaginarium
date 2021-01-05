@@ -9,19 +9,28 @@ export default class ErrorText extends React.PureComponent {
   static propTypes = {
     style: PropTypes.any,
     value: PropTypes.string,
+    text: PropTypes.string,
   };
 
   static defaultProps = {
     style: undefined,
     value: '',
+    text: '',
   };
 
   render() {
-    const {style, value, ...rest} = this.props;
-    if (!value) {
+    const {style, value, text, ...rest} = this.props;
+    if (!value && !text) {
       return null;
     }
-    return <Text value={value} style={[styles.text].concat(style)} {...rest} />;
+    return (
+      <Text
+        value={value}
+        text={text}
+        style={[styles.text].concat(style)}
+        {...rest}
+      />
+    );
   }
 }
 

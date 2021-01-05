@@ -19,5 +19,8 @@
         "send_code": "Отправить код",
         "confirmation_code": "Код подтверждения",
         "verify": "Подтвердить"
+    },
+    "error": {
+        "sign_in_failed": "Вход не выполнен"
     }
 }

@@ -4,7 +4,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
 import shadow from 'src/constants/shadow';
-import {borderRadius} from 'src/constants/sizes';
+import {borderRadius, elementWidth} from 'src/constants/sizes';
 import KeyboardAvoidingView from 'src/components/KeyboardAvoidingView';
 
 export default class Popup extends React.PureComponent {
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   container: {
+    width: elementWidth + borderRadius * 2,
     borderRadius,
     backgroundColor: '#fff',
     marginBottom: rem(40),
