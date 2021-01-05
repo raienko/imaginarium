@@ -7,7 +7,7 @@
         "settings": "Настройки",
         "sign_in_google": "Google",
         "sign_in_apple": "Apple ID",
-        "sign_in_phone": "По CMC",
+        "sign_in_phone": "По номеру телефона",
         "sign_out": "Выйти",
         "remove_account": "Удалить аккаунт"
     },

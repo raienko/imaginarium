@@ -1,5 +1,6 @@
 import store from 'src/store';
 import types from './types';
+import * as api from './api';
 
 export const auth = async (credentials) => {
   const token = 'fake_token';
@@ -22,6 +23,7 @@ export const fetchProfile = () => {
   });
 };
 
-export const logout = () => {
+export const logout = async () => {
+  await api.signOut();
   return store.dispatch({type: types.logout});
 };

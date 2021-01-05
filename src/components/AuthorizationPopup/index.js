@@ -5,6 +5,7 @@ import H1 from 'src/components/H1';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import * as authActions from 'src/store/auth/actions';
 import PhoneVerificationPopup from 'src/components/PhoneVerificationPopup';
+import colors from 'src/constants/colors';
 
 export default class AuthorizationPopup extends React.PureComponent {
   popup;
@@ -74,10 +75,12 @@ export default class AuthorizationPopup extends React.PureComponent {
             iconName="google"
             text="button.sign_in_google"
             onPress={this.auth}
+            primaryColor={colors.purple}
           />
           <ButtonWithIcon
             iconName="apple"
             text="button.sign_in_apple"
+            primaryColor={colors.black}
             onPress={this.auth}
           />
           <ButtonWithIcon

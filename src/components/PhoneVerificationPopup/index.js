@@ -47,6 +47,7 @@ export default class PhoneVerificationPopup extends React.PureComponent {
         codeValidator,
       });
     } catch (err) {
+      console.log('ERR!', err.code);
       this.setState({
         error: 'Incorrect phone number',
       });
@@ -54,18 +55,19 @@ export default class PhoneVerificationPopup extends React.PureComponent {
   };
 
   setConfirmationCode = (confirmationCode) => {
-    this.setState({confirmationCode});
+    this.setState({confirmationCode, error: ''});
   };
 
   verifyCode = async () => {
     const {onSuccess} = this.props;
-    const valid = true;
-
-    if (valid) {
-      this.hide();
+    const {codeValidator, confirmationCode} = this.state;
+    try {
+      await codeValidator.confirm(confirmationCode);
       await authActions.auth();
+      this.hide();
       onSuccess();
-    } else {
+    } catch (err) {
+      console.log('ERR CODE!', err.code);
       this.setState({
         error: 'Invalid code',
       });
@@ -91,7 +93,7 @@ export default class PhoneVerificationPopup extends React.PureComponent {
           onChangeText={this.setPhoneNumber}
           autoFocus={!codeSent}
           keyboardType="phone-pad"
-          error={!codeSent && error}
+          error={codeSent ? '' : error}
         />
         {!codeSent && <ErrorText value={error} />}
         {!codeSent && (

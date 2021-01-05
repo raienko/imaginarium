@@ -22,16 +22,17 @@ export default class Home extends React.PureComponent {
 
   playMultiplayer = async (ranked) => {
     const authorized = isAuthorized();
-
+    console.log({authorized});
     if (!authorized) {
       this.showAuthPopup();
+      console.log('THERE');
       return;
     }
 
     if (ranked) {
       // search for game
     }
-
+    console.log('HERE');
     navigation.navigate('Lobby');
   };
 
