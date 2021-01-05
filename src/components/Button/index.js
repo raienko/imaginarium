@@ -92,5 +92,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: elementFontSize,
     textTransform: 'uppercase',
+    maxWidth: '80%',
   },
 });

@@ -2,7 +2,8 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {rem} from 'src/utils/units';
 import navigation from 'src/navigation';
-import H1 from 'src/components/H1';
+import IfAuthorized from 'src/components/IfAuthorized';
+import TouchableIcon from 'src/components/TouchableIcon';
 import Logo from 'src/components/Logo';
 import {isAuthorized} from 'src/utils/helpers';
 import AuthorizationPopup from 'src/components/AuthorizationPopup';
@@ -77,6 +78,13 @@ export default class Home extends React.PureComponent {
           primaryColor={colors.yellow}
           iconName="cog"
         />
+        <IfAuthorized>
+          <TouchableIcon
+            style={styles.store}
+            name="shopping-cart"
+            onPress={() => navigation.navigate('Store')}
+          />
+        </IfAuthorized>
         <AuthorizationPopup
           ref={this.register('authPopup')}
           onSuccess={this.playMultiplayer}
@@ -96,5 +104,10 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginBottom: rem(30),
+  },
+  store: {
+    position: 'absolute',
+    top: rem(100),
+    right: rem(10),
   },
 });

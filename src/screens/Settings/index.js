@@ -7,6 +7,7 @@ import IfAuthorized from 'src/components/IfAuthorized';
 import * as authActions from 'src/store/auth/actions';
 import Screen from 'src/components/Screen';
 import Header from 'src/components/Header';
+import H1 from 'src/components/H1';
 import colors from 'src/constants/colors';
 
 export default class Settings extends React.PureComponent {
@@ -16,6 +17,8 @@ export default class Settings extends React.PureComponent {
         <Header>
           <BackButton onPress={navigation.back} />
         </Header>
+        <H1 value="Language" />
+        <H1 value="Notifications" />
         <IfAuthorized>
           <ButtonWithIcon
             text="button.remove_account"

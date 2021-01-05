@@ -35,7 +35,7 @@ const positions = [
     left: rem(10),
     top: rem(100),
   },
-]
+];
 
 export default class Players extends React.PureComponent {
   static propTypes = {
@@ -59,9 +59,7 @@ export default class Players extends React.PureComponent {
   render() {
     const {players} = this.props;
     return (
-      <View style={styles.wrapper}>
-        {players?.map(this.renderPlayer)}
-      </View>
+      <View style={styles.wrapper}>{players?.map(this.renderPlayer)}</View>
     );
   }
 }
@@ -76,9 +74,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     flexWrap: 'wrap',
-    top: rem(320),
+    bottom: rem(430),
     left: 0,
     right: 0,
+    zIndex: 1,
   },
   container: {
     alignItems: 'center',

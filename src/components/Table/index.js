@@ -15,7 +15,12 @@ export default class Table extends React.PureComponent {
 
   render() {
     const {style} = this.props;
-    return <ImageBackground source={background} style={[styles.wrapper].concat(style)} />;
+    return (
+      <ImageBackground
+        source={background}
+        style={[styles.wrapper].concat(style)}
+      />
+    );
   }
 }
 
@@ -26,12 +31,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'red',
     borderRadius: rem(10),
     overflow: 'hidden',
-    transform: [
-      {perspective: rem(600)},
-      {rotateX: '20def'},
-    ],
+    transform: [{perspective: rem(600)}, {rotateX: '20def'}],
     position: 'absolute',
-    top: rem(200),
+    bottom: rem(150),
     alignSelf: 'center',
   },
 });

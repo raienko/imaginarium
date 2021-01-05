@@ -14,9 +14,8 @@ import Spinner from 'src/components/Spinner';
 import {rem} from 'src/utils/units';
 import CardsStack from 'src/components/CardsStack';
 import Table from 'src/components/Table';
-import colors from 'src/constants/colors';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   game: state.multiplayer.game,
 });
 
@@ -38,19 +37,34 @@ export default connect(mapStateToProps)(
     render() {
       const {loading} = this.state;
       const players = [
-        {avatar: 'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg'},
-        {avatar: 'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg'},
-        {avatar: 'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg'},
-        {avatar: 'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg'},
-        {avatar: 'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg'},
+        {
+          avatar:
+            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+        },
+        {
+          avatar:
+            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+        },
+        {
+          avatar:
+            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+        },
+        {
+          avatar:
+            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+        },
+        {
+          avatar:
+            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+        },
       ];
       const association = 'Some long asdasd as das dasdas as dasd asd';
       return (
         <Screen style={styles.wrapper}>
           <Header style={styles.header}>
             <BackButton onPress={navigation.back} style={styles.back} />
+            <H1 text={association} style={styles.association} />
           </Header>
-          <H1 text={association} style={styles.association} />
           <Table />
           <Players players={players} />
           <CardsStack cards={cards} />
@@ -60,7 +74,8 @@ export default connect(mapStateToProps)(
         </Screen>
       );
     }
-  });
+  },
+);
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -78,12 +93,12 @@ const styles = StyleSheet.create({
   },
   timer: {
     position: 'absolute',
-    top: rem(230),
+    top: rem(130),
     alignSelf: 'center',
   },
   association: {
     width: rem(300),
-    marginLeft: rem(10),
     textAlign: 'center',
+    alignSelf: 'center',
   },
 });

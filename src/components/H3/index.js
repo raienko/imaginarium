@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import Text from 'src/components/Text';
 import PropTypes from 'prop-types';
 
-export default class H1 extends React.PureComponent {
+export default class H3 extends React.PureComponent {
   static propTypes = {
     style: PropTypes.any,
   };
@@ -20,8 +20,7 @@ export default class H1 extends React.PureComponent {
 
 const styles = StyleSheet.create({
   text: {
-    fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 20,
     textAlign: 'center',
   },
 });
