@@ -1,8 +1,8 @@
 {
     "app_name": "Imaginarium",
     "button": {
-        "singleplayer": "Singleplayer",
-        "multiplayer": "Multiplayer",
+        "play_with_friends": "Play with friends",
+        "play": "Play",
         "ranked": "Ranked",
         "settings": "Settings",
         "sign_in_google": "Google",
@@ -10,7 +10,8 @@
         "sign_in_phone": "Use phonenumber",
         "sign_out": "Logout",
         "remove_account": "Remove Account",
-        "play_with_friends": "Play with {{count}} friends"
+        "create_game": "Create game",
+        "find_game": "Find game"
     },
     "title": {
         "sign_in": "Please sign in to proceed"
@@ -19,7 +20,8 @@
         "phonenumber": "Phonenumber (+XXX-XX-XXX)",
         "send_code": "Send code",
         "confirmation_code": "Confirmation code",
-        "verify": "Verify"
+        "verify": "Verify",
+        "search": "Search by username"
     },
     "error": {
         "sign_in_failed": "Failed to sign in"

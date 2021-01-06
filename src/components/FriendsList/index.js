@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 import Input from 'src/components/Input';
-import Text from 'src/components/Text';
+import H3 from 'src/components/H3';
 import PropTypes from 'prop-types';
 import Userpick from 'src/components/Userpick';
 import Icon from 'src/components/Icon';
 import {elementWidth, offset, borderRadius} from 'src/constants/sizes';
+import {rem} from 'src/utils/units';
 import shadow from 'src/constants/shadow';
 import colors from 'src/constants/colors';
 
@@ -57,7 +58,7 @@ export default class FriendsList extends React.PureComponent {
         style={styles.friend}
         onPress={() => this.toggleSelection(item.id)}>
         <Userpick source={item.avatar} />
-        <Text value={item.name} style={styles.name} />
+        <H3 value={item.name} style={styles.name} />
         <Icon
           name={isSelected ? 'check-square' : 'square'}
           color={isSelected ? colors.yellow : colors.gray}
@@ -124,7 +125,7 @@ export default class FriendsList extends React.PureComponent {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1,
+    height: rem(350),
     width: elementWidth + offset * 2,
     borderRadius,
     backgroundColor: colors.white,
@@ -138,6 +139,7 @@ const styles = StyleSheet.create({
   },
   name: {
     flex: 1,
+    textAlign: 'left',
     paddingHorizontal: offset,
   },
   friend: {

@@ -19,10 +19,6 @@ export default class Home extends React.PureComponent {
     loading: false,
   };
 
-  playSingleplayer = () => {
-    return navigation.navigate('Singleplayer');
-  };
-
   playMultiplayer = async (ranked) => {
     const authorized = isAuthorized();
     if (!authorized) {
@@ -34,7 +30,7 @@ export default class Home extends React.PureComponent {
       // search for game
     }
 
-    navigation.navigate('Lobby');
+    navigation.navigate('Game');
   };
 
   register = (key) => (ref) => {
@@ -68,14 +64,13 @@ export default class Home extends React.PureComponent {
           primaryColor={colors.blue}
         />
         <ButtonWithIcon
-          text="button.singleplayer"
-          onPress={this.playSingleplayer}
+          text="button.play_with_friends"
+          onPress={() => navigation.navigate('Lobby')}
           iconName="play"
           primaryColor={colors.red}
-          disabled
         />
         <ButtonWithIcon
-          text="button.multiplayer"
+          text="button.play"
           onPress={() => this.playMultiplayer(false)}
           primaryColor={colors.purple}
           iconName="users"

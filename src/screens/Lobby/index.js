@@ -7,6 +7,7 @@ import Header from 'src/components/Header';
 import Screen from 'src/components/Screen';
 import FriendsList from 'src/components/FriendsList';
 import navigation from 'src/navigation';
+import colors from 'src/constants/colors';
 
 export default class Lobby extends React.PureComponent {
   state = {
@@ -24,14 +25,15 @@ export default class Lobby extends React.PureComponent {
         </Header>
         <FriendsList onSelectionChange={this.handleSelected} />
         <Button
-          text="button.play_with_friends"
-          disabled={selected.length < 2 || selected.length > 4}
-          options={{count: selected.length || ''}}
-          onPress={() => navigation.navigate('Multiplayer')}
+          text="button.create_game"
+          disabled={selected.length < 2 || selected.length > 5}
+          primaryColor={colors.green}
+          onPress={() => navigation.navigate('Game')}
         />
         <Button
-          text="Start"
-          onPress={() => navigation.navigate('Multiplayer')}
+          text="button.find_game"
+          disabled={selected.length < 1 || selected.length > 5}
+          onPress={() => navigation.navigate('Queue')}
         />
       </Screen>
     );

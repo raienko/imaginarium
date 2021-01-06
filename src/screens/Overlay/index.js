@@ -1,14 +1,9 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import GameStatus from 'src/components/GameStatus';
 
 export default class Overlay extends React.PureComponent {
   render() {
-    return (
-      <View style={styles.wrapper} pointerEvents="box-none">
-        <GameStatus />
-      </View>
-    );
+    return <View style={styles.wrapper} pointerEvents="box-none" />;
   }
 }
 

@@ -1,8 +1,8 @@
 {
     "app_name": "Имаджинариум",
     "button": {
-        "singleplayer": "Одиночная",
-        "multiplayer": "Мультиплеер",
+        "play_with_friends": "С друзьями",
+        "play": "Играть",
         "ranked": "Рейтинговая",
         "settings": "Настройки",
         "sign_in_google": "Google",
@@ -10,7 +10,8 @@
         "sign_in_phone": "По номеру телефона",
         "sign_out": "Выйти",
         "remove_account": "Удалить аккаунт",
-        "play_with_friends": "Играть с {{count}} друзьями"
+        "create_game": "Создать игру",
+        "find_game": "Найти игру"
     },
     "title": {
         "sign_in": "Выберите способ входа"
@@ -19,7 +20,8 @@
         "phonenumber": "Телефон (+ХХХ-ХХ-ХХХ)",
         "send_code": "Отправить код",
         "confirmation_code": "Код подтверждения",
-        "verify": "Подтвердить"
+        "verify": "Подтвердить",
+        "search": "Поиск по никнейму"
     },
     "error": {
         "sign_in_failed": "Вход не выполнен"
