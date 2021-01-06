@@ -9,7 +9,8 @@
         "sign_in_apple": "Apple ID",
         "sign_in_phone": "По номеру телефона",
         "sign_out": "Выйти",
-        "remove_account": "Удалить аккаунт"
+        "remove_account": "Удалить аккаунт",
+        "play_with_friends": "Играть с {{count}} друзьями"
     },
     "title": {
         "sign_in": "Выберите способ входа"

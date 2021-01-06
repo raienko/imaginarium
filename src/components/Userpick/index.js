@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
 import colors from 'src/constants/colors';
 import shadow from 'src/constants/shadow';
+import placeholder from './placeholder.png';
 
 export default class Userpick extends React.PureComponent {
   static propTypes = {
@@ -24,6 +25,7 @@ export default class Userpick extends React.PureComponent {
       <View style={[styles.wrapper, shadow, {backgroundColor: color}]}>
         <Image
           style={styles.image}
+          defaultSource={placeholder}
           source={image}
           resizeMode="contain"
         />

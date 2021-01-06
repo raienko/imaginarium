@@ -3,6 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
+import colors from 'src/constants/colors';
 
 export default class Header extends React.PureComponent {
   static propTypes = {
@@ -19,9 +20,7 @@ export default class Header extends React.PureComponent {
     const {children, style} = this.props;
     return (
       <SafeAreaView mode="padding" style={styles.wrapper} edges={['top']}>
-        <View style={[styles.container].concat(style)}>
-          {children}
-        </View>
+        <View style={[styles.container].concat(style)}>{children}</View>
       </SafeAreaView>
     );
   }
@@ -34,6 +33,7 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     zIndex: 9999,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
   },
   container: {
     padding: rem(10),

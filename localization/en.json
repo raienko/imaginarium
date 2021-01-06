@@ -9,7 +9,8 @@
         "sign_in_apple": "Apple ID",
         "sign_in_phone": "Use phonenumber",
         "sign_out": "Logout",
-        "remove_account": "Remove Account"
+        "remove_account": "Remove Account",
+        "play_with_friends": "Play with {{count}} friends"
     },
     "title": {
         "sign_in": "Please sign in to proceed"

@@ -5,6 +5,7 @@ import navigation from 'src/navigation';
 import IfAuthorized from 'src/components/IfAuthorized';
 import TouchableIcon from 'src/components/TouchableIcon';
 import Logo from 'src/components/Logo';
+import Header from 'src/components/Header';
 import {isAuthorized} from 'src/utils/helpers';
 import AuthorizationPopup from 'src/components/AuthorizationPopup';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
@@ -33,7 +34,7 @@ export default class Home extends React.PureComponent {
       // search for game
     }
 
-    navigation.navigate('Multiplayer');
+    navigation.navigate('Lobby');
   };
 
   register = (key) => (ref) => {
@@ -49,6 +50,15 @@ export default class Home extends React.PureComponent {
   render() {
     return (
       <Screen style={styles.wrapper}>
+        <IfAuthorized>
+          <Header>
+            <TouchableIcon
+              style={styles.store}
+              name="shopping-cart"
+              onPress={() => navigation.navigate('Store')}
+            />
+          </Header>
+        </IfAuthorized>
         <Logo style={styles.logo} />
         <ButtonWithIcon
           text="button.ranked"
@@ -76,13 +86,6 @@ export default class Home extends React.PureComponent {
           primaryColor={colors.yellow}
           iconName="cog"
         />
-        <IfAuthorized>
-          <TouchableIcon
-            style={styles.store}
-            name="shopping-cart"
-            onPress={() => navigation.navigate('Store')}
-          />
-        </IfAuthorized>
         <AuthorizationPopup
           ref={this.register('authPopup')}
           onSuccess={this.playMultiplayer}
@@ -103,9 +106,5 @@ const styles = StyleSheet.create({
   logo: {
     marginBottom: rem(30),
   },
-  store: {
-    position: 'absolute',
-    top: rem(100),
-    right: rem(10),
-  },
+  store: {},
 });
