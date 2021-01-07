@@ -11,6 +11,7 @@ import Settings from 'src/screens/Settings';
 import Game from 'src/screens/Game';
 import Lobby from 'src/screens/Lobby';
 import Store from 'src/screens/Store';
+import Loading from 'src/screens/Loading';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ export default class Navigation extends React.PureComponent {
           <Stack.Screen name="Settings" component={Settings} />
           <Stack.Screen name="Lobby" component={Lobby} />
           <Stack.Screen name="Store" component={Store} />
+          <Stack.Screen name="Loading" component={Loading} />
           <Stack.Screen name="Game" component={Game} />
         </Stack.Navigator>
       </NavigationContainer>

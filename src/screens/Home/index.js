@@ -19,7 +19,7 @@ export default class Home extends React.PureComponent {
     loading: false,
   };
 
-  playMultiplayer = async (ranked) => {
+  playGame = async (ranked) => {
     const authorized = isAuthorized();
     if (!authorized) {
       this.showAuthPopup();
@@ -30,7 +30,7 @@ export default class Home extends React.PureComponent {
       // search for game
     }
 
-    navigation.navigate('Game');
+    navigation.navigate('Loading');
   };
 
   register = (key) => (ref) => {
@@ -49,7 +49,6 @@ export default class Home extends React.PureComponent {
         <IfAuthorized>
           <Header>
             <TouchableIcon
-              style={styles.store}
               name="shopping-cart"
               onPress={() => navigation.navigate('Store')}
             />
@@ -58,7 +57,7 @@ export default class Home extends React.PureComponent {
         <Logo style={styles.logo} />
         <ButtonWithIcon
           text="button.ranked"
-          onPress={() => this.playMultiplayer(true)}
+          onPress={() => this.playGame(true)}
           iconName="trophy"
           disabled
           primaryColor={colors.blue}
@@ -66,14 +65,14 @@ export default class Home extends React.PureComponent {
         <ButtonWithIcon
           text="button.play_with_friends"
           onPress={() => navigation.navigate('Lobby')}
-          iconName="play"
+          iconName="users"
           primaryColor={colors.red}
         />
         <ButtonWithIcon
           text="button.play"
-          onPress={() => this.playMultiplayer(false)}
+          onPress={() => this.playGame(false)}
           primaryColor={colors.purple}
-          iconName="users"
+          iconName="play"
         />
         <ButtonWithIcon
           text="button.settings"
@@ -83,7 +82,7 @@ export default class Home extends React.PureComponent {
         />
         <AuthorizationPopup
           ref={this.register('authPopup')}
-          onSuccess={this.playMultiplayer}
+          onSuccess={this.playGame}
           onDismiss={this.hideAuthPopup}
         />
       </Screen>
@@ -101,5 +100,4 @@ const styles = StyleSheet.create({
   logo: {
     marginBottom: rem(30),
   },
-  store: {},
 });

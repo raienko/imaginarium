@@ -32,8 +32,8 @@ export default class Lobby extends React.PureComponent {
         />
         <Button
           text="button.find_game"
-          disabled={selected.length < 1 || selected.length > 5}
-          onPress={() => navigation.navigate('Queue')}
+          disabled={selected.length < 1 || selected.length >= 5}
+          onPress={() => navigation.navigate('Loading')}
         />
       </Screen>
     );
