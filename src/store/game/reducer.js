@@ -1,39 +1,44 @@
 import types from './types';
 
 export const initialState = {
-  soloGame: null,
-  multiplayerGame: null,
-  history: [],
+  game: null,
+  players: [],
+  cards: [],
+  searching: false,
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.createGame:
+    case types.fetchGame:
+      return {
+        ...state,
+        searching: false,
+        game: action.payload.game,
+      };
+    case types.searchGame:
+      return {
+        ...state,
+        searching: true,
+      };
+    case types.cancelGameSearch:
+      return {
+        ...state,
+        searching: false,
+      };
+    case types.fetchCards:
+      return {
+        ...state,
+        cards: action.payload.cards,
+      };
+    case types.fetchPlayers:
+      return {
+        ...state,
+        players: action.payload.players,
+      };
+    case types.clearGameData:
       return {
         ...initialState,
-        ...action.payload.config,
-      };
-    case types.dealCards:
-      return {
-        ...state,
-        cards: action.payload.card,
-        deck: action.payload.deck,
-      };
-    case types.playCard:
-      return {
-        ...state,
-        set: action.payload.set,
-        cards: action.payload.card,
-      };
-    case types.playWord:
-      return {
-        ...state,
-        association: action.payload.association,
-      };
-    case types.selectCard:
-      return {
-        ...state,
-        choices: action.payload.choices,
+        cards: state.cards,
       };
     default: {
       return {

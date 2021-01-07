@@ -11,6 +11,7 @@ import AuthorizationPopup from 'src/components/AuthorizationPopup';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import colors from 'src/constants/colors';
 import Screen from 'src/components/Screen';
+import * as gameActions from 'src/store/game/actions';
 
 export default class Home extends React.PureComponent {
   authPopup;
@@ -30,7 +31,7 @@ export default class Home extends React.PureComponent {
       // search for game
     }
 
-    navigation.navigate('Loading');
+    return gameActions.searchGame({ranked});
   };
 
   register = (key) => (ref) => {

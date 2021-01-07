@@ -16,11 +16,11 @@ import CardsStack from 'src/components/CardsStack';
 import Table from 'src/components/Table';
 
 const mapStateToProps = (state) => ({
-  game: state.multiplayer.game,
+  game: state.game.game,
 });
 
 export default connect(mapStateToProps)(
-  class Multiplayer extends React.PureComponent {
+  class Game extends React.PureComponent {
     state = {
       loading: true,
       members: [],
