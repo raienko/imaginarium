@@ -1,13 +1,19 @@
-import Game from 'src/models/Game';
+import request from 'src/utils/request';
 
 export const createGame = async (params) => {
-  return new Game(params);
+  return request('games', {
+    method: 'POST',
+    body: params,
+  });
+};
+
+export const updateGame = async (gameId, params) => {
+  return request(`games/${gameId}`, {
+    method: 'PUT',
+    body: params,
+  });
 };
 
 export const searchGame = async (params) => {
-  return true;
-};
-
-export const joinGame = async (params) => {
-
+  return request('queue', {method: 'POST'});
 };

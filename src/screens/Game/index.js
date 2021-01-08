@@ -3,10 +3,10 @@ import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Screen from 'src/components/Screen';
 import H1 from 'src/components/H1';
-import BackButton from 'src/components/BackButton';
-import navigation from 'src/navigation';
+import * as gameActions from 'src/store/game/actions';
 import cards from 'src/cards';
 import Header from 'src/components/Header';
+import Button from 'src/components/Button';
 import Footer from 'src/components/Footer';
 import Players from 'src/components/Players';
 import Timer from 'src/components/Timer';
@@ -62,7 +62,7 @@ export default connect(mapStateToProps)(
       return (
         <Screen style={styles.wrapper}>
           <Header style={styles.header}>
-            <BackButton onPress={navigation.back} style={styles.back} />
+            <Button text="button.leave" onPress={gameActions.leaveGame} />
             <H1 text={association} style={styles.association} />
           </Header>
           <Table />

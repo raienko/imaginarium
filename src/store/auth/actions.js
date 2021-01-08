@@ -10,17 +10,33 @@ export const auth = async (credentials) => {
   });
 };
 
-export const fetchProfile = () => {
+export const fetchProfile = async () => {
+  const profile = {
+    name: 'John',
+    birthday: '2020.01.92',
+    role: 'player',
+  };
   return store.dispatch({
     type: types.fetchProfile,
-    payload: {
-      profile: {
-        name: 'John',
-        birthday: '2020.01.92',
-        role: 'player',
-      },
-    },
+    payload: {profile},
   });
+};
+
+export const updateProfile = async (changes) => {
+  const profile = {
+    ...store.getState().auth.profile,
+    ...changes,
+  };
+
+  return store.dispatch({
+    type: types.fetchProfile,
+    payload: {profile},
+  });
+};
+
+export const removeAccount = async (reason) => {
+  // do server request;
+  await logout();
 };
 
 export const logout = async () => {

@@ -1,8 +1,9 @@
 import store from 'src/store';
 import types from './types';
+import * as api from './api';
 
-export const createGame = (config) => {
-  const game = {id: Date.now()};
+export const createGame = async (params) => {
+  const game = await api.createGame(params);
   return store.dispatch({
     type: types.fetchGame,
     payload: {
@@ -19,7 +20,8 @@ export const fetchGame = () => {
   });
 };
 
-export const searchGame = () => {
+export const searchGame = async () => {
+  await api.searchGame().catch((e) => console.log(e.message, e.code));
   return store.dispatch({type: types.searchGame});
 };
 

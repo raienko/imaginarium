@@ -22,7 +22,7 @@ export default class Settings extends React.PureComponent {
         <IfAuthorized>
           <ButtonWithIcon
             text="button.remove_account"
-            onPress={authActions.logout}
+            onPress={authActions.removeAccount}
             iconName="trash"
             primaryColor={colors.red}
           />

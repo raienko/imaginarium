@@ -6,6 +6,11 @@ export const isAuthorized = () => {
   return !!auth.authorized;
 };
 
-export const isIOS = Platform.OS == 'ios';
+export const getToken = () => {
+  const {auth} = store.getState();
+  return auth.token;
+};
+
+export const isIOS = Platform.OS === 'ios';
 
 export const isAndroid = Platform.OS === 'android';
