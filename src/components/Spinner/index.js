@@ -1,6 +1,7 @@
 import React from 'react';
 import {Modal, ActivityIndicator, StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
+import colors from 'src/constants/colors';
 
 export default class Spinner extends React.PureComponent {
   static propTypes = {
@@ -21,9 +22,10 @@ export default class Spinner extends React.PureComponent {
         hardwareAccelerated
         statusBarTranslucent
         visible={visible}
+        transparent
         onRequestClose={() => {}}>
         <View style={styles.wrapper}>
-          <ActivityIndicator color="#F00" size="large" />
+          <ActivityIndicator color={colors.gray} size="large" />
         </View>
       </Modal>
     );
@@ -33,7 +35,7 @@ export default class Spinner extends React.PureComponent {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 1)',
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
     alignItems: 'center',
     justifyContent: 'center',
   },

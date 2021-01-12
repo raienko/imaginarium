@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   wrapper: {
     width: rem(200),
     height: rem(400),
-    backgroundColor: 'red',
     borderRadius: rem(10),
     overflow: 'hidden',
     transform: [{perspective: rem(600)}, {rotateX: '20def'}],
