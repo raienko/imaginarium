@@ -14,3 +14,7 @@ export const getToken = () => {
 export const isIOS = Platform.OS === 'ios';
 
 export const isAndroid = Platform.OS === 'android';
+
+export const wait = (timeout) => {
+  return new Promise((resolve) => setTimeout(resolve, timeout));
+};

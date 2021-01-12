@@ -1,13 +1,19 @@
 import store from 'src/store';
 import types from './types';
 import * as api from './api';
+import throwError from 'src/utils/throwError';
+
+const fakeGame = {
+  id: 'asdadfasdf',
+  players: [],
+};
 
 export const createGame = async (params) => {
   const game = await api.createGame(params);
   return store.dispatch({
     type: types.fetchGame,
     payload: {
-      game,
+      game: fakeGame,
     },
   });
 };
@@ -21,8 +27,12 @@ export const fetchGame = () => {
 };
 
 export const searchGame = async () => {
-  await api.searchGame().catch((e) => console.log(e.message, e.code));
-  return store.dispatch({type: types.searchGame});
+  try {
+    await api.searchGame();
+    return store.dispatch({type: types.searchGame});
+  } catch (err) {
+    throwError('Game search failed', err.code);
+  }
 };
 
 export const cancelGameSearch = () => {

@@ -4,18 +4,20 @@ import PropTypes from 'prop-types';
 
 export default class Spinner extends React.PureComponent {
   static propTypes = {
+    animated: PropTypes.bool,
     visible: PropTypes.bool,
   };
 
   static defaultProps = {
+    animated: false,
     visible: false,
   };
 
   render() {
-    const {visible} = this.props;
+    const {visible, animated} = this.props;
     return (
       <Modal
-        animationType="fade"
+        animationType={animated ? 'fade' : 'none'}
         hardwareAccelerated
         statusBarTranslucent
         visible={visible}
@@ -31,7 +33,7 @@ export default class Spinner extends React.PureComponent {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backgroundColor: 'rgba(0, 0, 0, 1)',
     alignItems: 'center',
     justifyContent: 'center',
   },

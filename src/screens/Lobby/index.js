@@ -8,7 +8,7 @@ import Screen from 'src/components/Screen';
 import FriendsList from 'src/components/FriendsList';
 import navigation from 'src/navigation';
 import colors from 'src/constants/colors';
-import * as gameActions from 'src/store/game/actions';
+import * as gameActions from 'src/store/games/actions';
 
 export default class Lobby extends React.PureComponent {
   state = {

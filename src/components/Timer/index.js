@@ -28,10 +28,6 @@ export default class Button extends React.PureComponent {
     };
   }
 
-  componentDidMount() {
-    this.start();
-  }
-
   componentWillUnmount() {
     this.stop();
   }

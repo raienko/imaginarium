@@ -11,7 +11,9 @@
         "sign_out": "Выйти",
         "remove_account": "Удалить аккаунт",
         "create_game": "Создать игру",
-        "find_game": "Найти игру"
+        "find_game": "Найти игру",
+        "leave": "Сдаться",
+        "cancel": "Отменить"
     },
     "title": {
         "sign_in": "Выберите способ входа"

@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Screen from 'src/components/Screen';
 import H1 from 'src/components/H1';
-import * as gameActions from 'src/store/game/actions';
+import * as gameActions from 'src/store/games/actions';
 import cards from 'src/cards';
 import Header from 'src/components/Header';
 import Button from 'src/components/Button';
@@ -14,13 +14,21 @@ import Spinner from 'src/components/Spinner';
 import {rem} from 'src/utils/units';
 import CardsStack from 'src/components/CardsStack';
 import Table from 'src/components/Table';
+import {wait} from 'src/utils/helpers';
+import TouchableIcon from 'src/components/TouchableIcon';
+import Popup from 'src/components/Popup';
+import colors from 'src/constants/colors';
 
 const mapStateToProps = (state) => ({
-  game: state.game.game,
+  currentGame: state.games.currentGame,
 });
 
 export default connect(mapStateToProps)(
   class Game extends React.PureComponent {
+    timer;
+
+    leavePopup;
+
     state = {
       loading: true,
       members: [],
@@ -31,46 +39,48 @@ export default connect(mapStateToProps)(
     }
 
     start = async () => {
+      await wait(3000);
       this.setState({loading: false});
+      this.timer.start();
+    };
+
+    register = (key) => (ref) => {
+      if (ref) {
+        this[key] = ref;
+      }
     };
 
     render() {
       const {loading} = this.state;
-      const players = [
-        {
-          avatar:
-            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
-        },
-        {
-          avatar:
-            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
-        },
-        {
-          avatar:
-            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
-        },
-        {
-          avatar:
-            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
-        },
-        {
-          avatar:
-            'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
-        },
-      ];
+      const players = fakePlayers;
       const association = 'Some long asdasd as das dasdas as dasd asd';
       return (
         <Screen style={styles.wrapper}>
           <Header style={styles.header}>
-            <Button text="button.leave" onPress={gameActions.leaveGame} />
+            <TouchableIcon
+              name="times"
+              onPress={() => this.leavePopup.show()}
+            />
             <H1 text={association} style={styles.association} />
           </Header>
           <Table />
           <Players players={players} />
           <CardsStack cards={cards} />
-          <Timer style={styles.timer} />
+          <Timer style={styles.timer} ref={this.register('timer')} />
           <Footer />
           <Spinner visible={loading} />
+          <Popup ref={this.register('leavePopup')}>
+            <Button
+              text="button.leave"
+              onPress={() => gameActions.leaveGame()}
+              primaryColor={colors.white}
+              secondaryColor={colors.black}
+            />
+            <Button
+              text="button.cancel"
+              onPress={() => this.leavePopup.hide()}
+            />
+          </Popup>
         </Screen>
       );
     }
@@ -102,3 +112,26 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
+
+const fakePlayers = [
+  {
+    avatar:
+      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+  },
+  {
+    avatar:
+      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+  },
+  {
+    avatar:
+      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+  },
+  {
+    avatar:
+      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+  },
+  {
+    avatar:
+      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+  },
+];

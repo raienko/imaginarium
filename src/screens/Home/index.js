@@ -11,7 +11,7 @@ import AuthorizationPopup from 'src/components/AuthorizationPopup';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import colors from 'src/constants/colors';
 import Screen from 'src/components/Screen';
-import * as gameActions from 'src/store/game/actions';
+import * as gamesActions from 'src/store/games/actions';
 
 export default class Home extends React.PureComponent {
   authPopup;
@@ -22,6 +22,7 @@ export default class Home extends React.PureComponent {
 
   playGame = async (ranked) => {
     const authorized = isAuthorized();
+
     if (!authorized) {
       this.showAuthPopup();
       return;
@@ -31,7 +32,16 @@ export default class Home extends React.PureComponent {
       // search for game
     }
 
-    return gameActions.searchGame({ranked});
+    return gamesActions.searchGame({ranked});
+  };
+
+  playRanked = () => this.playGame(true);
+
+  playWithFriends = () => this.playGame(false);
+
+  play = async () => {
+    await gamesActions.searchGame();
+    return navigation.navigate('Queue');
   };
 
   register = (key) => (ref) => {
@@ -58,20 +68,19 @@ export default class Home extends React.PureComponent {
         <Logo style={styles.logo} />
         <ButtonWithIcon
           text="button.ranked"
-          onPress={() => this.playGame(true)}
+          onPress={this.playRanked}
           iconName="trophy"
-          disabled
           primaryColor={colors.blue}
         />
         <ButtonWithIcon
           text="button.play_with_friends"
-          onPress={() => navigation.navigate('Lobby')}
+          onPress={this.playWithFriends}
           iconName="users"
           primaryColor={colors.red}
         />
         <ButtonWithIcon
           text="button.play"
-          onPress={() => this.playGame(false)}
+          onPress={this.play}
           primaryColor={colors.purple}
           iconName="play"
         />

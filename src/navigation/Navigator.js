@@ -13,7 +13,7 @@ import Settings from 'src/screens/Settings';
 import Game from 'src/screens/Game';
 import Lobby from 'src/screens/Lobby';
 import Store from 'src/screens/Store';
-import Loading from 'src/screens/Loading';
+import Queue from 'src/screens/Queue';
 
 const Stack = createStackNavigator();
 
@@ -24,40 +24,43 @@ const MainNavigator = () => (
     <Stack.Screen name="Settings" component={Settings} />
     <Stack.Screen name="Lobby" component={Lobby} />
     <Stack.Screen name="Store" component={Store} />
+    <Stack.Screen name="Queue" component={Queue} />
   </Stack.Navigator>
 );
 
 const GameNavigator = () => (
   <Stack.Navigator headerMode="none">
-    <Stack.Screen name="Loading" component={Loading} />
     <Stack.Screen name="Game" component={Game} />
     <Stack.Screen name="HowToPlay" component={HowToPlay} />
+    <Stack.Screen name="Settings" component={Settings} />
   </Stack.Navigator>
 );
 
 import {navigationRef} from './index';
 
 const mapStateToProps = (state) => ({
-  game: state.game.game,
+  currentGame: state.games.currentGame,
 });
 
 export default connect(mapStateToProps)(
   class Navigator extends React.PureComponent {
     static propTypes = {
-      game: PropTypes.object,
+      currentGame: PropTypes.object,
     };
 
     static defaultProps = {
-      game: null,
+      currentGame: null,
     };
 
     render() {
-      const {game} = this.props;
+      const {currentGame} = this.props;
 
       let ActiveNavigator = MainNavigator;
-      if (game) {
+
+      if (currentGame) {
         ActiveNavigator = GameNavigator;
       }
+
       return (
         <NavigationContainer ref={navigationRef}>
           <ActiveNavigator />

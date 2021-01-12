@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     marginBottom: rem(40),
     padding: borderRadius,
+    paddingTop: borderRadius / 2,
   },
   overlay: {
     position: 'absolute',
