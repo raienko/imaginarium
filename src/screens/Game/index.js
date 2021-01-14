@@ -32,9 +32,12 @@ export default connect(mapStateToProps)(
 
     cardViewer;
 
+    cardsStack;
+
     state = {
       loading: true,
       members: [],
+      hand: cards,
     };
 
     async componentDidMount() {
@@ -57,11 +60,15 @@ export default connect(mapStateToProps)(
       this.cardViewer.show(index);
     };
 
+    submit = (index) => {
+      this.cardViewer.hide();
+      this.cardsStack.throw(index);
+    };
+
     render() {
-      const {loading} = this.state;
+      const {loading, hand} = this.state;
       const players = fakePlayers;
       const association = 'Association';
-      const hand = cards;
       return (
         <Screen style={styles.wrapper}>
           <Header style={styles.header}>
@@ -73,7 +80,11 @@ export default connect(mapStateToProps)(
           </Header>
           <Table />
           <Players players={players} />
-          <CardsStack cards={hand} onPress={this.showCard} />
+          <CardsStack
+            cards={hand}
+            onPress={this.showCard}
+            ref={this.register('cardsStack')}
+          />
           <Timer style={styles.timer} ref={this.register('timer')} />
           <Footer />
           <Spinner visible={loading} />
@@ -90,9 +101,9 @@ export default connect(mapStateToProps)(
             />
           </Popup>
           <CardsViewer
-            association={association}
             ref={this.register('cardViewer')}
             cards={hand}
+            onSubmit={this.submit}
           />
         </Screen>
       );

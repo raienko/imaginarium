@@ -3,6 +3,7 @@ import {Animated, View, StyleSheet, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import Card, {width} from 'src/components/Card';
 import {rem} from 'src/utils/units';
+import FlippableCard from '../FlippableCard';
 
 const scale = 0.9;
 
@@ -54,11 +55,10 @@ export default class CardsStack extends React.PureComponent {
     onPress: () => {},
   };
 
-  stack = [];
+  flippedCardPosition = new Animated.ValueXY();
+  flippedCardScale = new Animated.Value(1);
 
-  componentDidMount() {
-    setTimeout(() => this.throw(3), 2000);
-  }
+  stack = [];
 
   renderCard = (card, index) => {
     const {onPress} = this.props;
@@ -93,21 +93,56 @@ export default class CardsStack extends React.PureComponent {
 
     const card = this.stack[index];
 
-    this.animation = Animated.timing(card.offset, {
+    const moveCardOutOfHand = Animated.timing(card.offset, {
       toValue: {
-        x: 100,
-        y: -300,
+        x: 0,
+        y: 300,
       },
       duration: 1000,
       useNativeDriver: true,
     });
+
+    this.flippedCardPosition.setValue({x: 0, y: 0});
+    this.flippedCardScale.setValue(0);
+
+    const throwFlippedCardOnTheTable = Animated.parallel([
+      Animated.timing(this.flippedCardPosition, {
+        toValue: {
+          x: 0,
+          y: -600,
+        },
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.flippedCardScale, {
+        toValue: 0.2,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+    ]);
+
+    this.animation = Animated.sequence([
+      moveCardOutOfHand,
+      throwFlippedCardOnTheTable,
+    ]);
 
     this.animation.start();
   };
 
   render() {
     const {cards} = this.props;
-    return <View style={styles.wrapper}>{cards.map(this.renderCard)}</View>;
+    const transform = [
+      ...this.flippedCardPosition.getTranslateTransform(),
+      {scale: this.flippedCardScale},
+    ];
+    return (
+      <View style={styles.wrapper}>
+        <Animated.View style={[styles.flipped, {transform}]}>
+          <FlippableCard flipped />
+        </Animated.View>
+        {cards.map(this.renderCard)}
+      </View>
+    );
   }
 }
 
@@ -125,5 +160,9 @@ const styles = StyleSheet.create({
   },
   card: {
     position: 'absolute',
+  },
+  flipped: {
+    position: 'absolute',
+    bottom: -rem(600),
   },
 });

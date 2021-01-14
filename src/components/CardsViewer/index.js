@@ -11,11 +11,12 @@ import Card from 'src/components/Card';
 export default class CardsViewer extends React.PureComponent {
   static propTypes = {
     cards: PropTypes.array,
-    association: PropTypes.string,
+    onSubmit: PropTypes.func,
   };
 
   static defaultProps = {
-    association: '',
+    cards: [],
+    onSubmit: () => {},
   };
 
   state = {
@@ -46,13 +47,9 @@ export default class CardsViewer extends React.PureComponent {
   };
 
   submit = () => {
-    const {association, cards} = this.props;
+    const {onSubmit} = this.props;
     const {active} = this.state;
-    if (!association) {
-      // this.associationInput.show();
-    }
-    // do request
-    this.hide();
+    return onSubmit(active);
   };
 
   render() {
