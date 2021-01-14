@@ -24,6 +24,19 @@ export default class CardsViewer extends React.PureComponent {
 
   handleCardMoved = (index) => (event, gestures) => {
     const card = this.stack[index];
+    card.zIndex.setValue(1);
+
+    const offset = Math.abs(gestures.dx) + Math.abs(gestures.dy);
+    if (offset > 100) {
+      card.scale.setValue(0.9);
+    }
+    if (offset > 200) {
+      card.scale.setValue(0.7);
+      card.zIndex.setValue(0);
+    } else {
+      card.zIndex.setValue(10);
+    }
+
     return Animated.event([null, {dx: card.position.x, dy: card.position.y}], {
       useNativeDriver: false,
     })(event, gestures);
@@ -67,12 +80,18 @@ export default class CardsViewer extends React.PureComponent {
       onPanResponderRelease: this.handleCardReleased(index),
     });
 
-    const transform = this.stack[index].position.getTranslateTransform();
+    const transform = [
+      ...this.stack[index].position.getTranslateTransform(),
+      {scale: this.stack[index].scale},
+    ];
 
     return (
       <Animated.View
         {...panResponder.panHandlers}
-        style={[styles.container, {transform}]}
+        style={[
+          styles.container,
+          {transform, zIndex: this.stack[index].zIndex},
+        ]}
         key={`${index}`}>
         <Image style={styles.card} source={item.image} />
       </Animated.View>
