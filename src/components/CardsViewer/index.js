@@ -40,7 +40,7 @@ export default class CardsViewer extends React.PureComponent {
 
     const animation = Animated.timing(card.position, {
       toValue: {x: 0, y: 0},
-      duration: offset * 100,
+      duration: 0,
       easing: Easing.linear,
       useNativeDriver: true,
     });
@@ -67,12 +67,12 @@ export default class CardsViewer extends React.PureComponent {
       onPanResponderRelease: this.handleCardReleased(index),
     });
 
-    const transform = card.position.getTranslateTransform();
+    const transform = this.stack[index].position.getTranslateTransform();
 
     return (
       <Animated.View
-        style={[styles.container, {transform}]}
         {...panResponder.panHandlers}
+        style={[styles.container, {transform}]}
         key={`${index}`}>
         <Image style={styles.card} source={item.image} />
       </Animated.View>
