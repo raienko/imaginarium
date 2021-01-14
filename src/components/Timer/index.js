@@ -34,7 +34,7 @@ export default class Button extends React.PureComponent {
 
   start = () => {
     this.setState({startedAt: Date.now()});
-    this._timer = setInterval(this.tick, 1000);
+    this._timer = setInterval(this.tick, 400);
   };
 
   stop = () => {
@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
   text: {
     fontWeight: 'bold',
     fontSize: 50,
-    width: rem(100),
     textAlign: 'left',
     marginLeft: rem(5),
   },

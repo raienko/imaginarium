@@ -13,6 +13,7 @@ import Timer from 'src/components/Timer';
 import Spinner from 'src/components/Spinner';
 import {rem} from 'src/utils/units';
 import CardsStack from 'src/components/CardsStack';
+import CardsViewer from 'src/components/CardsViewer';
 import Table from 'src/components/Table';
 import {wait} from 'src/utils/helpers';
 import TouchableIcon from 'src/components/TouchableIcon';
@@ -53,7 +54,7 @@ export default connect(mapStateToProps)(
     render() {
       const {loading} = this.state;
       const players = fakePlayers;
-      const association = 'Some long asdasd as das dasdas as dasd asd';
+      const association = 'Association';
       return (
         <Screen style={styles.wrapper}>
           <Header style={styles.header}>
@@ -69,6 +70,7 @@ export default connect(mapStateToProps)(
           <Timer style={styles.timer} ref={this.register('timer')} />
           <Footer />
           <Spinner visible={loading} />
+          <CardsViewer ref={this.register('cardViewer')} cards={cards} />
           <Popup ref={this.register('leavePopup')}>
             <Button
               text="button.leave"
@@ -81,6 +83,16 @@ export default connect(mapStateToProps)(
               onPress={() => this.leavePopup.hide()}
             />
           </Popup>
+          <Button
+            text="show"
+            style={{
+              position: 'absolute',
+              alignSelf: 'center',
+              bottom: 100,
+              zIndex: 999999999,
+            }}
+            onPress={() => this.cardViewer.show()}
+          />
         </Screen>
       );
     }
