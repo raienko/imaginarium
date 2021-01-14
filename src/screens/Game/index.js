@@ -30,6 +30,8 @@ export default connect(mapStateToProps)(
 
     leavePopup;
 
+    cardViewer;
+
     state = {
       loading: true,
       members: [],
@@ -40,7 +42,7 @@ export default connect(mapStateToProps)(
     }
 
     start = async () => {
-      await wait(3000);
+      // await wait(3000);
       this.setState({loading: false});
       this.timer.start();
     };
@@ -51,10 +53,15 @@ export default connect(mapStateToProps)(
       }
     };
 
+    showCard = (index) => {
+      this.cardViewer.show(index);
+    };
+
     render() {
       const {loading} = this.state;
       const players = fakePlayers;
       const association = 'Association';
+      const hand = cards;
       return (
         <Screen style={styles.wrapper}>
           <Header style={styles.header}>
@@ -66,11 +73,10 @@ export default connect(mapStateToProps)(
           </Header>
           <Table />
           <Players players={players} />
-          <CardsStack cards={cards} />
+          <CardsStack cards={hand} onPress={this.showCard} />
           <Timer style={styles.timer} ref={this.register('timer')} />
           <Footer />
           <Spinner visible={loading} />
-          <CardsViewer ref={this.register('cardViewer')} cards={cards} />
           <Popup ref={this.register('leavePopup')}>
             <Button
               text="button.leave"
@@ -83,15 +89,10 @@ export default connect(mapStateToProps)(
               onPress={() => this.leavePopup.hide()}
             />
           </Popup>
-          <Button
-            text="show"
-            style={{
-              position: 'absolute',
-              alignSelf: 'center',
-              bottom: 100,
-              zIndex: 999999999,
-            }}
-            onPress={() => this.cardViewer.show()}
+          <CardsViewer
+            association={association}
+            ref={this.register('cardViewer')}
+            cards={hand}
           />
         </Screen>
       );

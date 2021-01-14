@@ -1,117 +1,82 @@
 import React from 'react';
-import {
-  View,
-  Modal,
-  Image,
-  Easing,
-  Animated,
-  StyleSheet,
-  PanResponder,
-} from 'react-native';
+import {View, Modal, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
+import Button from 'src/components/Button';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import colors from 'src/constants/colors';
+import TouchableIcon from 'src/components/TouchableIcon';
+import Card from 'src/components/Card';
 
 export default class CardsViewer extends React.PureComponent {
   static propTypes = {
     cards: PropTypes.array,
+    association: PropTypes.string,
   };
 
-  stack = [];
+  static defaultProps = {
+    association: '',
+  };
 
   state = {
+    active: 0,
     visible: false,
   };
 
-  handleCardMoved = (index) => (event, gestures) => {
-    const card = this.stack[index];
-    card.zIndex.setValue(1);
-
-    const offset = Math.abs(gestures.dx) + Math.abs(gestures.dy);
-    if (offset > 100) {
-      card.scale.setValue(0.9);
-    }
-    if (offset > 200) {
-      card.scale.setValue(0.7);
-      card.zIndex.setValue(0);
-    } else {
-      card.zIndex.setValue(10);
-    }
-
-    return Animated.event([null, {dx: card.position.x, dy: card.position.y}], {
-      useNativeDriver: false,
-    })(event, gestures);
-  };
-
-  handleCardReleased = (index) => (event, gestures) => {
-    const card = this.stack[index];
-
-    const offset = Math.abs(gestures.dx) + Math.abs(gestures.dy);
-
-    if (offset >= 100) {
-      console.log(`Card ${index} moved for ${offset} units`);
-    }
-
-    const animation = Animated.timing(card.position, {
-      toValue: {x: 0, y: 0},
-      duration: 0,
-      easing: Easing.linear,
-      useNativeDriver: true,
-    });
-
-    return animation.start();
-  };
-
-  renderCard = (item, index) => {
-    const position = new Animated.ValueXY({x: 0, y: 0});
-    const scale = new Animated.Value(1);
-    const zIndex = new Animated.Value(index);
-
-    const card = {
-      position,
-      scale,
-      zIndex,
-    };
-
-    this.stack.push(card);
-
-    const panResponder = PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderMove: this.handleCardMoved(index),
-      onPanResponderRelease: this.handleCardReleased(index),
-    });
-
-    const transform = [
-      ...this.stack[index].position.getTranslateTransform(),
-      {scale: this.stack[index].scale},
-    ];
-
-    return (
-      <Animated.View
-        {...panResponder.panHandlers}
-        style={[
-          styles.container,
-          {transform, zIndex: this.stack[index].zIndex},
-        ]}
-        key={`${index}`}>
-        <Image style={styles.card} source={item.image} />
-      </Animated.View>
-    );
-  };
-
-  show = () => {
-    this.setState({visible: true});
+  show = (active = 0) => {
+    this.setState({visible: true, active});
   };
 
   hide = () => {
-    this.setState({visible: false});
+    this.setState({visible: false, active: 0});
+  };
+
+  next = () => {
+    const {cards} = this.props;
+    const {active} = this.state;
+    const next = (active + 1) % cards.length;
+    this.setState({active: next});
+  };
+
+  previous = () => {
+    const {cards} = this.props;
+    const {active} = this.state;
+    const previous = active === 0 ? cards.length - 1 : active - 1;
+    this.setState({active: previous});
+  };
+
+  submit = () => {
+    const {association, cards} = this.props;
+    const {active} = this.state;
+    if (!association) {
+      // this.associationInput.show();
+    }
+    // do request
+    this.hide();
   };
 
   render() {
     const {cards} = this.props;
-    const {visible} = this.state;
+    const {visible, active} = this.state;
     return (
       <Modal visible={visible} animationType="fade" transparent>
-        <View style={styles.wrapper}>{cards.map(this.renderCard)}</View>
+        <SafeAreaView
+          style={styles.wrapper}
+          edges={['top', 'bottom']}
+          mode="padding">
+          <TouchableOpacity onPress={this.hide} style={styles.overlay} />
+          <Card source={cards[active].image} scale={2.3} />
+          <View style={styles.footer}>
+            <TouchableIcon name="arrow-left" onPress={this.previous} />
+            <Button
+              text="button.play"
+              onPress={this.submit}
+              primaryColor={colors.green}
+              style={styles.btn}
+            />
+            <TouchableIcon name="arrow-right" onPress={this.next} />
+          </View>
+        </SafeAreaView>
       </Modal>
     );
   }
@@ -120,18 +85,25 @@ export default class CardsViewer extends React.PureComponent {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
-  container: {
+  footer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    paddingBottom: rem(10),
+    width: '100%',
+  },
+  btn: {
+    width: rem(200),
+  },
+  overlay: {
     position: 'absolute',
-  },
-  card: {
-    width: rem(360),
-    height: rem(560),
-    backgroundColor: '#fff',
-    borderWidth: 2,
-    borderRadius: rem(10),
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
   },
 });

@@ -20,7 +20,16 @@ export default class TouchableIcon extends React.PureComponent {
     const {disabled, style, onPress, ...rest} = this.props;
 
     return (
-      <TouchableOpacity disabled={disabled} onPress={onPress} style={style}>
+      <TouchableOpacity
+        disabled={disabled}
+        onPress={onPress}
+        style={style}
+        hitSlop={{
+          top: 20,
+          left: 20,
+          right: 20,
+          bottom: 20,
+        }}>
         <Icon {...rest} />
       </TouchableOpacity>
     );
