@@ -32,7 +32,8 @@ export default class Home extends React.PureComponent {
       // search for game
     }
 
-    return gamesActions.searchGame({ranked});
+    await gamesActions.searchGame({ranked});
+    return navigation.navigate('Queue');
   };
 
   playRanked = () => this.playGame(true);
