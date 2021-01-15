@@ -14,12 +14,15 @@ import Game from 'src/screens/Game';
 import Lobby from 'src/screens/Lobby';
 import Store from 'src/screens/Store';
 import Queue from 'src/screens/Queue';
+import CharacterSetup from 'src/screens/CharacterSetup';
+import ViewPlayer from 'src/screens/ViewPlayer';
 
 const Stack = createStackNavigator();
 
 const MainNavigator = () => (
   <Stack.Navigator headerMode="none">
     <Stack.Screen name="Home" component={Home} />
+    <Stack.Screen name="CharacterSetup" component={CharacterSetup} />
     <Stack.Screen name="HowToPlay" component={HowToPlay} />
     <Stack.Screen name="Settings" component={Settings} />
     <Stack.Screen name="Lobby" component={Lobby} />
@@ -29,8 +32,9 @@ const MainNavigator = () => (
 );
 
 const GameNavigator = () => (
-  <Stack.Navigator headerMode="none">
+  <Stack.Navigator headerMode="none" mode="modal">
     <Stack.Screen name="Game" component={Game} />
+    <Stack.Screen name="ViewPlayer" component={ViewPlayer} />
     <Stack.Screen name="HowToPlay" component={HowToPlay} />
     <Stack.Screen name="Settings" component={Settings} />
   </Stack.Navigator>

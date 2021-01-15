@@ -1,10 +1,12 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TouchableOpacity} from 'react-native';
 import PropTypes from 'prop-types';
 import Text from 'src/components/Text';
 import Userpick from 'src/components/Userpick';
 import {rem} from 'src/utils/units';
 import colors from 'src/constants/colors';
+import navigation from 'src/navigation';
+
 const colorsOrder = [
   colors.yellow,
   colors.purple,
@@ -43,16 +45,23 @@ export default class Players extends React.PureComponent {
     score: PropTypes.object.isRequired,
   };
 
+  viewPlayer = (player) => () => {
+    navigation.navigate('ViewPlayer', {player});
+  };
+
   renderPlayer = (player, index) => {
     const {score} = this.props;
     const position = positions[index];
     return (
-      <View style={[styles.container].concat(position)} key={`${index}`}>
-        <Userpick source={player.avatar} color={colorsOrder[index]} />
+      <TouchableOpacity
+        style={[styles.container].concat(position)}
+        onPress={this.viewPlayer(player)}
+        key={`${index}`}>
+        <Userpick source={player.head} color={colorsOrder[index]} />
         <View style={styles.scoreBox}>
           <Text value={score?.[player.id] || 0} style={styles.score} />
         </View>
-      </View>
+      </TouchableOpacity>
     );
   };
 

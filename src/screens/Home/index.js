@@ -63,6 +63,10 @@ export default class Home extends React.PureComponent {
               name="shopping-cart"
               onPress={() => navigation.navigate('Store')}
             />
+            <TouchableIcon
+              name="user"
+              onPress={() => navigation.navigate('CharacterSetup')}
+            />
           </Header>
         </IfAuthorized>
         <Logo style={styles.logo} />

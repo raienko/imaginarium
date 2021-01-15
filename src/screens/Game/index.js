@@ -15,7 +15,7 @@ import {rem} from 'src/utils/units';
 import CardsStack from 'src/components/CardsStack';
 import CardsViewer from 'src/components/CardsViewer';
 import Table from 'src/components/Table';
-import {wait} from 'src/utils/helpers';
+import Character from 'src/components/Character';
 import TouchableIcon from 'src/components/TouchableIcon';
 import Popup from 'src/components/Popup';
 import colors from 'src/constants/colors';
@@ -69,6 +69,7 @@ export default connect(mapStateToProps)(
       const {loading, hand} = this.state;
       const players = fakePlayers;
       const association = 'Association';
+
       return (
         <Screen style={styles.wrapper}>
           <Header style={styles.header}>
@@ -139,23 +140,33 @@ const styles = StyleSheet.create({
 
 const fakePlayers = [
   {
-    avatar:
-      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+    head: Character.assets.head[0],
+    body: Character.assets.body[0],
+    name: 'John',
+    id: 'asdas1231',
   },
   {
-    avatar:
-      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+    head: Character.assets.head[0],
+    body: Character.assets.body[1],
+    name: 'Alice',
+    id: 'asdas1231asd',
   },
   {
-    avatar:
-      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+    head: Character.assets.head[1],
+    body: Character.assets.body[0],
+    name: 'Euyh',
+    id: 'asASD1',
   },
   {
-    avatar:
-      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+    head: Character.assets.head[1],
+    body: Character.assets.body[1],
+    name: 'Sid',
+    id: 'asdasasd1231',
   },
   {
-    avatar:
-      'https://t3.ftcdn.net/jpg/01/97/50/74/360_F_197507429_3tQOq6F5ce69rJHstB1y69mpnnVhqFgj.jpg',
+    head: Character.assets.head[0],
+    body: Character.assets.body[0],
+    name: 'Nance',
+    id: 'asdas122g31',
   },
 ];
