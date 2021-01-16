@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
   },
   flipped: {
     position: 'absolute',
-    bottom: rem(57),
+    bottom: rem(97),
     zIndex: 9999999999,
   },
 });
