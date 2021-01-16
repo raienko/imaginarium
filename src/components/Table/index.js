@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: rem(120),
     alignSelf: 'center',
+    backgroundColor: '#07661e',
   },
   background: {
     position: 'absolute',

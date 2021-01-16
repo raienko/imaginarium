@@ -5,6 +5,7 @@ import {size} from 'src/components/CharacterV2';
 import {height} from 'src/components/Table';
 import {rem} from 'src/utils/units';
 import chair from './chair.png';
+import FlippableCard from 'src/components/FlippableCard';
 
 export default class Slot extends React.PureComponent {
   static propTypes = {
@@ -24,6 +25,13 @@ export default class Slot extends React.PureComponent {
       <View style={[styles.wrapper, styles[index]]}>
         <Image style={styles.chair} source={chair} />
         {children}
+        <View style={styles.cards}>
+          <FlippableCard flipped scale={0.1} />
+          <FlippableCard flipped scale={0.1} />
+          <FlippableCard flipped scale={0.1} />
+          <FlippableCard flipped scale={0.1} />
+          <FlippableCard flipped scale={0.1} />
+        </View>
       </View>
     );
   }
@@ -71,5 +79,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     bottom: offset,
     transform: [{rotate: '-180deg'}],
+  },
+  cards: {
+    flexDirection: 'row',
+    position: 'absolute',
+    alignSelf: 'center',
+    bottom: -rem(0),
   },
 });

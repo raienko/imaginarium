@@ -24,11 +24,7 @@ export default class Card extends React.PureComponent {
     const image = typeof source === 'string' ? {uri: source} : source;
     return (
       <View style={styles.wrapper}>
-        <Image
-          style={[size, styles.image]}
-          source={image}
-          resizeMode="cover"
-        />
+        <Image style={[size, styles.image]} source={image} resizeMode="cover" />
       </View>
     );
   }
@@ -39,9 +35,9 @@ export const height = width * 1.5;
 
 const styles = StyleSheet.create({
   wrapper: {
-    backgroundColor: '#fff',
-    borderRadius: rem(10),
-    borderWidth: rem(5),
+    backgroundColor: '#696969',
+    borderRadius: rem(1),
+    borderWidth: rem(1),
     borderColor: '#fff',
     shadowOffset: {
       width: 1,
