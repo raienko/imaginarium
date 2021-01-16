@@ -13,6 +13,8 @@ import Timer from 'src/components/Timer';
 import Spinner from 'src/components/Spinner';
 import {rem} from 'src/utils/units';
 import CardsStack from 'src/components/CardsStack';
+import Slot from 'src/components/Slot';
+import CharacterV2 from 'src/components/CharacterV2';
 import CardsViewer from 'src/components/CardsViewer';
 import Table from 'src/components/Table';
 import Character from 'src/components/Character';
@@ -77,15 +79,35 @@ export default connect(mapStateToProps)(
               name="times"
               onPress={() => this.leavePopup.show()}
             />
-            <H1 text={association} style={styles.association} />
+            <H1 value={association} style={styles.association} />
           </Header>
-          <Table />
-          <Players players={players} />
+          <Table>
+            <Slot index={0}>
+              <CharacterV2 asset={0} />
+            </Slot>
+            <Slot index={1}>
+              <CharacterV2 asset={1} />
+            </Slot>
+            <Slot index={2}>
+              <CharacterV2 asset={2} />
+            </Slot>
+            <Slot index={3}>
+              <CharacterV2 asset={3} />
+            </Slot>
+            <Slot index={4}>
+              <CharacterV2 asset={4} />
+            </Slot>
+            <Slot index={5}>
+              <CharacterV2 asset={5} />
+            </Slot>
+          </Table>
+          {/*<Players players={players} />*/}
           <CardsStack
             cards={hand}
             onPress={this.showCard}
             ref={this.register('cardsStack')}
           />
+
           <Timer style={styles.timer} ref={this.register('timer')} />
           <Footer />
           <Spinner visible={loading} />
@@ -128,8 +150,8 @@ const styles = StyleSheet.create({
   },
   timer: {
     position: 'absolute',
-    top: rem(130),
-    alignSelf: 'center',
+    top: rem(80),
+    right: rem(20),
   },
   association: {
     width: rem(300),
@@ -142,30 +164,35 @@ const fakePlayers = [
   {
     head: Character.assets.head[0],
     body: Character.assets.body[0],
+    score: 20,
     name: 'John',
     id: 'asdas1231',
   },
   {
     head: Character.assets.head[0],
     body: Character.assets.body[1],
+    score: 0,
     name: 'Alice',
     id: 'asdas1231asd',
   },
   {
     head: Character.assets.head[1],
     body: Character.assets.body[0],
+    score: 9,
     name: 'Euyh',
     id: 'asASD1',
   },
   {
     head: Character.assets.head[1],
     body: Character.assets.body[1],
+    score: 10,
     name: 'Sid',
     id: 'asdasasd1231',
   },
   {
     head: Character.assets.head[0],
     body: Character.assets.body[0],
+    score: 20,
     name: 'Nance',
     id: 'asdas122g31',
   },

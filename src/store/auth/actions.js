@@ -12,9 +12,10 @@ export const auth = async (credentials) => {
 
 export const fetchProfile = async () => {
   const profile = {
-    name: 'John',
-    birthday: '2020.01.92',
+    username: 'John',
     role: 'player',
+    head: 0,
+    body: 0,
   };
   return store.dispatch({
     type: types.fetchProfile,

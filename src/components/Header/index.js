@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     zIndex: 9999,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
   },
   container: {
     padding: rem(10),

@@ -42,7 +42,6 @@ const positions = [
 export default class Players extends React.PureComponent {
   static propTypes = {
     players: PropTypes.array.isRequired,
-    score: PropTypes.object.isRequired,
   };
 
   viewPlayer = (player) => () => {
@@ -50,7 +49,6 @@ export default class Players extends React.PureComponent {
   };
 
   renderPlayer = (player, index) => {
-    const {score} = this.props;
     const position = positions[index];
     return (
       <TouchableOpacity
@@ -59,7 +57,7 @@ export default class Players extends React.PureComponent {
         key={`${index}`}>
         <Userpick source={player.head} color={colorsOrder[index]} />
         <View style={styles.scoreBox}>
-          <Text value={score?.[player.id] || 0} style={styles.score} />
+          <Text value={player.score} style={styles.score} />
         </View>
       </TouchableOpacity>
     );

@@ -5,7 +5,7 @@ import Card, {width} from 'src/components/Card';
 import {rem} from 'src/utils/units';
 import FlippableCard from '../FlippableCard';
 
-const scale = 0.9;
+const scale = 0.5;
 
 const transforms = [
   {
@@ -109,7 +109,7 @@ export default class CardsStack extends React.PureComponent {
       Animated.timing(this.flippedCardPosition, {
         toValue: {
           x: 0,
-          y: -600,
+          y: -570,
         },
         duration: 1000,
         useNativeDriver: true,
@@ -138,7 +138,7 @@ export default class CardsStack extends React.PureComponent {
     return (
       <View style={styles.wrapper}>
         <Animated.View style={[styles.flipped, {transform}]}>
-          <FlippableCard flipped />
+          <FlippableCard flipped source={cards[0].image} />
         </Animated.View>
         {cards.map(this.renderCard)}
       </View>
@@ -149,7 +149,7 @@ export default class CardsStack extends React.PureComponent {
 const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
-    bottom: rem(220),
+    bottom: rem(100),
     left: 0,
     right: 0,
     zIndex: 999999,

@@ -1,5 +1,7 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
 import Input from 'src/components/Input';
 import Button from 'src/components/Button';
 import navigation from 'src/navigation';
@@ -7,50 +9,76 @@ import Screen from 'src/components/Screen';
 import Character from 'src/components/Character';
 import {rem} from 'src/utils/units';
 import TouchableIcon from 'src/components/TouchableIcon';
+import * as authActions from 'src/store/auth/actions';
 
-export default class CharacterSetup extends React.PureComponent {
-  state = {
-    name: '',
-    head: 0,
-    body: 0,
-  };
+const mapStateToProps = (state) => ({
+  profile: state.auth.profile,
+});
 
-  next = (key) => () => {
-    const current = this.state[key];
-    const next = (current + 1) % Character.assets[key].length;
-    this.setState({[key]: next});
-  };
+export default connect(mapStateToProps)(
+  class CharacterSetup extends React.PureComponent {
+    static propTypes = {
+      profile: PropTypes.object.isRequired,
+    };
 
-  previous = (key) => () => {
-    const current = this.state[key];
-    const previous = (current || Character.assets[key].length) - 1;
-    this.setState({[key]: previous});
-  };
+    constructor(props) {
+      super(props);
+      this.state = {
+        name: '',
+        head: props.profile.head,
+        body: props.profile.body,
+      };
+    }
 
-  render() {
-    const {head, body} = this.state;
-    return (
-      <Screen style={styles.wrapper}>
-        <Input placeholder="name" />
-        <View style={styles.container}>
-          <Character
-            head={Character.assets.head[head]}
-            body={Character.assets.body[body]}
-          />
-          <View style={[styles.controls, styles.head]}>
-            <TouchableIcon name="arrow-left" onPress={this.previous('head')} />
-            <TouchableIcon name="arrow-right" onPress={this.next('head')} />
+    next = (key) => () => {
+      const current = this.state[key];
+      const next = (current + 1) % Character.assets[key].length;
+      this.setState({[key]: next});
+    };
+
+    previous = (key) => () => {
+      const current = this.state[key];
+      const previous = (current || Character.assets[key].length) - 1;
+      this.setState({[key]: previous});
+    };
+
+    submit = async () => {
+      const {head, body} = this.state;
+      await authActions.updateProfile({head, body});
+      return navigation.back();
+    };
+
+    render() {
+      const {head, body} = this.state;
+      return (
+        <Screen style={styles.wrapper}>
+          <Input placeholder="name" />
+          <View style={styles.container}>
+            <Character
+              head={Character.assets.head[head]}
+              body={Character.assets.body[body]}
+            />
+            <View style={[styles.controls, styles.head]}>
+              <TouchableIcon
+                name="arrow-left"
+                onPress={this.previous('head')}
+              />
+              <TouchableIcon name="arrow-right" onPress={this.next('head')} />
+            </View>
+            <View style={[styles.controls, styles.body]}>
+              <TouchableIcon
+                name="arrow-left"
+                onPress={this.previous('body')}
+              />
+              <TouchableIcon name="arrow-right" onPress={this.next('body')} />
+            </View>
           </View>
-          <View style={[styles.controls, styles.body]}>
-            <TouchableIcon name="arrow-left" onPress={this.previous('body')} />
-            <TouchableIcon name="arrow-right" onPress={this.next('body')} />
-          </View>
-        </View>
-        <Button text="button.play" onPress={navigation.back} />
-      </Screen>
-    );
-  }
-}
+          <Button text="button.play" onPress={this.submit} />
+        </Screen>
+      );
+    }
+  },
+);
 
 const styles = StyleSheet.create({
   wrapper: {

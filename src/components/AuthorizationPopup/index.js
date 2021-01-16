@@ -42,6 +42,7 @@ export default class AuthorizationPopup extends React.PureComponent {
     const authorized = true;
     if (authorized) {
       await authActions.auth();
+      await authActions.fetchProfile();
       this.hide();
       return onSuccess();
     } else {
