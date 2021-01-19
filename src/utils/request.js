@@ -24,7 +24,7 @@ export default async (url, params) => {
   if (typeof params?.body === 'object') {
     options.body = JSON.stringify(params.body);
   }
-  return true;
+
   logger.out(`[${rID}] ${env.HOST}/${url}`, options);
   return fetch(`${env.HOST}/${url}`, options)
     .then(async (response) => {

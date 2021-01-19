@@ -10,6 +10,9 @@ const fakeGame = {
 
 export const createGame = async (params) => {
   const game = await api.createGame(params);
+  console.log({
+    game,
+  });
   return store.dispatch({
     type: types.fetchGame,
     payload: {
