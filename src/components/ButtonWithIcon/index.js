@@ -15,7 +15,7 @@ export default class ButtonWithIcon extends React.PureComponent {
   };
 
   static defaultProps = {
-    color: colors.dark,
+    color: colors.gray,
     textColor: colors.white,
     iconName: 'home',
     iconFont: undefined,

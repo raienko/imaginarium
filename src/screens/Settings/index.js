@@ -29,6 +29,7 @@ export default class Settings extends React.PureComponent {
           <ButtonWithIcon
             text="button.sign_out"
             onPress={authActions.logout}
+            color={colors.gray}
             iconName="sign-out"
           />
         </IfAuthorized>
