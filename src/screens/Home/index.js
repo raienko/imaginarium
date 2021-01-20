@@ -75,24 +75,24 @@ export default class Home extends React.PureComponent {
           text="button.ranked"
           onPress={this.playRanked}
           iconName="trophy"
-          primaryColor={colors.blue}
+          color={colors.blue}
         />
         <ButtonWithIcon
           text="button.play_with_friends"
           onPress={this.playWithFriends}
           iconName="users"
-          primaryColor={colors.red}
+          color={colors.red}
         />
         <ButtonWithIcon
           text="button.play"
           onPress={this.play}
-          primaryColor={colors.purple}
+          color={colors.purple}
           iconName="play"
         />
         <ButtonWithIcon
           text="button.settings"
           onPress={() => navigation.navigate('Settings')}
-          primaryColor={colors.yellow}
+          color={colors.yellow}
           iconName="cog"
         />
         <AuthorizationPopup

@@ -28,7 +28,7 @@ export default class Lobby extends React.PureComponent {
         <Button
           text="button.create_game"
           disabled={selected.length < 2 || selected.length > 5}
-          primaryColor={colors.green}
+          color={colors.green}
           onPress={gameActions.createGame}
         />
         <Button

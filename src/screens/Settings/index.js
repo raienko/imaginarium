@@ -24,7 +24,7 @@ export default class Settings extends React.PureComponent {
             text="button.remove_account"
             onPress={authActions.removeAccount}
             iconName="trash"
-            primaryColor={colors.red}
+            color={colors.red}
           />
           <ButtonWithIcon
             text="button.sign_out"

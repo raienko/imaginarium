@@ -108,13 +108,13 @@ export default class AuthorizationPopup extends React.PureComponent {
             iconName="google"
             text="button.sign_in_google"
             onPress={this.auth}
-            primaryColor={colors.purple}
+            color={colors.purple}
           />
           <IfIOS>
             <ButtonWithIcon
               iconName="apple"
               text="button.sign_in_apple"
-              primaryColor={colors.black}
+              color={colors.black}
               onPress={this.appleAuth}
             />
           </IfIOS>

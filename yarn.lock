@@ -6460,6 +6460,11 @@ setprototypeof@1.1.1:
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.1.tgz#7e95acb24aa92f5885e0abef5ba131330d4ae683"
   integrity sha512-JvdAWfbXeIGaZ9cILp38HntZSFSo3mWg6xGcJJsd+d4aRMOqauag1C63dJfDw7OaMYwEbHMOxEZ1lqVRYP2OAw==
 
+shade-blend-color@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/shade-blend-color/-/shade-blend-color-1.0.0.tgz#cfa10d3673a22ba31d552a0e793b708bc24be0bc"
+  integrity sha512-Tnp/ppF5h3YhPCpeHiZJ2DRnvmo4luu9qpMhuksCT+QInIXJ9alA3Vd9klfEi+RY8Oh7MaK5vzH/qcLo892L1g==
+
 shallow-clone@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/shallow-clone/-/shallow-clone-1.0.0.tgz#4480cd06e882ef68b2ad88a3ea54832e2c48b571"

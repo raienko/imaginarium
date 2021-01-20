@@ -68,7 +68,7 @@ export default class CardsViewer extends React.PureComponent {
             <Button
               text="button.play"
               onPress={this.submit}
-              primaryColor={colors.green}
+              color={colors.green}
               style={styles.btn}
             />
             <TouchableIcon name="arrow-right" onPress={this.next} />

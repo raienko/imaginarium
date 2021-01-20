@@ -115,8 +115,8 @@ export default connect(mapStateToProps)(
             <Button
               text="button.leave"
               onPress={() => gameActions.leaveGame()}
-              primaryColor={colors.white}
-              secondaryColor={colors.black}
+              color={colors.white}
+              textColor={colors.black}
             />
             <Button
               text="button.cancel"

@@ -8,26 +8,29 @@ import colors from 'src/constants/colors';
 
 export default class ButtonWithIcon extends React.PureComponent {
   static propTypes = {
-    secondaryColor: PropTypes.string,
+    textColor: PropTypes.string,
     iconName: PropTypes.string,
     iconFont: PropTypes.any,
     style: PropTypes.any,
   };
 
   static defaultProps = {
-    primaryColor: colors.dark,
-    secondaryColor: colors.white,
+    color: colors.dark,
+    textColor: colors.white,
     iconName: 'home',
     iconFont: undefined,
     style: undefined,
   };
 
   render() {
-    const {secondaryColor, iconName, iconFont, style} = this.props;
+    const {textColor, iconName, iconFont, style} = this.props;
     return (
-      <Button {...this.props} style={[styles.wrapper].concat(style)}>
+      <Button
+        {...this.props}
+        textStyle={{color: textColor}}
+        style={[styles.wrapper].concat(style)}>
         <Icon
-          style={[styles.icon, {color: secondaryColor}]}
+          style={[styles.icon, {color: textColor}]}
           name={iconName}
           font={iconFont}
         />
