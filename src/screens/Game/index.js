@@ -114,7 +114,10 @@ export default connect(mapStateToProps)(
           <Popup ref={this.register('leavePopup')}>
             <Button
               text="button.leave"
-              onPress={() => gameActions.leaveGame()}
+              onPress={() => {
+                this.leavePopup.hide();
+                gameActions.leaveGame();
+              }}
               color={colors.white}
               textColor={colors.black}
             />

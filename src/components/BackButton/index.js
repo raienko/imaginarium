@@ -5,7 +5,7 @@ import colors from 'src/constants/colors';
 export default class BackButton extends React.PureComponent {
   render() {
     return (
-      <TouchableIcon {...this.props} color={colors.white} name="arrow-left" />
+      <TouchableIcon {...this.props} color={colors.dark} name="arrow-left" />
     );
   }
 }

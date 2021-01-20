@@ -7,6 +7,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import colors from 'src/constants/colors';
 import TouchableIcon from 'src/components/TouchableIcon';
 import Card from 'src/components/Card';
+import ButtonWithIcon from '../ButtonWithIcon';
 
 export default class CardsViewer extends React.PureComponent {
   static propTypes = {
@@ -64,14 +65,22 @@ export default class CardsViewer extends React.PureComponent {
           <TouchableOpacity onPress={this.hide} style={styles.overlay} />
           <Card source={cards[active].image} scale={2.3} />
           <View style={styles.footer}>
-            <TouchableIcon name="arrow-left" onPress={this.previous} />
+            <ButtonWithIcon
+              iconName="arrow-left"
+              onPress={this.previous}
+              style={styles.arrow}
+            />
             <Button
               text="button.play"
               onPress={this.submit}
               color={colors.green}
               style={styles.btn}
             />
-            <TouchableIcon name="arrow-right" onPress={this.next} />
+            <ButtonWithIcon
+              iconName="arrow-right"
+              onPress={this.next}
+              style={styles.arrow}
+            />
           </View>
         </SafeAreaView>
       </Modal>
@@ -95,6 +104,9 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: rem(200),
+  },
+  arrow: {
+    width: rem(70),
   },
   overlay: {
     position: 'absolute',

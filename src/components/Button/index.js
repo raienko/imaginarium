@@ -14,6 +14,7 @@ import {saturate} from 'src/utils/helpers';
 export default class Button extends React.PureComponent {
   static propTypes = {
     color: PropTypes.string,
+    textColor: PropTypes.string,
     borderWidth: PropTypes.number,
     borderColor: PropTypes.string,
     borderRadius: PropTypes.number,
@@ -27,6 +28,7 @@ export default class Button extends React.PureComponent {
 
   static defaultProps = {
     color: colors.yellow,
+    textColor: colors.white,
     borderWidth: 1,
     borderColor: colors.dark,
     borderRadius: rem(10),
@@ -58,6 +60,7 @@ export default class Button extends React.PureComponent {
       offset,
       disabled,
       children,
+      textColor,
       textStyle,
       borderRadius,
       borderColor,
@@ -99,7 +102,10 @@ export default class Button extends React.PureComponent {
         <View
           style={[styles.foreground, offsets, foreground, border]}
           pointerEvents="none">
-          <Text {...rest} style={[styles.text].concat(textStyle)} />
+          <Text
+            {...rest}
+            style={[styles.text, {color: textColor}].concat(textStyle)}
+          />
           {children}
         </View>
       </TouchableOpacity>
@@ -116,7 +122,7 @@ const styles = StyleSheet.create({
   foreground: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     flexDirection: 'row',
     paddingHorizontal: rem(20),
   },
@@ -132,6 +138,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontWeight: 'bold',
+    textAlign: 'center',
     fontSize: elementFontSize,
     textTransform: 'uppercase',
     color: colors.white,

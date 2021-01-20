@@ -15,4 +15,4 @@ export const elementWidth = rem(320);
 
 export const elementHeight = elementWidth * 0.23;
 
-export const elementFontSize = rem(24);
+export const elementFontSize = rem(22);

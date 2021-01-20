@@ -1,37 +1,36 @@
 import React from 'react';
-import {TouchableOpacity} from 'react-native';
+import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import Icon from 'src/components/Icon';
+import {rem} from 'src/utils/units';
+import ButtonWithIcon from 'src/components/ButtonWithIcon';
 
 export default class TouchableIcon extends React.PureComponent {
   static propTypes = {
-    onPress: PropTypes.func,
-    disabled: PropTypes.bool,
+    name: PropTypes.string,
+    font: PropTypes.string,
     style: PropTypes.any,
   };
 
   static defaultProps = {
-    onPress: () => {},
-    disabled: false,
     style: undefined,
   };
 
   render() {
-    const {disabled, style, onPress, ...rest} = this.props;
+    const {style, name, font, ...rest} = this.props;
 
     return (
-      <TouchableOpacity
-        disabled={disabled}
-        onPress={onPress}
-        style={style}
-        hitSlop={{
-          top: 20,
-          left: 20,
-          right: 20,
-          bottom: 20,
-        }}>
-        <Icon {...rest} />
-      </TouchableOpacity>
+      <ButtonWithIcon
+        {...rest}
+        style={[styles.wrapper].concat(style)}
+        iconName={name}
+        iconFont={font}
+      />
     );
   }
 }
+
+const styles = StyleSheet.create({
+  wrapper: {
+    width: rem(70),
+  },
+});

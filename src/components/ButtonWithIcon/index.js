@@ -27,7 +27,7 @@ export default class ButtonWithIcon extends React.PureComponent {
     return (
       <Button
         {...this.props}
-        textStyle={{color: textColor}}
+        textStyle={styles.text}
         style={[styles.wrapper].concat(style)}>
         <Icon
           style={[styles.icon, {color: textColor}]}
@@ -44,8 +44,12 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     flexDirection: 'row-reverse',
   },
+  text: {
+    textAlign: 'left',
+    flex: 1,
+  },
   icon: {
     width: rem(50),
-    textAlign: 'left',
+    textAlign: 'center',
   },
 });
