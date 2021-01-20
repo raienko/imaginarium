@@ -42,6 +42,11 @@ export default class Button extends React.PureComponent {
     pressed: false,
   };
 
+  handlePress = () => {
+    const {onPress} = this.props;
+    requestAnimationFrame(onPress);
+  };
+
   handlePressIn = () => this.setState({pressed: true});
 
   handlePressOut = () => this.setState({pressed: false});
@@ -50,7 +55,6 @@ export default class Button extends React.PureComponent {
     const {
       color,
       style,
-      onPress,
       offset,
       disabled,
       children,
@@ -84,14 +88,17 @@ export default class Button extends React.PureComponent {
 
     return (
       <TouchableOpacity
-        onPress={onPress}
+        onPress={this.handlePress}
         activeOpacity={1}
         disabled={disabled}
+        pointerEvents="box"
         onPressIn={this.handlePressIn}
         onPressOut={this.handlePressOut}
         style={[styles.wrapper, disabled && styles.disabled].concat(style)}>
         <View style={[styles.background, background, border]} />
-        <View style={[styles.foreground, offsets, foreground, border]}>
+        <View
+          style={[styles.foreground, offsets, foreground, border]}
+          pointerEvents="none">
           <Text {...rest} style={[styles.text].concat(textStyle)} />
           {children}
         </View>
