@@ -20,7 +20,7 @@ export default class Screen extends React.PureComponent {
       <ImageBackground
         style={styles.wrapper}
         source={background}
-        blurRadius={20}>
+        blurRadius={0}>
         <SafeAreaView {...rest} edges={['top', 'bottom']} mode="padding" />
       </ImageBackground>
     );
@@ -30,7 +30,7 @@ export default class Screen extends React.PureComponent {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: '#DDBE9C',
+    backgroundColor: '#000',
     paddingBottom: rem(20),
   },
 });

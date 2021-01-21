@@ -102,11 +102,11 @@ export default class Button extends React.PureComponent {
         <View
           style={[styles.foreground, offsets, foreground, border]}
           pointerEvents="none">
+          {children}
           <Text
             {...rest}
             style={[styles.text, {color: textColor}].concat(textStyle)}
           />
-          {children}
         </View>
       </TouchableOpacity>
     );

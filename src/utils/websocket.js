@@ -1,30 +1,39 @@
 import env from 'src/constants/env';
+import EventBus from 'src/utils/EventBus';
+import throwError from 'src/utils/throwError';
 
-export default class Websocket {
+export const events = {
+  connected: 'connected',
+  disconnected: 'disconnected',
+  message: 'message',
+  error: 'error',
+};
+
+export default new (class Websocket extends EventBus {
   _ws;
-  _url;
-  _callback;
 
-  constructor(url = env.HOST, callback = () => {}) {
-    this._url = url;
-    this._callback = callback;
+  constructor(props) {
+    super(props);
   }
 
   connect = () => {
     if (this._ws) {
-      throw new Error('Already connected');
+      throwError('Already connected!');
     }
 
     const token = 'some_token';
 
-    const url = this._url;
+    const url = env.HOST;
     const protocols = 'echo-protocol';
     const options = {
       headers: {Authorization: token},
     };
 
     this._ws = new WebSocket(url, protocols, options);
-    this._ws.onmessage = this._handleMessage;
+    this._ws.onopen = () => this.dispatch(events.connected);
+    this._ws.onclose = () => this.dispatch(events.disconnected);
+    this._ws.onerror = (err) => this.dispatch(events.error, err);
+    this._ws.onmessage = (message) => this.dispatch(events.message, message);
   };
 
   send = (type, data) => {
@@ -36,9 +45,4 @@ export default class Websocket {
     this._ws.close();
     this._ws = null;
   };
-
-  _handleMessage = (message) => {
-    console.log('Received message:', {message});
-    this._callback(message);
-  };
-}
+})();
