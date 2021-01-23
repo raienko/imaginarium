@@ -1,6 +1,8 @@
 import env from 'src/constants/env';
 import {getToken} from 'src/utils/helpers';
 import logger from 'src/utils/logger';
+import userAgent from 'src/utils/userAgent';
+import throwError from 'src/utils/throwError';
 
 let requestID = 0;
 
@@ -12,6 +14,7 @@ export default async (url, params) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      'User-Agent': userAgent,
       ...params?.headers,
     },
   };
@@ -26,6 +29,7 @@ export default async (url, params) => {
   }
 
   logger.out(`[${rID}] ${env.HOST}/${url}`, options);
+
   return fetch(`${env.HOST}/${url}`, options)
     .then(async (response) => {
       let result;
@@ -39,6 +43,6 @@ export default async (url, params) => {
     })
     .catch((err) => {
       logger.failed(`[${rID}] ${env.HOST}/${url}`, err.message, err.code);
-      throw err;
+      throwError(err.message);
     });
 };
