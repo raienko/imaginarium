@@ -1,25 +1,23 @@
 import types from './types';
 
 export const initialState = {
-  authorized: false,
   token: '',
-  profile: null,
+  refreshToken: '',
+  userId: '',
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.authorize:
+    case types.register:
+    case types.login:
       return {
         ...state,
         token: action.payload.token,
-        authorized: true,
-      };
-    case types.fetchProfile:
-      return {
-        ...state,
-        profile: action.payload.profile,
+        refreshToken: action.payload.refreshToken,
+        userId: action.payload.userId,
       };
     case types.logout:
+    case types.removeAccount:
       return {
         ...initialState,
       };

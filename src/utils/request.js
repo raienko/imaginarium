@@ -6,7 +6,7 @@ import throwError from 'src/utils/throwError';
 
 let requestID = 0;
 
-export default async (url, params) => {
+const request = async (url, params) => {
   const rID = requestID++;
 
   const options = {
@@ -46,3 +46,31 @@ export default async (url, params) => {
       throwError(err.message);
     });
 };
+
+request.post = (url, body, params) =>
+  request(url, {
+    ...params,
+    method: 'POST',
+    body,
+  });
+
+request.put = (url, body, params) =>
+  request(url, {
+    ...params,
+    method: 'PUT',
+    body,
+  });
+
+request.get = (url, params) =>
+  request(url, {
+    ...params,
+    method: 'GET',
+  });
+
+request.delete = (url, params) =>
+  request(url, {
+    ...params,
+    method: 'DELETE',
+  });
+
+export default request;

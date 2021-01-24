@@ -2,45 +2,28 @@ import store from 'src/store';
 import types from './types';
 import * as api from './api';
 
-export const auth = async (credentials) => {
-  const token = 'fake_token';
+export const register = async (user) => {
+  const {token, refreshToken, userId} = await api.register(user);
   return store.dispatch({
-    type: types.authorize,
-    payload: {token},
+    type: types.register,
+    payload: {token, refreshToken, userId},
   });
 };
 
-export const fetchProfile = async () => {
-  const profile = {
-    username: 'John',
-    role: 'player',
-    head: 0,
-    body: 0,
-  };
+export const login = async (credentials) => {
+  const {token, refreshToken, userId} = await api.login(credentials);
   return store.dispatch({
-    type: types.fetchProfile,
-    payload: {profile},
+    type: types.login,
+    payload: {token, refreshToken, userId},
   });
-};
-
-export const updateProfile = async (changes) => {
-  const profile = {
-    ...store.getState().auth.profile,
-    ...changes,
-  };
-
-  return store.dispatch({
-    type: types.fetchProfile,
-    payload: {profile},
-  });
-};
-
-export const removeAccount = async (reason) => {
-  // do server request;
-  await logout();
 };
 
 export const logout = async () => {
-  await api.signOut().catch(() => {});
+  await api.logout();
   return store.dispatch({type: types.logout});
+};
+
+export const removeAccount = async (reason) => {
+  await api.removeAccount(reason);
+  return store.dispatch({type: types.removeAccount});
 };

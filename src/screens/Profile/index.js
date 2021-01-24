@@ -16,7 +16,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(
-  class CharacterSetup extends React.PureComponent {
+  class Profile extends React.PureComponent {
     static propTypes = {
       profile: PropTypes.object.isRequired,
     };

@@ -1,19 +1,17 @@
 import request from 'src/utils/request';
 
-export const createGame = async (params) => {
-  return request('games', {
-    method: 'POST',
-    body: params,
-  });
+export const createGame = async (config) => {
+  return request.post('game', config);
 };
 
-export const updateGame = async (gameId, params) => {
-  return request(`games/${gameId}`, {
-    method: 'PUT',
-    body: params,
-  });
+export const fetchGame = async () => {
+  return request.get('game');
+};
+
+export const updateGame = async (params) => {
+  return request.put('game');
 };
 
 export const searchGame = async (params) => {
-  return request('queue', {method: 'POST'});
+  return request.post('queue', params);
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text} from 'react-native';
 import PropTypes from 'prop-types';
-import localization, {updateOnLanguageChange} from 'localization';
+import localization, {updateOnLanguageChange} from 'locales';
 
 export default updateOnLanguageChange(
   class CustomText extends React.PureComponent {

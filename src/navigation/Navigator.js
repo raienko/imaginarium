@@ -14,7 +14,7 @@ import Game from 'src/screens/Game';
 import Lobby from 'src/screens/Lobby';
 import Store from 'src/screens/Store';
 import Queue from 'src/screens/Queue';
-import CharacterSetup from 'src/screens/CharacterSetup';
+import CharacterSetup from 'src/screens/Profile';
 import ViewPlayer from 'src/screens/ViewPlayer';
 
 const Stack = createStackNavigator();

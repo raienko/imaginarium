@@ -2,7 +2,7 @@ import React from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import shadow from 'src/constants/shadow';
-import localization, {updateOnLanguageChange} from 'localization';
+import localization, {updateOnLanguageChange} from 'locales';
 import {
   elementWidth,
   elementHeight,

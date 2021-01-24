@@ -1,29 +1,10 @@
-import auth from '@react-native-firebase/auth';
-import {appleAuth} from '@invertase/react-native-apple-authentication';
+import request from 'src/utils/request';
 
-export const signInWithPhoneNumber = async (phoneNumber) => {
-  return auth().signInWithPhoneNumber(phoneNumber);
-};
+export const register = async (user) => request.post('auth/register', {user});
 
-export const signInWithApple = async () => {
-  const options = {
-    requestedOperation: appleAuth.Operation.LOGIN,
-    requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
-  };
-  const authRequest = await appleAuth.performRequest(options);
+export const login = async (credentials) =>
+  request.post('auth/login', {credentials});
 
-  const credentialState = await appleAuth.getCredentialStateForUser(
-    authRequest.user,
-  );
-  console.log({credentialState, authRequest});
-  if (credentialState === appleAuth.State.AUTHORIZED) {
-    return true;
-  } else {
-    return false;
-  }
-};
+export const logout = async () => request.post('auth/logout');
 
-export const signOut = async () => {
-  // inform backend that user signed out
-  return auth().signOut();
-};
+export const removeAccount = async (reason) => request.delete('auth', {reason});

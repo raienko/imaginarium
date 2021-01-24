@@ -1,8 +1,8 @@
 export default {
   fetchGame: 'fetchGame',
-  fetchCards: 'fetchCards',
+  updateGame: 'updateGame',
+  leaveGame: 'leaveGame',
   searchGame: 'searchGame',
-  fetchPlayers: 'fetchPlayers',
-  clearGameData: 'clearGameData',
-  cancelGameSearch: 'cancelGameSearch',
+  cancelSearch: 'cancelSearch',
+  fetchCards: 'fetchCards',
 };

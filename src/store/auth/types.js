@@ -1,5 +1,6 @@
 export default {
-  authorize: 'authorize',
-  fetchProfile: 'fetchProfile',
+  register: 'register',
+  login: 'login',
   logout: 'logout',
+  removeAccount: 'removeAccount',
 };

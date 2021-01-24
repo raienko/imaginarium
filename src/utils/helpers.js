@@ -3,8 +3,8 @@ import store from 'src/store';
 import pSBC from 'shade-blend-color';
 
 export const isAuthorized = () => {
-  const {auth} = store.getState();
-  return !!auth.authorized;
+  const token = getToken();
+  return !!token;
 };
 
 export const getToken = () => {
