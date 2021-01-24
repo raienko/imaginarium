@@ -1,7 +1,11 @@
 import types from './types';
 
 export const initialState = {
-  profile: null,
+  profile: {
+    id: '',
+    username: '',
+    character: 0,
+  },
 };
 
 export default (state = initialState, action) => {

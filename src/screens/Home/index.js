@@ -6,7 +6,7 @@ import IfAuthorized from 'src/components/IfAuthorized';
 import TouchableIcon from 'src/components/TouchableIcon';
 import Logo from 'src/components/Logo';
 import Header from 'src/components/Header';
-import {getToken, isAuthorized} from 'src/utils/helpers';
+import {isAuthorized} from 'src/utils/helpers';
 import AuthorizationPopup from 'src/components/AuthorizationPopup';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import colors from 'src/constants/colors';
@@ -43,7 +43,8 @@ export default class Home extends React.PureComponent {
   play = async () => {
     const authorized = isAuthorized();
     if (!authorized) {
-      navigation.navigate('Profile');
+      navigation.navigate('Profile', {hasPlayBtn: true});
+      return;
     }
     await gamesActions.searchGame();
     return navigation.navigate('Queue');
@@ -70,7 +71,7 @@ export default class Home extends React.PureComponent {
             />
             <TouchableIcon
               name="user"
-              onPress={() => navigation.navigate('CharacterSetup')}
+              onPress={() => navigation.navigate('Profile')}
             />
           </Header>
         </IfAuthorized>

@@ -9,5 +9,9 @@ export const updateUser = (changes) => {
 };
 
 export const fetchProfiles = (ids) => {
-  return request.get('users', {ids});
+  return request.get('user/profiles', {ids});
+};
+
+export const checkUsername = (username) => {
+  return request.post('user/username', {username});
 };

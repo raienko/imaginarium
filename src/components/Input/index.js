@@ -65,6 +65,7 @@ const styles = StyleSheet.create({
     color: colors.dark,
     borderWidth: 2,
     borderColor: colors.white,
+    textAlign: 'center',
   },
   disabled: {
     opacity: 0.3,

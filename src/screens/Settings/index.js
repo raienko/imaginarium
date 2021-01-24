@@ -6,7 +6,6 @@ import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import IfAuthorized from 'src/components/IfAuthorized';
 import * as authActions from 'src/store/auth/actions';
 import Screen from 'src/components/Screen';
-import Header from 'src/components/Header';
 import H1 from 'src/components/H1';
 import colors from 'src/constants/colors';
 
@@ -14,9 +13,7 @@ export default class Settings extends React.PureComponent {
   render() {
     return (
       <Screen style={styles.wrapper}>
-        <Header>
-          <BackButton onPress={navigation.back} />
-        </Header>
+        <BackButton onPress={navigation.back} />
         <H1 value="Language" />
         <H1 value="Notifications" />
         <IfAuthorized>

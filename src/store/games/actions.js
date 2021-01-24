@@ -29,17 +29,17 @@ export const fetchGame = () => {
   });
 };
 
-export const searchGame = async () => {
+export const searchGame = async (params) => {
   try {
-    await api.searchGame();
+    await api.searchGame(params);
     return store.dispatch({type: types.searchGame});
   } catch (err) {
     throwError('Game search failed', err.code);
   }
 };
 
-export const cancelGameSearch = () => {
-  return store.dispatch({type: types.cancelGameSearch});
+export const cancelSearch = async () => {
+  return store.dispatch({type: types.cancelSearch});
 };
 
 export const fetchCards = () => {

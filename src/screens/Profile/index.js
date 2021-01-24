@@ -6,13 +6,15 @@ import Input from 'src/components/Input';
 import Button from 'src/components/Button';
 import navigation from 'src/navigation';
 import Screen from 'src/components/Screen';
-import Character from 'src/components/Character';
+import Character from 'src/components/CharacterV2';
+import BackButton from 'src/components/BackButton';
 import {rem} from 'src/utils/units';
 import TouchableIcon from 'src/components/TouchableIcon';
-import * as authActions from 'src/store/auth/actions';
+import * as userApi from 'src/store/user/api';
+import * as userActions from 'src/store/user/actions';
 
 const mapStateToProps = (state) => ({
-  profile: state.auth.profile,
+  profile: state.user.profile,
 });
 
 export default connect(mapStateToProps)(
@@ -23,57 +25,100 @@ export default connect(mapStateToProps)(
 
     constructor(props) {
       super(props);
+      const {profile} = this.props;
+
       this.state = {
-        name: '',
-        head: props.profile.head,
-        body: props.profile.body,
+        username: profile.username,
+        character: profile.character,
+        valid: false,
+        fetching: false,
       };
     }
 
     next = (key) => () => {
       const current = this.state[key];
-      const next = (current + 1) % Character.assets[key].length;
+      const next = (current + 1) % Character.assets.length;
       this.setState({[key]: next});
     };
 
     previous = (key) => () => {
       const current = this.state[key];
-      const previous = (current || Character.assets[key].length) - 1;
+      const previous = (current || Character.assets.length) - 1;
       this.setState({[key]: previous});
     };
 
     submit = async () => {
-      const {head, body} = this.state;
-      await authActions.updateProfile({head, body});
-      return navigation.back();
+      const {username, character} = this.state;
+      this.setState({fetching: true});
+      try {
+        await userActions.updateUser({username, character});
+        this.setState({fetching: false});
+      } catch (err) {
+        this.setState({fetching: false, error: err.message});
+      }
+      // do something
+    };
+
+    play = async () => {
+      const hasChanges = false;
+      if (hasChanges) {
+        await this.submit();
+      }
+      navigation.navigate('Queue');
+    };
+
+    setUsername = (username) => {
+      this.setState({username}, this.validateWithDelay);
+    };
+
+    validate = () => {
+      const {username} = this.state;
+      const usernameValid = userApi.checkUsername(username);
+      const valid = usernameValid && username.length > 3;
+      this.setState({valid});
+    };
+
+    validateWithDelay = () => {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(this.validate, 1500);
     };
 
     render() {
-      const {head, body} = this.state;
+      const {username, character, valid, fetching} = this.state;
+      let error = '';
+      if (username && !valid) {
+        error = 'Username already taken';
+      }
+      const hasPlayBtn = navigation.getParam('hasPlayBtn');
       return (
         <Screen style={styles.wrapper}>
-          <Input placeholder="name" />
+          <BackButton onPress={navigation.back} />
+          <Input
+            placeholder="username"
+            error={error}
+            editable={!fetching}
+            onChangeText={this.setUsername}
+          />
           <View style={styles.container}>
-            <Character
-              head={Character.assets.head[head]}
-              body={Character.assets.body[body]}
-            />
-            <View style={[styles.controls, styles.head]}>
+            <Character asset={character} />
+            <View style={styles.controls}>
               <TouchableIcon
                 name="arrow-left"
-                onPress={this.previous('head')}
+                onPress={this.previous('character')}
               />
-              <TouchableIcon name="arrow-right" onPress={this.next('head')} />
-            </View>
-            <View style={[styles.controls, styles.body]}>
               <TouchableIcon
-                name="arrow-left"
-                onPress={this.previous('body')}
+                name="arrow-right"
+                onPress={this.next('character')}
               />
-              <TouchableIcon name="arrow-right" onPress={this.next('body')} />
             </View>
           </View>
-          <Button text="button.play" onPress={this.submit} />
+          {hasPlayBtn && (
+            <Button
+              text="button.play"
+              disabled={!valid || fetching}
+              onPress={this.play}
+            />
+          )}
         </Screen>
       );
     }
@@ -84,10 +129,12 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
   },
   container: {
     marginTop: rem(20),
+    width: rem(300),
+    alignItems: 'center',
   },
   controls: {
     flexDirection: 'row',

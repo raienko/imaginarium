@@ -5,11 +5,14 @@ import Button from 'src/components/Button';
 import Screen from 'src/components/Screen';
 import * as gamesActions from 'src/store/games/actions';
 import navigation from 'src/navigation';
+import logger from 'src/utils/logger';
 
 export default class Queue extends React.PureComponent {
   cancelSearch = async () => {
-    await gamesActions.cancelGameSearch();
-    navigation.back();
+    await gamesActions
+      .cancelSearch()
+      .catch((err) => logger.error('Failed to cancel game', err.message));
+    navigation.navigate('Home');
   };
 
   componentDidMount() {
