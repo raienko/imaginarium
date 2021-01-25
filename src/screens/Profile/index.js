@@ -6,7 +6,7 @@ import Input from 'src/components/Input';
 import Button from 'src/components/Button';
 import navigation from 'src/navigation';
 import Screen from 'src/components/Screen';
-import Character from 'src/components/CharacterV2';
+import Character from 'src/components/Character';
 import BackButton from 'src/components/BackButton';
 import {rem} from 'src/utils/units';
 import TouchableIcon from 'src/components/TouchableIcon';

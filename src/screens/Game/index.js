@@ -8,16 +8,14 @@ import cards from 'src/cards';
 import Header from 'src/components/Header';
 import Button from 'src/components/Button';
 import Footer from 'src/components/Footer';
-import Players from 'src/components/Players';
 import Timer from 'src/components/Timer';
 import Spinner from 'src/components/Spinner';
 import {rem} from 'src/utils/units';
 import CardsStack from 'src/components/CardsStack';
 import Slot from 'src/components/Slot';
-import CharacterV2 from 'src/components/CharacterV2';
+import Character from 'src/components/Character';
 import CardsViewer from 'src/components/CardsViewer';
 import Table from 'src/components/Table';
-import Character from 'src/components/Character';
 import TouchableIcon from 'src/components/TouchableIcon';
 import Popup from 'src/components/Popup';
 import colors from 'src/constants/colors';
@@ -83,25 +81,24 @@ export default connect(mapStateToProps)(
           </Header>
           <Table>
             <Slot index={0}>
-              <CharacterV2 asset={0} />
+              <Character asset={0} />
             </Slot>
             <Slot index={1}>
-              <CharacterV2 asset={1} />
+              <Character asset={1} />
             </Slot>
             <Slot index={2}>
-              <CharacterV2 asset={2} />
+              <Character asset={2} />
             </Slot>
             <Slot index={3}>
-              <CharacterV2 asset={3} />
+              <Character asset={3} />
             </Slot>
             <Slot index={4}>
-              <CharacterV2 asset={4} />
+              <Character asset={4} />
             </Slot>
             <Slot index={5}>
-              <CharacterV2 asset={5} />
+              <Character asset={5} />
             </Slot>
           </Table>
-          {/*<Players players={players} />*/}
           <CardsStack
             cards={hand}
             onPress={this.showCard}
@@ -165,36 +162,29 @@ const styles = StyleSheet.create({
 
 const fakePlayers = [
   {
-    head: Character.assets.head[0],
-    body: Character.assets.body[0],
+    character: 0,
     score: 20,
     name: 'John',
     id: 'asdas1231',
   },
   {
-    head: Character.assets.head[0],
-    body: Character.assets.body[1],
+    character: 0,
     score: 0,
     name: 'Alice',
     id: 'asdas1231asd',
   },
   {
-    head: Character.assets.head[1],
-    body: Character.assets.body[0],
+    character: 0,
     score: 9,
     name: 'Euyh',
     id: 'asASD1',
   },
   {
-    head: Character.assets.head[1],
-    body: Character.assets.body[1],
     score: 10,
     name: 'Sid',
     id: 'asdasasd1231',
   },
   {
-    head: Character.assets.head[0],
-    body: Character.assets.body[0],
     score: 20,
     name: 'Nance',
     id: 'asdas122g31',

@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import {size} from 'src/components/CharacterV2';
+import {size} from 'src/components/Character';
 import {height} from 'src/components/Table';
 import {rem} from 'src/utils/units';
 import chair from './chair.png';

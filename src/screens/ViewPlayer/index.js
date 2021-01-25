@@ -16,11 +16,7 @@ export default class ViewPlayer extends React.PureComponent {
     return (
       <Screen style={styles.wrapper}>
         <Input style={styles.name} value={player.name} editable={false} />
-        <Character
-          style={styles.character}
-          head={player.head}
-          body={player.body}
-        />
+        <Character style={styles.character} />
         <Button text="button.cancel" onPress={navigation.back} />
       </Screen>
     );
