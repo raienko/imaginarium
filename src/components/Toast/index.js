@@ -20,7 +20,7 @@ export default class Toast extends React.PureComponent {
 
 const styles = StyleSheet.create({
   wrapper: {
-    width: rem(300),
+    width: rem(340),
     alignSelf: 'center',
     justifyContent: 'center',
     height: rem(50),
