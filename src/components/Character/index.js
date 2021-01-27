@@ -2,15 +2,7 @@ import React from 'react';
 import {Image, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
-
-import char0 from './assets/char_0.png';
-import char1 from './assets/char_1.png';
-import char2 from './assets/char_2.png';
-import char3 from './assets/char_3.png';
-import char4 from './assets/char_4.png';
-import char5 from './assets/char_5.png';
-
-const assets = [char0, char1, char2, char3, char4, char5];
+import characters from 'src/characters';
 
 export default class Character extends React.PureComponent {
   static propTypes = {
@@ -23,14 +15,14 @@ export default class Character extends React.PureComponent {
     style: undefined,
   };
 
-  static assets = assets;
+  static assets = characters;
 
   render() {
     const {style, asset} = this.props;
     return (
       <Image
         style={[styles.character].concat(style)}
-        source={assets[asset]}
+        source={characters[asset]}
         resizeMode="contain"
       />
     );

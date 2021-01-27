@@ -1,8 +1,9 @@
+import randomName from 'src/utils/randomName';
 import types from './types';
 
 export const initialState = {
   profile: {
-    id: '',
+    name: randomName(),
     username: '',
     character: 0,
   },

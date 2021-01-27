@@ -1,5 +1,5 @@
 import env from 'src/constants/env';
-import {getToken} from 'src/utils/helpers';
+import {getToken} from 'src/utils/store';
 import logger from 'src/utils/logger';
 import userAgent from 'src/utils/userAgent';
 import throwError from 'src/utils/throwError';

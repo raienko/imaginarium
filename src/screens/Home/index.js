@@ -6,7 +6,7 @@ import IfAuthorized from 'src/components/IfAuthorized';
 import TouchableIcon from 'src/components/TouchableIcon';
 import Logo from 'src/components/Logo';
 import Header from 'src/components/Header';
-import {isAuthorized} from 'src/utils/helpers';
+import {isAuthorized} from 'src/utils/store';
 import AuthorizationPopup from 'src/components/AuthorizationPopup';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import colors from 'src/constants/colors';

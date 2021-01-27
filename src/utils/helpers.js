@@ -1,16 +1,5 @@
 import {Platform} from 'react-native';
-import store from 'src/store';
 import pSBC from 'shade-blend-color';
-
-export const isAuthorized = () => {
-  const token = getToken();
-  return !!token;
-};
-
-export const getToken = () => {
-  const {auth} = store.getState();
-  return auth.token;
-};
 
 export const isIOS = Platform.OS === 'ios';
 
@@ -21,3 +10,10 @@ export const wait = (timeout) => {
 };
 
 export const saturate = (color, saturation) => pSBC(saturation, color);
+
+export const getRandomIndex = (arr) => Math.floor(Math.random() * arr.length);
+
+export const getRandom = (arr) => {
+  const index = getRandomIndex(arr);
+  return arr[index];
+};
