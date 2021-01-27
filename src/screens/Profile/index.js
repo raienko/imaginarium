@@ -6,15 +6,20 @@ import Input from 'src/components/Input';
 import Button from 'src/components/Button';
 import navigation from 'src/navigation';
 import Screen from 'src/components/Screen';
+import ErrorText from 'src/components/ErrorText';
 import Character from 'src/components/Character';
 import BackButton from 'src/components/BackButton';
 import {rem} from 'src/utils/units';
 import TouchableIcon from 'src/components/TouchableIcon';
+import * as authActions from 'src/store/auth/actions';
 import * as userActions from 'src/store/user/actions';
+import * as gamesActions from 'src/store/games/actions';
 import randomName from 'src/utils/randomName';
+import colors from 'src/constants/colors';
 import Icon from 'src/components/Icon';
 
 const mapStateToProps = (state) => ({
+  token: state.auth.token,
   profile: state.user.profile,
 });
 
@@ -22,6 +27,7 @@ export default connect(mapStateToProps)(
   class Profile extends React.PureComponent {
     static propTypes = {
       profile: PropTypes.object.isRequired,
+      token: PropTypes.string.isRequired,
     };
 
     constructor(props) {
@@ -31,7 +37,7 @@ export default connect(mapStateToProps)(
       this.state = {
         name: profile.name,
         character: profile.character,
-        valid: true,
+        error: '',
         fetching: false,
       };
     }
@@ -49,23 +55,25 @@ export default connect(mapStateToProps)(
     };
 
     submit = async () => {
+      const {token, profile} = this.props;
       const {name, character} = this.state;
       this.setState({fetching: true});
       try {
-        await userActions.updateUser({name, character});
-        this.setState({fetching: false});
-      } catch (err) {
-        this.setState({fetching: false, error: err.message});
-      }
-      // do something
-    };
+        if (!token) {
+          await authActions.register({name, character});
+          await userActions.fetchUser();
+        }
 
-    play = async () => {
-      const hasChanges = false;
-      if (hasChanges) {
-        await this.submit();
-      }
-      navigation.navigate('Queue');
+        const nameChanged = name !== profile.name;
+        const charChanged = character !== profile.character;
+        if (nameChanged || charChanged) {
+          await userActions.updateUser({name, character});
+        }
+
+        await gamesActions.searchGame();
+        navigation.navigate('Queue');
+      } catch (err) {}
+      this.setState({fetching: false});
     };
 
     setName = (name) => {
@@ -79,8 +87,11 @@ export default connect(mapStateToProps)(
 
     validate = () => {
       const {name} = this.state;
-      const valid = name.length > 3;
-      this.setState({valid});
+      let error = '';
+      if (name.length < 3) {
+        error = 'error.name';
+      }
+      this.setState({error});
     };
 
     validateWithDelay = () => {
@@ -89,15 +100,15 @@ export default connect(mapStateToProps)(
     };
 
     render() {
-      const {name, character, valid, fetching} = this.state;
-      let error = '';
+      const {name, character, error, fetching} = this.state;
       const hasPlayBtn = navigation.getParam('hasPlayBtn');
       return (
         <Screen style={styles.wrapper}>
           <BackButton onPress={navigation.back} />
+          <ErrorText text={error} />
           <View style={styles.row}>
             <Input
-              placeholder="name"
+              placeholder="form.name"
               error={error}
               value={name}
               editable={!fetching}
@@ -105,8 +116,9 @@ export default connect(mapStateToProps)(
               style={styles.input}
             />
             <TouchableIcon
-              name="dice-5-outline"
-              font={Icon.fonts.MaterialCommunityIcons}
+              name="dice"
+              font={Icon.fonts.FontAwesome5}
+              color={colors.yellow}
               onPress={this.randomName}
             />
           </View>
@@ -123,8 +135,8 @@ export default connect(mapStateToProps)(
           {hasPlayBtn && (
             <Button
               text="button.play"
-              disabled={!valid || fetching}
-              onPress={this.play}
+              disabled={error || fetching}
+              onPress={this.submit}
             />
           )}
         </Screen>

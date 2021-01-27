@@ -7,7 +7,7 @@ import ButtonWithIcon from 'src/components/ButtonWithIcon';
 export default class TouchableIcon extends React.PureComponent {
   static propTypes = {
     name: PropTypes.string,
-    font: PropTypes.string,
+    font: PropTypes.any,
     style: PropTypes.any,
   };
 

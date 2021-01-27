@@ -3,6 +3,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import {rem} from 'src/utils/units';
@@ -20,6 +21,7 @@ Icon.fonts = {
   EvilIcons,
   MaterialCommunityIcons,
   FontAwesome,
+  FontAwesome5,
   Ionicons,
   Feather,
 };

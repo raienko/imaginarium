@@ -23,9 +23,11 @@
         "send_code": "Send code",
         "confirmation_code": "Confirmation code",
         "verify": "Verify",
-        "search": "Search by username"
+        "search": "Search by username",
+        "name": "Name"
     },
     "error": {
-        "sign_in_failed": "Failed to sign in"
+        "sign_in_failed": "Failed to sign in",
+        "name": "At least 3 characters"
     }
 }
