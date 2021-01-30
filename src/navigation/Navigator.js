@@ -14,6 +14,7 @@ import Game from 'src/screens/Game';
 import Lobby from 'src/screens/Lobby';
 import Store from 'src/screens/Store';
 import Queue from 'src/screens/Queue';
+import Auth from 'src/screens/Auth';
 import Profile from 'src/screens/Profile';
 import ViewPlayer from 'src/screens/ViewPlayer';
 
@@ -22,6 +23,7 @@ const Stack = createStackNavigator();
 const MainNavigator = () => (
   <Stack.Navigator headerMode="none">
     <Stack.Screen name="Home" component={Home} />
+    <Stack.Screen name="Auth" component={Auth} />
     <Stack.Screen name="Profile" component={Profile} />
     <Stack.Screen name="HowToPlay" component={HowToPlay} />
     <Stack.Screen name="Settings" component={Settings} />

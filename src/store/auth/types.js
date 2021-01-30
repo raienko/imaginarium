@@ -1,6 +1,5 @@
 export default {
-  register: 'register',
-  login: 'login',
+  auth: 'auth',
   logout: 'logout',
   removeAccount: 'removeAccount',
 };

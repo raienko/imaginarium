@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => ({
-  token: state.auth.token,
+  token: state.auth.accessToken,
 });
 
 export default connect(mapStateToProps)(
   class IfAuthorized extends React.PureComponent {
     static propTypes = {
-      token: PropTypes.string.isRequired,
+      token: PropTypes.object.isRequired,
       children: PropTypes.node.isRequired,
     };
 

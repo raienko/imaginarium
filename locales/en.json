@@ -13,7 +13,8 @@
         "create_game": "Create game",
         "find_game": "Find game",
         "leave": "Give up",
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "next": "Next"
     },
     "title": {
         "sign_in": "Please sign in to proceed"
@@ -24,7 +25,8 @@
         "confirmation_code": "Confirmation code",
         "verify": "Verify",
         "search": "Search by username",
-        "name": "Name"
+        "username": "Username",
+        "password": "Password"
     },
     "error": {
         "sign_in_failed": "Failed to sign in",

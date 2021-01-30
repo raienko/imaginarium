@@ -2,19 +2,18 @@ import store from 'src/store';
 import types from './types';
 import * as api from './api';
 
-export const register = async (user) => {
-  const {token, refreshToken, userId} = await api.register(user);
-  return store.dispatch({
-    type: types.register,
-    payload: {token, refreshToken, userId},
+export const auth = async (username, password) => {
+  const {accessToken, refreshToken, userId} = await api.auth({
+    username,
+    password,
   });
-};
-
-export const login = async (credentials) => {
-  const {token, refreshToken, userId} = await api.login(credentials);
   return store.dispatch({
-    type: types.login,
-    payload: {token, refreshToken, userId},
+    type: types.auth,
+    payload: {
+      accessToken,
+      refreshToken,
+      userId,
+    },
   });
 };
 

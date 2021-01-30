@@ -1,18 +1,17 @@
 import types from './types';
 
 export const initialState = {
-  token: '',
-  refreshToken: '',
+  accessToken: null,
+  refreshToken: null,
   userId: '',
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case types.register:
-    case types.login:
+    case types.auth:
       return {
         ...state,
-        token: action.payload.token,
+        accessToken: action.payload.accessToken,
         refreshToken: action.payload.refreshToken,
         userId: action.payload.userId,
       };

@@ -1,12 +1,11 @@
-import randomName from 'src/utils/randomName';
 import types from './types';
 
 export const initialState = {
   profile: {
-    name: randomName(),
     username: '',
     character: 0,
   },
+  friends: [],
 };
 
 export default (state = initialState, action) => {
@@ -16,6 +15,10 @@ export default (state = initialState, action) => {
       return {
         ...state,
         profile: action.payload.profile,
+      };
+    case types.fetchFriends:
+      return {
+        friends: action.payload.friends,
       };
     default: {
       return {

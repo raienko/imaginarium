@@ -14,12 +14,10 @@ import TouchableIcon from 'src/components/TouchableIcon';
 import * as authActions from 'src/store/auth/actions';
 import * as userActions from 'src/store/user/actions';
 import * as gamesActions from 'src/store/games/actions';
-import randomName from 'src/utils/randomName';
 import colors from 'src/constants/colors';
-import Icon from 'src/components/Icon';
+import {isAuthorized} from '../../utils/store';
 
 const mapStateToProps = (state) => ({
-  token: state.auth.token,
   profile: state.user.profile,
 });
 
@@ -27,7 +25,6 @@ export default connect(mapStateToProps)(
   class Profile extends React.PureComponent {
     static propTypes = {
       profile: PropTypes.object.isRequired,
-      token: PropTypes.string.isRequired,
     };
 
     constructor(props) {
@@ -35,7 +32,7 @@ export default connect(mapStateToProps)(
       const {profile} = this.props;
 
       this.state = {
-        name: profile.name,
+        username: profile.username,
         character: profile.character,
         error: '',
         fetching: false,
@@ -55,19 +52,20 @@ export default connect(mapStateToProps)(
     };
 
     submit = async () => {
-      const {token, profile} = this.props;
-      const {name, character} = this.state;
+      const {profile} = this.props;
+      const {username, character} = this.state;
       this.setState({fetching: true});
+      const authorized = isAuthorized();
       try {
-        if (!token) {
-          await authActions.register({name, character});
+        if (!authorized) {
+          await authActions.register({username, character});
           await userActions.fetchUser();
         }
 
-        const nameChanged = name !== profile.name;
+        const usernameChanged = username !== profile.username;
         const charChanged = character !== profile.character;
-        if (nameChanged || charChanged) {
-          await userActions.updateUser({name, character});
+        if (usernameChanged || charChanged) {
+          await userActions.updateUser({username, character});
         }
 
         await gamesActions.searchGame();
@@ -76,19 +74,14 @@ export default connect(mapStateToProps)(
       this.setState({fetching: false});
     };
 
-    setName = (name) => {
-      this.setState({name, valid: false}, this.validateWithDelay);
-    };
-
-    randomName = () => {
-      const name = randomName();
-      this.setName(name);
+    set = (key) => (value) => {
+      this.setState({[key]: value, valid: false}, this.validateWithDelay);
     };
 
     validate = () => {
-      const {name} = this.state;
+      const {username} = this.state;
       let error = '';
-      if (name.length < 3) {
+      if (username.length < 3) {
         error = 'error.name';
       }
       this.setState({error});
@@ -100,28 +93,18 @@ export default connect(mapStateToProps)(
     };
 
     render() {
-      const {name, character, error, fetching} = this.state;
-      const hasPlayBtn = navigation.getParam('hasPlayBtn');
+      const {username, character, error, fetching} = this.state;
       return (
         <Screen style={styles.wrapper}>
           <BackButton onPress={navigation.back} />
           <ErrorText text={error} />
-          <View style={styles.row}>
-            <Input
-              placeholder="form.name"
-              error={error}
-              value={name}
-              editable={!fetching}
-              onChangeText={this.setName}
-              style={styles.input}
-            />
-            <TouchableIcon
-              name="dice"
-              font={Icon.fonts.FontAwesome5}
-              color={colors.yellow}
-              onPress={this.randomName}
-            />
-          </View>
+          <Input
+            placeholder="form.username"
+            error={error}
+            value={username}
+            editable={!fetching}
+            onChangeText={this.set('username')}
+          />
           <View style={styles.container}>
             <Character asset={character} />
             <View style={styles.controls}>
@@ -132,13 +115,12 @@ export default connect(mapStateToProps)(
               <TouchableIcon name="arrow-right" onPress={this.nextCharacter} />
             </View>
           </View>
-          {hasPlayBtn && (
-            <Button
-              text="button.play"
-              disabled={error || fetching}
-              onPress={this.submit}
-            />
-          )}
+          <Button
+            text="button.next"
+            color={colors.green}
+            disabled={error || fetching}
+            onPress={this.submit}
+          />
         </Screen>
       );
     }
@@ -172,10 +154,5 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     padding: rem(10),
-  },
-  input: {
-    width: undefined,
-    flex: 1,
-    margin: rem(10),
   },
 });

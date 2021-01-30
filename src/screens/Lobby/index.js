@@ -3,9 +3,7 @@ import {StyleSheet} from 'react-native';
 import {rem} from 'src/utils/units';
 import BackButton from 'src/components/BackButton';
 import Button from 'src/components/Button';
-import Header from 'src/components/Header';
 import Screen from 'src/components/Screen';
-import FriendsList from 'src/components/FriendsList';
 import navigation from 'src/navigation';
 import colors from 'src/constants/colors';
 import * as gameActions from 'src/store/games/actions';
@@ -21,10 +19,7 @@ export default class Lobby extends React.PureComponent {
     const {selected} = this.state;
     return (
       <Screen style={styles.wrapper}>
-        <Header>
-          <BackButton onPress={navigation.back} />
-        </Header>
-        <FriendsList onSelectionChange={this.handleSelected} />
+        <BackButton onPress={navigation.back} />
         <Button
           text="button.create_game"
           disabled={selected.length < 2 || selected.length > 5}

@@ -7,5 +7,5 @@ export const isAuthorized = () => {
 
 export const getToken = () => {
   const {auth} = store.getState();
-  return auth.token;
+  return auth.accessToken?.token;
 };

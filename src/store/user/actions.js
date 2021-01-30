@@ -21,3 +21,13 @@ export const updateUser = async (changes) => {
     },
   });
 };
+
+export const fetchFriends = async (filters) => {
+  const friends = await api.fetchFriends(filters);
+  return store.dispatch({
+    type: types.fetchFriends,
+    payload: {
+      friends,
+    },
+  });
+};

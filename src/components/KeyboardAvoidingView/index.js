@@ -51,7 +51,5 @@ export default class KeyboardAvoidingView extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-  },
+  wrapper: {},
 });

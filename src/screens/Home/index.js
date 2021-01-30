@@ -16,34 +16,10 @@ import * as gamesActions from 'src/store/games/actions';
 export default class Home extends React.PureComponent {
   authPopup;
 
-  state = {
-    loading: false,
-  };
-
-  playGame = async (ranked) => {
-    const authorized = isAuthorized();
-
-    if (!authorized) {
-      this.showAuthPopup();
-      return;
-    }
-
-    if (ranked) {
-      // search for game
-    }
-
-    await gamesActions.searchGame({ranked});
-    return navigation.navigate('Queue');
-  };
-
-  playRanked = () => this.playGame(true);
-
-  playWithFriends = () => this.playGame(false);
-
   play = async () => {
     const authorized = isAuthorized();
     if (!authorized) {
-      navigation.navigate('Profile', {hasPlayBtn: true});
+      navigation.navigate('Auth');
       return;
     }
     await gamesActions.searchGame();
@@ -55,10 +31,6 @@ export default class Home extends React.PureComponent {
       this[key] = ref;
     }
   };
-
-  showAuthPopup = () => this.authPopup.show();
-
-  hideAuthPopup = () => this.authPopup.hide();
 
   render() {
     return (
@@ -78,20 +50,20 @@ export default class Home extends React.PureComponent {
         <Logo style={styles.logo} />
         <ButtonWithIcon
           text="button.ranked"
-          onPress={this.playRanked}
+          onPress={() => navigation.navigate('Lobby', {ranked: true})}
           iconName="trophy"
           color={colors.blue}
         />
         <ButtonWithIcon
           text="button.play_with_friends"
-          onPress={this.playWithFriends}
+          onPress={() => navigation.navigate('Lobby')}
           iconName="users"
           color={colors.red}
         />
         <ButtonWithIcon
           text="button.play"
           onPress={this.play}
-          color={colors.purple}
+          color={colors.green}
           iconName="play"
         />
         <ButtonWithIcon
@@ -99,11 +71,6 @@ export default class Home extends React.PureComponent {
           onPress={() => navigation.navigate('Settings')}
           color={colors.yellow}
           iconName="cog"
-        />
-        <AuthorizationPopup
-          ref={this.register('authPopup')}
-          onSuccess={this.playGame}
-          onDismiss={this.hideAuthPopup}
         />
       </Screen>
     );

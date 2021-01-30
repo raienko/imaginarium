@@ -43,6 +43,7 @@ export default updateOnLanguageChange(
             error && styles.error,
           ].concat(style)}
           ref={onRef}
+          editable={editable}
           placeholder={placeholder ? localization.t(placeholder) : ''}
           allowFontScaling={false}
         />
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   disabled: {
-    opacity: 0.3,
+    opacity: 0.6,
   },
   error: {
     borderColor: colors.red,
