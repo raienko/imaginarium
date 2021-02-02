@@ -7,14 +7,18 @@ import TouchableIcon from 'src/components/TouchableIcon';
 import Logo from 'src/components/Logo';
 import Header from 'src/components/Header';
 import {isAuthorized} from 'src/utils/store';
-import AuthorizationPopup from 'src/components/AuthorizationPopup';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import colors from 'src/constants/colors';
 import Screen from 'src/components/Screen';
-import * as gamesActions from 'src/store/games/actions';
+import * as userActions from 'src/store/user/actions';
 
 export default class Home extends React.PureComponent {
-  authPopup;
+  componentDidMount() {
+    const authorized = isAuthorized();
+    if (authorized) {
+      userActions.fetchUser();
+    }
+  }
 
   play = async () => {
     const authorized = isAuthorized();
@@ -22,8 +26,7 @@ export default class Home extends React.PureComponent {
       navigation.navigate('Auth');
       return;
     }
-    await gamesActions.searchGame();
-    return navigation.navigate('Queue');
+    return navigation.navigate('Profile');
   };
 
   register = (key) => (ref) => {

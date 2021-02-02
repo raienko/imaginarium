@@ -35,6 +35,10 @@ export const startSockets = async () => {
   await ws.connect();
 };
 
+export const stopSockets = async () => {
+  await ws.disconnect();
+};
+
 export const setSocketStatus = async (status) => {
   return store.dispatch({
     type: types.setSocketStatus,

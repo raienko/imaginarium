@@ -20,6 +20,10 @@ export default (state = initialState, action) => {
       return {
         friends: action.payload.friends,
       };
+    case 'RESET':
+      return {
+        ...initialState,
+      };
     default: {
       return {
         ...state,

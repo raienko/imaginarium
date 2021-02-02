@@ -31,3 +31,9 @@ export const fetchFriends = async (filters) => {
     },
   });
 };
+
+export const reset = async () => {
+  return store.dispatch({
+    type: 'RESET',
+  });
+};

@@ -11,6 +11,7 @@ import ErrorText from 'src/components/ErrorText';
 import BackButton from 'src/components/BackButton';
 import {rem} from 'src/utils/units';
 import * as authActions from 'src/store/auth/actions';
+import * as userActions from 'src/store/user/actions';
 import colors from 'src/constants/colors';
 
 const mapStateToProps = (state) => ({
@@ -40,6 +41,7 @@ export default connect(mapStateToProps)(
       this.setState({fetching: true});
       try {
         await authActions.auth(username, password);
+        await userActions.fetchUser();
         navigation.navigate('Profile');
       } catch (err) {
         this.setState({fetching: false, error: err.message});
@@ -71,7 +73,7 @@ export default connect(mapStateToProps)(
       const {username, password, error, fetching} = this.state;
       return (
         <Screen style={styles.wrapper}>
-          <BackButton onPress={navigation.back} />
+          <BackButton onPress={() => navigation.navigate('Home')} />
           <KeyboardAvoidingView>
             <ErrorText text={error} />
             <Input

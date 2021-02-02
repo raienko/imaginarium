@@ -11,11 +11,9 @@ import Character from 'src/components/Character';
 import BackButton from 'src/components/BackButton';
 import {rem} from 'src/utils/units';
 import TouchableIcon from 'src/components/TouchableIcon';
-import * as authActions from 'src/store/auth/actions';
 import * as userActions from 'src/store/user/actions';
 import * as gamesActions from 'src/store/games/actions';
 import colors from 'src/constants/colors';
-import {isAuthorized} from '../../utils/store';
 
 const mapStateToProps = (state) => ({
   profile: state.user.profile,
@@ -55,19 +53,15 @@ export default connect(mapStateToProps)(
       const {profile} = this.props;
       const {username, character} = this.state;
       this.setState({fetching: true});
-      const authorized = isAuthorized();
       try {
-        if (!authorized) {
-          await authActions.register({username, character});
-          await userActions.fetchUser();
-        }
-
         const usernameChanged = username !== profile.username;
         const charChanged = character !== profile.character;
+
         if (usernameChanged || charChanged) {
           await userActions.updateUser({username, character});
         }
 
+        return;
         await gamesActions.searchGame();
         navigation.navigate('Queue');
       } catch (err) {}
@@ -96,7 +90,7 @@ export default connect(mapStateToProps)(
       const {username, character, error, fetching} = this.state;
       return (
         <Screen style={styles.wrapper}>
-          <BackButton onPress={navigation.back} />
+          <BackButton onPress={() => navigation.navigate('Home')} />
           <ErrorText text={error} />
           <Input
             placeholder="form.username"

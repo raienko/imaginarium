@@ -16,12 +16,10 @@ export default new (class Websocket extends EventBus {
     super(props);
   }
 
-  connect = () => {
+  connect = (token) => {
     if (this._ws) {
       throwError('Already connected!');
     }
-
-    const token = 'some_token';
 
     const url = env.HOST;
     const protocols = 'echo-protocol';
@@ -31,7 +29,10 @@ export default new (class Websocket extends EventBus {
 
     this._ws = new WebSocket(url, protocols, options);
     this._ws.onopen = () => this.dispatch(events.connected);
-    this._ws.onclose = () => this.dispatch(events.disconnected);
+    this._ws.onclose = () => {
+      this._ws = null;
+      this.dispatch(events.disconnected);
+    };
     this._ws.onerror = (err) => this.dispatch(events.error, err);
     this._ws.onmessage = (message) => this.dispatch(events.message, message);
   };
@@ -43,6 +44,5 @@ export default new (class Websocket extends EventBus {
 
   disconnect = () => {
     this._ws.close();
-    this._ws = null;
   };
 })();

@@ -8,6 +8,7 @@ import Toast from 'src/components/Toast';
 import Icon from 'src/components/Icon';
 import signalQuality from 'src/constants/signalQuality';
 import * as systemActions from 'src/store/system/actions';
+import {isAuthorized} from '../../utils/store';
 
 const mapStateToProps = (state) => ({
   signal: state.system.signal,
@@ -28,10 +29,6 @@ export default connect(mapStateToProps)(
     constructor(props) {
       super(props);
       this.unsubscribe = NetInfo.addEventListener(systemActions.pingServer);
-    }
-
-    async componentDidMount() {
-      await systemActions.startSockets();
     }
 
     componentWillUnmount() {
