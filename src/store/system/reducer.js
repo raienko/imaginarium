@@ -6,6 +6,7 @@ export const initialState = {
   online: true,
   signal: signalQuality.good,
   sockets: true,
+  ready: false,
 };
 
 export default (state = initialState, action) => {
@@ -21,6 +22,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         sockets: action.payload.status,
+      };
+    case types.setReadyState:
+      return {
+        ...state,
+        ready: action.payload.ready,
       };
     default: {
       return {

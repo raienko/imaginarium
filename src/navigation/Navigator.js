@@ -17,6 +17,7 @@ import Queue from 'src/screens/Queue';
 import Auth from 'src/screens/Auth';
 import Profile from 'src/screens/Profile';
 import ViewPlayer from 'src/screens/ViewPlayer';
+import Loading from 'src/screens/Loading';
 
 const Stack = createStackNavigator();
 
@@ -46,20 +47,27 @@ import {navigationRef} from './index';
 
 const mapStateToProps = (state) => ({
   currentGame: state.games.currentGame,
+  ready: state.system.ready,
 });
 
 export default connect(mapStateToProps)(
   class Navigator extends React.PureComponent {
     static propTypes = {
       currentGame: PropTypes.object,
+      ready: PropTypes.bool,
     };
 
     static defaultProps = {
       currentGame: null,
+      ready: false,
     };
 
     render() {
-      const {currentGame} = this.props;
+      const {currentGame, ready} = this.props;
+
+      if (!ready) {
+        return <Loading />;
+      }
 
       let ActiveNavigator = MainNavigator;
 
