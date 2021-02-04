@@ -38,12 +38,17 @@ const request = async (url, params) => {
       } catch (e) {
         result = response;
       }
+
+      if (!response.ok) {
+        throwError(result.error || response.statusText, response.status);
+      }
+
       logger.in(`[${rID}] ${env.HOST}/${url}`, result);
       return result;
     })
     .catch((err) => {
       logger.failed(`[${rID}] ${env.HOST}/${url}`, err.message, err.code);
-      throwError(err.message);
+      return throwError(err.message, err.code || 500);
     });
 };
 

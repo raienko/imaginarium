@@ -61,6 +61,7 @@ export default connect(mapStateToProps)(
           await userActions.updateUser({username, character});
         }
 
+        this.setState({fetching: false});
         return;
         await gamesActions.searchGame();
         navigation.navigate('Queue');
