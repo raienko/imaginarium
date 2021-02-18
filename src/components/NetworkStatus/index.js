@@ -1,14 +1,13 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, Modal} from 'react-native';
 import {connect} from 'react-redux';
 import NetInfo from '@react-native-community/netinfo';
 import PropTypes from 'prop-types';
+import H2 from 'src/components/H2';
 import {rem} from 'src/utils/units';
 import Toast from 'src/components/Toast';
-import Icon from 'src/components/Icon';
 import signalQuality from 'src/constants/signalQuality';
 import * as systemActions from 'src/store/system/actions';
-import {isAuthorized} from '../../utils/store';
 
 const mapStateToProps = (state) => ({
   signal: state.system.signal,
@@ -37,38 +36,34 @@ export default connect(mapStateToProps)(
 
     render() {
       const {online, signal, connected} = this.props;
-      if (online && signal !== signalQuality.bad && connected) {
-        return null;
+      if (!online || !connected) {
+        return (
+          <Modal visible>
+            <View style={styles.wrapper}>
+              <H2 value={online ? 'Server down' : 'Offline'} />
+            </View>
+          </Modal>
+        );
       }
-      return (
-        <Toast style={styles.wrapper}>
-          <View style={styles.cell}>
-            <Icon name="wifi" color="#000" />
-            <Icon name={online ? 'thumbs-up' : 'thumbs-down'} color="#000" />
-          </View>
-          <View style={styles.cell}>
-            <Icon name="tachometer" color="#000" />
-            <Icon
-              name={signal === signalQuality.good ? 'thumbs-up' : 'thumbs-down'}
-              color="#000"
-            />
-          </View>
-          <View style={styles.cell}>
-            <Icon name="server" color="#000" />
-            <Icon name={connected ? 'thumbs-up' : 'thumbs-down'} color="#000" />
-          </View>
-        </Toast>
-      );
+
+      if (signal === signalQuality.bad) {
+        return (
+          <Toast>
+            <H2>Bad signal</H2>
+          </Toast>
+        );
+      }
+
+      return null;
     }
   },
 );
 
 const styles = StyleSheet.create({
-  wrapper: {},
-  cell: {
+  wrapper: {
     flex: 1,
-    marginHorizontal: rem(10),
-    flexDirection: 'row',
-    justifyContent: 'space-around',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

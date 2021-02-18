@@ -61,11 +61,11 @@ export default connect(mapStateToProps)(
           await userActions.updateUser({username, character});
         }
 
-        this.setState({fetching: false});
-        return;
         await gamesActions.searchGame();
         navigation.navigate('Queue');
-      } catch (err) {}
+      } catch (err) {
+        console.log('Error :', err.message);
+      }
       this.setState({fetching: false});
     };
 
