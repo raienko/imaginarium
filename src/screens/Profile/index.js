@@ -97,7 +97,7 @@ export default connect(mapStateToProps)(
             placeholder="form.username"
             error={error}
             value={username}
-            editable={!fetching}
+            editable={false}
             onChangeText={this.set('username')}
           />
           <View style={styles.container}>
