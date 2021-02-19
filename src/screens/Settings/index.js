@@ -12,8 +12,8 @@ import colors from 'src/constants/colors';
 
 export default class Settings extends React.PureComponent {
   logout = async () => {
-    await authActions.removeAccount();
     await userActions.reset();
+    await authActions.logout();
   };
 
   render() {

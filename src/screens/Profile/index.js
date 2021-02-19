@@ -31,7 +31,7 @@ export default connect(mapStateToProps)(
 
       this.state = {
         username: profile.username,
-        character: profile.character,
+        character: profile.character || 0,
         error: '',
         fetching: false,
       };

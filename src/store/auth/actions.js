@@ -20,8 +20,7 @@ export const auth = async (username, password) => {
 };
 
 export const logout = async () => {
-  await api.logout();
-  await systemActions.stopSockets();
+  await Promise.allSettled([api.logout, systemActions.stopSockets]);
   return store.dispatch({type: types.logout});
 };
 

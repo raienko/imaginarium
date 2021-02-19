@@ -35,8 +35,10 @@ export default connect(mapStateToProps)(
     }
 
     render() {
+      return null;
+
       const {online, signal, connected} = this.props;
-      if (!online || !connected) {
+      if (!online) {
         return (
           <Modal visible>
             <View style={styles.wrapper}>

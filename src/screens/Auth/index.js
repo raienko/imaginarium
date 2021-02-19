@@ -49,28 +49,16 @@ export default connect(mapStateToProps)(
     };
 
     set = (key) => (value) => {
-      this.setState({[key]: value, error: ''}, this.validateWithDelay);
-    };
-
-    validate = () => {
-      const {username, password} = this.state;
-      let error = '';
-      if (username.length < 3) {
-        error = 'error.name';
-      }
-      if (!password) {
-        error = 'error.password';
-      }
-      this.setState({error});
-    };
-
-    validateWithDelay = () => {
-      clearTimeout(this.timer);
-      this.timer = setTimeout(this.validate, 500);
+      this.setState({[key]: value, error: ''});
     };
 
     render() {
       const {username, password, error, fetching} = this.state;
+
+      const validUsername = username.length > 3;
+      const validPassword = password.length > 3;
+      const fulfilled = validUsername && validPassword;
+
       return (
         <Screen style={styles.wrapper}>
           <BackButton onPress={() => navigation.navigate('Home')} />
@@ -91,7 +79,7 @@ export default connect(mapStateToProps)(
             <Button
               text="button.next"
               color={colors.green}
-              disabled={error || fetching}
+              disabled={!fulfilled || fetching}
               onPress={this.submit}
             />
           </KeyboardAvoidingView>

@@ -9,8 +9,12 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps)(
   class IfAuthorized extends React.PureComponent {
     static propTypes = {
-      token: PropTypes.object.isRequired,
+      token: PropTypes.object,
       children: PropTypes.node.isRequired,
+    };
+
+    static defaultProps = {
+      token: null,
     };
 
     render() {
