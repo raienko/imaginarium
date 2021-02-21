@@ -17,14 +17,6 @@ export default connect(mapStateToProps)(
       token: '',
     };
 
-    componentDidMount() {
-      this.check();
-    }
-
-    componentDidUpdate(prevProps) {
-      this.check();
-    }
-
     render() {
       return null;
     }
