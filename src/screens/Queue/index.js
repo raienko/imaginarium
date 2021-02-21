@@ -15,10 +15,6 @@ export default class Queue extends React.PureComponent {
     navigation.navigate('Home');
   };
 
-  componentDidMount() {
-    setTimeout(gamesActions.createGame, 1000);
-  }
-
   render() {
     return (
       <Screen style={styles.wrapper}>

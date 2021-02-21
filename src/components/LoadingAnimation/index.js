@@ -28,7 +28,6 @@ export default connect(mapStateToProps)(
       const authorized = !!token;
       await systemActions.pingServer();
       if (authorized) {
-        await systemActions.startSockets();
         await userActions.fetchUser();
       }
       await wait(5000);

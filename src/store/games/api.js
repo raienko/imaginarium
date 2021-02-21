@@ -13,5 +13,9 @@ export const updateGame = async (params) => {
 };
 
 export const searchGame = async (params) => {
-  return request.post('queue', params);
+  return request.post('matchmaking', params);
+};
+
+export const cancelSearch = async () => {
+  return request.delete('matchmaking');
 };

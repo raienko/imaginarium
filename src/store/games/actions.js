@@ -39,6 +39,7 @@ export const searchGame = async (params) => {
 };
 
 export const cancelSearch = async () => {
+  await api.cancelSearch();
   return store.dispatch({type: types.cancelSearch});
 };
 
