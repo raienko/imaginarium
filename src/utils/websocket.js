@@ -12,15 +12,30 @@ export const events = {
 export default new (class Websocket extends EventBus {
   _ws;
 
-  constructor(props) {
-    super(props);
-  }
+  _shouldRestart;
+
+  _handleSocketOpened = () => this.dispatch(events.connected);
+
+  _handleSocketClosed = () => {
+    this._ws = null;
+    this.dispatch(events.disconnected);
+  };
+
+  _handleSocketError = (err) => this.dispatch(events.error, err);
+
+  _handleSocketMessage = (message) => {
+    console.log({message});
+    const data = JSON.parse(message);
+    console.log({data});
+    this.dispatch(events.message, data);
+  };
 
   connect = (token) => {
     if (this._ws) {
       throwError('Already connected!');
     }
 
+    this._shouldRestart = true;
     const url = env.HOST;
     const protocols = 'echo-protocol';
     const options = {
@@ -28,13 +43,10 @@ export default new (class Websocket extends EventBus {
     };
 
     this._ws = new WebSocket(url, protocols, options);
-    this._ws.onopen = () => this.dispatch(events.connected);
-    this._ws.onclose = () => {
-      this._ws = null;
-      this.dispatch(events.disconnected);
-    };
-    this._ws.onerror = (err) => this.dispatch(events.error, err);
-    this._ws.onmessage = (message) => this.dispatch(events.message, message);
+    this._ws.onopen = this._handleSocketOpened;
+    this._ws.onclose = this._handleSocketClosed;
+    this._ws.onerror = this._handleSocketError;
+    this._ws.onmessage = this._handleSocketMessage;
   };
 
   send = (type, data) => {
@@ -44,5 +56,6 @@ export default new (class Websocket extends EventBus {
 
   disconnect = () => {
     this._ws.close();
+    this._shouldRestart = false;
   };
 })();

@@ -21,14 +21,18 @@ export const pingServer = async () => {
     signal = signalQuality.bad;
   }
 
-  return store.dispatch({
+  const connected = response?.message === 'pong';
+
+  await store.dispatch({
     type: types.ping,
     payload: {
-      connected: response?.message === 'pong',
+      connected,
       online: response !== 404,
       signal,
     },
   });
+
+  return connected;
 };
 
 export const startSockets = async () => {

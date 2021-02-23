@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import NetInfo from '@react-native-community/netinfo';
 import PropTypes from 'prop-types';
 import H2 from 'src/components/H2';
-import {rem} from 'src/utils/units';
 import Toast from 'src/components/Toast';
 import signalQuality from 'src/constants/signalQuality';
 import * as systemActions from 'src/store/system/actions';

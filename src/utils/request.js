@@ -1,3 +1,4 @@
+/* global AbortController */
 import env from 'src/constants/env';
 import {getToken} from 'src/utils/store';
 import logger from 'src/utils/logger';
@@ -6,10 +7,14 @@ import throwError from 'src/utils/throwError';
 
 let requestID = 0;
 
-const request = async (url, params) => {
+const request = async (url, params, timeout = 1000) => {
   const rID = requestID++;
 
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeout);
+
   const options = {
+    signal: controller.signal,
     ...params,
     headers: {
       Accept: 'application/json',
@@ -49,7 +54,8 @@ const request = async (url, params) => {
     .catch((err) => {
       logger.failed(`[${rID}] ${env.HOST}/${url}`, err.message, err.code);
       return throwError(err.message, err.code || 500);
-    });
+    })
+    .finally(() => clearTimeout(timer));
 };
 
 request.post = (url, body, params) =>
