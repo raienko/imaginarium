@@ -7,7 +7,7 @@ import throwError from 'src/utils/throwError';
 
 let requestID = 0;
 
-const request = async (url, params, timeout = 1000) => {
+const request = async (url, params, timeout = 3000) => {
   const rID = requestID++;
 
   const controller = new AbortController();

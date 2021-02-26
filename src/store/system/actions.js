@@ -35,8 +35,8 @@ export const pingServer = async () => {
   return connected;
 };
 
-export const startSockets = async () => {
-  await ws.connect();
+export const startSockets = async (token) => {
+  await ws.connect(token);
 };
 
 export const stopSockets = async () => {

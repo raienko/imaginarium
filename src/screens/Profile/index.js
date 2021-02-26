@@ -111,7 +111,7 @@ export default connect(mapStateToProps)(
             </View>
           </View>
           <Button
-            text="button.next"
+            text="button.play"
             color={colors.green}
             disabled={error || fetching}
             onPress={this.submit}

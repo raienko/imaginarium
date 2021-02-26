@@ -46,24 +46,24 @@ const GameNavigator = () => (
 import {navigationRef} from './index';
 
 const mapStateToProps = (state) => ({
-  currentGame: state.games.currentGame,
+  game: state.user.profile.game,
   ready: state.system.ready,
 });
 
 export default connect(mapStateToProps)(
   class Navigator extends React.PureComponent {
     static propTypes = {
-      currentGame: PropTypes.object,
+      game: PropTypes.string,
       ready: PropTypes.bool,
     };
 
     static defaultProps = {
-      currentGame: null,
+      game: '',
       ready: false,
     };
 
     render() {
-      const {currentGame, ready} = this.props;
+      const {game, ready} = this.props;
 
       if (!ready) {
         return <Loading />;
@@ -71,7 +71,7 @@ export default connect(mapStateToProps)(
 
       let ActiveNavigator = MainNavigator;
 
-      if (currentGame) {
+      if (game) {
         ActiveNavigator = GameNavigator;
       }
 

@@ -1,6 +1,9 @@
 import env from 'src/constants/env';
 import EventBus from 'src/utils/EventBus';
 import throwError from 'src/utils/throwError';
+import logger from 'src/utils/logger';
+
+let count = 0;
 
 export const events = {
   connected: 'connected',
@@ -12,22 +15,42 @@ export const events = {
 export default new (class Websocket extends EventBus {
   _ws;
 
-  _shouldRestart;
+  _token;
 
-  _handleSocketOpened = () => this.dispatch(events.connected);
+  _handleSocketOpened = () => {
+    logger.success('Sockets connection opened');
+    this.dispatch(events.connected);
+    this._clearTimers();
+  };
 
   _handleSocketClosed = () => {
     this._ws = null;
-    this.dispatch(events.disconnected);
+    if (this._token) {
+      this._restart();
+    } else {
+      this.dispatch(events.disconnected);
+      logger.warn('Sockets connection closed');
+    }
   };
 
   _handleSocketError = (err) => this.dispatch(events.error, err);
 
   _handleSocketMessage = (message) => {
     console.log({message});
-    const data = JSON.parse(message);
+    const data = JSON.parse(message.data);
     console.log({data});
     this.dispatch(events.message, data);
+  };
+
+  _restart = () => {
+    logger.info('Socket reconnecting');
+    const timeout = count++ * 1000;
+    this._timer = setTimeout(() => this.connect(this._token), timeout);
+  };
+
+  _clearTimers = () => {
+    count = 0;
+    clearTimeout(this._timer);
   };
 
   connect = (token) => {
@@ -35,7 +58,7 @@ export default new (class Websocket extends EventBus {
       throwError('Already connected!');
     }
 
-    this._shouldRestart = true;
+    this._token = token;
     const url = env.HOST;
     const protocols = 'echo-protocol';
     const options = {
@@ -55,7 +78,8 @@ export default new (class Websocket extends EventBus {
   };
 
   disconnect = () => {
-    this._ws.close();
-    this._shouldRestart = false;
+    this._token = '';
+    this._ws?.close();
+    this._clearTimers();
   };
 })();

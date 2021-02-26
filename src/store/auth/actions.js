@@ -8,7 +8,7 @@ export const auth = async (username, password) => {
     username,
     password,
   });
-  await systemActions.startSockets(accessToken.token);
+
   return store.dispatch({
     type: types.auth,
     payload: {
@@ -20,7 +20,7 @@ export const auth = async (username, password) => {
 };
 
 export const logout = async () => {
-  await Promise.allSettled([api.logout, systemActions.stopSockets]);
+  await Promise.all([api.logout, systemActions.stopSockets]);
   return store.dispatch({type: types.logout});
 };
 
