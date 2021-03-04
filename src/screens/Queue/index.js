@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import H3 from 'src/components/H3';
 import Button from 'src/components/Button';
 import Screen from 'src/components/Screen';
-import * as gamesActions from 'src/store/games/actions';
+import * as gamesActions from 'src/modules/games/actions';
 import navigation from 'src/navigation';
 import logger from 'src/utils/logger';
 

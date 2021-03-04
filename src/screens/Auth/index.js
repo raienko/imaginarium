@@ -10,8 +10,8 @@ import KeyboardAvoidingView from 'src/components/KeyboardAvoidingView';
 import ErrorText from 'src/components/ErrorText';
 import BackButton from 'src/components/BackButton';
 import {rem} from 'src/utils/units';
-import * as authActions from 'src/store/auth/actions';
-import * as userActions from 'src/store/user/actions';
+import * as authActions from 'src/modules/auth/actions';
+import * as userActions from 'src/modules/user/actions';
 import colors from 'src/constants/colors';
 
 const mapStateToProps = (state) => ({

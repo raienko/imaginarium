@@ -65,13 +65,11 @@ export default class Popup extends React.PureComponent {
         onRequestClose={onDismiss}
         statusBarTranslucent
         animationType="slide">
-        <KeyboardAvoidingView>
-          <SafeAreaView style={styles.wrapper} edges="bottom" mode="padding">
-            <TouchableOpacity style={styles.overlay} onPress={onDismiss} />
-            <View style={[styles.container, shadow].concat(style)}>
-              {children}
-            </View>
-          </SafeAreaView>
+        <KeyboardAvoidingView style={styles.wrapper}>
+          <TouchableOpacity style={styles.overlay} onPress={onDismiss} />
+          <View style={[styles.container, shadow].concat(style)}>
+            {children}
+          </View>
         </KeyboardAvoidingView>
       </Modal>
     );

@@ -19,3 +19,7 @@ export const searchGame = async (params) => {
 export const cancelSearch = async () => {
   return request.delete('matchmaking');
 };
+
+export const leaveGame = async () => {
+  return request.post('game/leave');
+};

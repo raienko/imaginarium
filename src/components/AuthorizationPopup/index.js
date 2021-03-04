@@ -5,8 +5,8 @@ import H1 from 'src/components/H1';
 import ErrorText from 'src/components/ErrorText';
 import IfIOS from 'src/components/IfIOS';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
-import * as authActions from 'src/store/auth/actions';
-import * as authApi from 'src/store/auth/api';
+import * as authActions from 'src/modules/auth/actions';
+import * as authApi from 'src/modules/auth/api';
 import PhoneVerificationPopup from 'src/components/PhoneVerificationPopup';
 import colors from 'src/constants/colors';
 

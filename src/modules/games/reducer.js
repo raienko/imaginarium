@@ -1,7 +1,7 @@
 import types from './types';
 
 export const initialState = {
-  current: null,
+  game: null,
   cards: [],
   searching: false,
 };
@@ -11,17 +11,17 @@ export default (state = initialState, action) => {
     case types.fetchGame:
       return {
         ...state,
-        current: action.payload.game,
+        game: action.payload.game,
       };
     case types.updateGame:
       return {
         ...state,
-        current: action.payload.game,
+        game: action.payload.game,
       };
     case types.leaveGame:
       return {
         ...state,
-        current: null,
+        game: null,
       };
     case types.searchGame:
       return {

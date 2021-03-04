@@ -2,8 +2,10 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Screen from 'src/components/Screen';
+import {fetchGame} from 'src/modules/games/actions';
 import H1 from 'src/components/H1';
-import * as gameActions from 'src/store/games/actions';
+import * as gameActions from 'src/modules/games/actions';
+import * as userActions from 'src/modules/user/actions';
 import cards from 'src/cards';
 import Header from 'src/components/Header';
 import Button from 'src/components/Button';
@@ -21,7 +23,7 @@ import Popup from 'src/components/Popup';
 import colors from 'src/constants/colors';
 
 const mapStateToProps = (state) => ({
-  currentGame: state.games.currentGame,
+  game: state.games.game,
 });
 
 export default connect(mapStateToProps)(
@@ -45,9 +47,8 @@ export default connect(mapStateToProps)(
     }
 
     start = async () => {
-      // await wait(3000);
+      await fetchGame();
       this.setState({loading: false});
-      this.timer.start();
     };
 
     register = (key) => (ref) => {
@@ -65,10 +66,19 @@ export default connect(mapStateToProps)(
       this.cardsStack.throw(index);
     };
 
+    leave = async () => {
+      this.setState({loading: true});
+      this.leavePopup.hide();
+      await gameActions.leaveGame();
+      await userActions.fetchUser();
+    };
+
     render() {
       const {loading, hand} = this.state;
-      const players = fakePlayers;
+      const {game} = this.props;
       const association = 'Association';
+
+      console.log({game});
 
       return (
         <Screen style={styles.wrapper}>
@@ -111,10 +121,7 @@ export default connect(mapStateToProps)(
           <Popup ref={this.register('leavePopup')}>
             <Button
               text="button.leave"
-              onPress={() => {
-                this.leavePopup.hide();
-                gameActions.leaveGame();
-              }}
+              onPress={this.leave}
               color={colors.white}
               textColor={colors.black}
             />
@@ -128,6 +135,7 @@ export default connect(mapStateToProps)(
             cards={hand}
             onSubmit={this.submit}
           />
+          {!game && <Spinner />}
         </Screen>
       );
     }
@@ -159,34 +167,3 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
 });
-
-const fakePlayers = [
-  {
-    character: 0,
-    score: 20,
-    name: 'John',
-    id: 'asdas1231',
-  },
-  {
-    character: 0,
-    score: 0,
-    name: 'Alice',
-    id: 'asdas1231asd',
-  },
-  {
-    character: 0,
-    score: 9,
-    name: 'Euyh',
-    id: 'asASD1',
-  },
-  {
-    score: 10,
-    name: 'Sid',
-    id: 'asdasasd1231',
-  },
-  {
-    score: 20,
-    name: 'Nance',
-    id: 'asdas122g31',
-  },
-];

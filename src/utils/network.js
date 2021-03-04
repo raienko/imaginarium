@@ -1,5 +1,5 @@
 import NetInfo from '@react-native-community/netinfo';
-import * as systemActions from 'src/store/system/actions';
+import * as systemActions from 'src/modules/system/actions';
 import EventBus from './EventBus';
 
 export const events = {

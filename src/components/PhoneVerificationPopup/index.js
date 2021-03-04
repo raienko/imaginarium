@@ -4,8 +4,8 @@ import Input from 'src/components/Input';
 import Popup from 'src/components/Popup';
 import Button from 'src/components/Button';
 import ErrorText from 'src/components/ErrorText';
-import * as authApi from 'src/store/auth/api';
-import * as authActions from 'src/store/auth/actions';
+import * as authApi from 'src/modules/auth/api';
+import * as authActions from 'src/modules/auth/actions';
 
 export default class PhoneVerificationPopup extends React.PureComponent {
   static propTypes = {

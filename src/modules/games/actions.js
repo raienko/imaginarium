@@ -3,29 +3,23 @@ import types from './types';
 import * as api from './api';
 import throwError from 'src/utils/throwError';
 
-const fakeGame = {
-  id: 'asdadfasdf',
-  players: [],
-};
-
 export const createGame = async (params) => {
   const game = await api.createGame(params);
-  console.log({
-    game,
-  });
   return store.dispatch({
     type: types.fetchGame,
     payload: {
-      game: fakeGame,
+      game,
     },
   });
 };
 
-export const fetchGame = () => {
-  const game = {id: Date.now()};
+export const fetchGame = async () => {
+  const game = await api.fetchGame();
   return store.dispatch({
     type: types.fetchGame,
-    payload: {game},
+    payload: {
+      game,
+    },
   });
 };
 
@@ -59,14 +53,7 @@ export const updateGame = (changes) => {
   });
 };
 
-export const fetchPlayers = (ids) => {
-  const players = ids.map((id) => ({id, name: Date.now(), score: 0}));
-  return store.dispatch({
-    type: types.fetchPlayers,
-    payload: {players},
-  });
-};
-
-export const leaveGame = () => {
-  return store.dispatch({type: types.clearGameData});
+export const leaveGame = async () => {
+  await api.leaveGame();
+  return store.dispatch({type: types.leaveGame});
 };

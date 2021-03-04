@@ -6,7 +6,7 @@ import Button from 'src/components/Button';
 import Screen from 'src/components/Screen';
 import navigation from 'src/navigation';
 import colors from 'src/constants/colors';
-import * as gameActions from 'src/store/games/actions';
+import * as gameActions from 'src/modules/games/actions';
 
 export default class Lobby extends React.PureComponent {
   state = {

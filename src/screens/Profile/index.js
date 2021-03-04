@@ -11,8 +11,8 @@ import Character from 'src/components/Character';
 import BackButton from 'src/components/BackButton';
 import {rem} from 'src/utils/units';
 import TouchableIcon from 'src/components/TouchableIcon';
-import * as userActions from 'src/store/user/actions';
-import * as gamesActions from 'src/store/games/actions';
+import * as userActions from 'src/modules/user/actions';
+import * as gamesActions from 'src/modules/games/actions';
 import colors from 'src/constants/colors';
 
 const mapStateToProps = (state) => ({

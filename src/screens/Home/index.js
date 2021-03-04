@@ -10,7 +10,7 @@ import {isAuthorized} from 'src/utils/store';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import colors from 'src/constants/colors';
 import Screen from 'src/components/Screen';
-import * as userActions from 'src/store/user/actions';
+import * as userActions from 'src/modules/user/actions';
 
 export default class Home extends React.PureComponent {
   componentDidMount() {

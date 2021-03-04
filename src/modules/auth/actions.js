@@ -1,5 +1,5 @@
 import store from 'src/store';
-import * as systemActions from 'src/store/system/actions';
+import * as systemActions from 'src/modules/system/actions';
 import types from './types';
 import * as api from './api';
 

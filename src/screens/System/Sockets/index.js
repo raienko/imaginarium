@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import * as systemActions from 'src/store/system/actions';
-import * as userActions from 'src/store/user/actions';
+import * as systemActions from 'src/modules/system/actions';
+import * as userActions from 'src/modules/user/actions';
 import ws from 'src/utils/websocket';
 
 const mapStateToProps = (state) => ({

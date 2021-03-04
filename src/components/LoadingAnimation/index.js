@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 import LottieView from 'lottie-react-native';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
-import * as systemActions from 'src/store/system/actions';
-import * as userActions from 'src/store/user/actions';
+import * as systemActions from 'src/modules/system/actions';
+import * as userActions from 'src/modules/user/actions';
 import animation from './loading.json';
 import {wait} from '../../utils/helpers';
 
