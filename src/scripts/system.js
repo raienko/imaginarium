@@ -6,6 +6,8 @@ export const handleAppLaunched = async () => {
   const authorized = isAuthorized();
   const token = getToken();
 
+  // TODO refresh token if expired
+
   if (authorized) {
     await userActions.fetchUser();
     await systemActions.startSockets(token);
