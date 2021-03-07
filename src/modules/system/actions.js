@@ -1,6 +1,6 @@
 import store from 'src/store';
 import logger from 'src/utils/logger';
-import signalQuality from 'src/constants/signalQuality';
+import signalQuality from 'src/config/signalQuality';
 import ws from 'src/utils/websocket';
 import types from './types';
 import * as api from './api';

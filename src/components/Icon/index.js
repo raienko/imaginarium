@@ -7,7 +7,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import {rem} from 'src/utils/units';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 
 const defaultFont = FontAwesome;
 

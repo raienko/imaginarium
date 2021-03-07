@@ -8,7 +8,7 @@ import Logo from 'src/components/Logo';
 import Header from 'src/components/Header';
 import {isAuthorized} from 'src/utils/store';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 import Screen from 'src/components/Screen';
 import * as userActions from 'src/modules/user/actions';
 

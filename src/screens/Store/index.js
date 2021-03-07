@@ -5,7 +5,7 @@ import H1 from 'src/components/H1';
 import H3 from 'src/components/H3';
 import Header from 'src/components/Header';
 import navigation from 'src/navigation';
-import {offset} from 'src/constants/sizes';
+import {offset} from 'src/config/sizes';
 import BackButton from 'src/components/BackButton';
 
 export default class Store extends React.PureComponent {

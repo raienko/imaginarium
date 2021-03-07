@@ -1,7 +1,7 @@
 import React from 'react';
 import {Modal, ActivityIndicator, StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 
 export default class Spinner extends React.PureComponent {
   static propTypes = {

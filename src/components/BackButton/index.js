@@ -3,7 +3,7 @@ import {StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
 import TouchableIcon from 'src/components/TouchableIcon';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 
 export default class BackButton extends React.PureComponent {
   static propTypes = {

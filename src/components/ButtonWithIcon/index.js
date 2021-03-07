@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from 'src/components/Button';
 import Icon from 'src/components/Icon';
 import {rem} from 'src/utils/units';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 
 export default class ButtonWithIcon extends React.PureComponent {
   static propTypes = {

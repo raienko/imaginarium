@@ -5,7 +5,7 @@ import BackButton from 'src/components/BackButton';
 import Button from 'src/components/Button';
 import Screen from 'src/components/Screen';
 import navigation from 'src/navigation';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 import * as gameActions from 'src/modules/games/actions';
 
 export default class Lobby extends React.PureComponent {

@@ -1,5 +1,5 @@
 /* global AbortController */
-import env from 'src/constants/env';
+import env from 'src/config/env';
 import {getToken} from 'src/utils/store';
 import logger from 'src/utils/logger';
 import userAgent from 'src/utils/userAgent';

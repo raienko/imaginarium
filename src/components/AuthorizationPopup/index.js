@@ -8,7 +8,7 @@ import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import * as authActions from 'src/modules/auth/actions';
 import * as authApi from 'src/modules/auth/api';
 import PhoneVerificationPopup from 'src/components/PhoneVerificationPopup';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 
 export default class AuthorizationPopup extends React.PureComponent {
   popup;

@@ -3,8 +3,8 @@ import {TouchableOpacity, View, Modal, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
-import shadow from 'src/constants/shadow';
-import {borderRadius, elementWidth} from 'src/constants/sizes';
+import shadow from 'src/config/shadow';
+import {borderRadius, elementWidth} from 'src/config/sizes';
 import KeyboardAvoidingView from 'src/components/KeyboardAvoidingView';
 
 export default class Popup extends React.PureComponent {

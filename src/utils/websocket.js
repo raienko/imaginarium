@@ -1,4 +1,4 @@
-import env from 'src/constants/env';
+import env from 'src/config/env';
 import EventBus from 'src/utils/EventBus';
 import throwError from 'src/utils/throwError';
 import logger from 'src/utils/logger';

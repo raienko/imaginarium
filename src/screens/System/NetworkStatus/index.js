@@ -5,7 +5,7 @@ import NetInfo from '@react-native-community/netinfo';
 import PropTypes from 'prop-types';
 import H2 from 'src/components/H2';
 import Toast from 'src/components/Toast';
-import signalQuality from 'src/constants/signalQuality';
+import signalQuality from 'src/config/signalQuality';
 import * as systemActions from 'src/modules/system/actions';
 
 const mapStateToProps = (state) => ({

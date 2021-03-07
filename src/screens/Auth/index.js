@@ -10,9 +10,8 @@ import KeyboardAvoidingView from 'src/components/KeyboardAvoidingView';
 import ErrorText from 'src/components/ErrorText';
 import BackButton from 'src/components/BackButton';
 import {rem} from 'src/utils/units';
-import * as authActions from 'src/modules/auth/actions';
-import * as userActions from 'src/modules/user/actions';
-import colors from 'src/constants/colors';
+import * as auth from 'src/scripts/auth';
+import colors from 'src/config/colors';
 
 const mapStateToProps = (state) => ({
   profile: state.user.profile,
@@ -40,8 +39,7 @@ export default connect(mapStateToProps)(
       const {username, password} = this.state;
       this.setState({fetching: true});
       try {
-        await authActions.auth(username, password);
-        await userActions.fetchUser();
+        await auth.login(username, password);
         navigation.navigate('Profile');
       } catch (err) {
         this.setState({fetching: false, error: err.message});

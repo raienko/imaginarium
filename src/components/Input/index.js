@@ -1,7 +1,7 @@
 import React from 'react';
 import {TextInput, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
-import shadow from 'src/constants/shadow';
+import shadow from 'src/config/shadow';
 import localization, {updateOnLanguageChange} from 'locales';
 import {
   elementWidth,
@@ -9,8 +9,8 @@ import {
   borderRadius,
   offset,
   elementFontSize,
-} from 'src/constants/sizes';
-import colors from 'src/constants/colors';
+} from 'src/config/sizes';
+import colors from 'src/config/colors';
 
 export default updateOnLanguageChange(
   class Input extends React.PureComponent {

@@ -13,7 +13,7 @@ import {rem} from 'src/utils/units';
 import TouchableIcon from 'src/components/TouchableIcon';
 import * as userActions from 'src/modules/user/actions';
 import * as gamesActions from 'src/modules/games/actions';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 
 const mapStateToProps = (state) => ({
   profile: state.user.profile,

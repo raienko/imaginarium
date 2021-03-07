@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
 import Button from 'src/components/Button';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 import TouchableIcon from 'src/components/TouchableIcon';
 import Card from 'src/components/Card';
 import ButtonWithIcon from '../ButtonWithIcon';

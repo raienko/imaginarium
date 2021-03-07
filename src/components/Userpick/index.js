@@ -2,8 +2,8 @@ import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
-import colors from 'src/constants/colors';
-import shadow from 'src/constants/shadow';
+import colors from 'src/config/colors';
+import shadow from 'src/config/shadow';
 import placeholder from './placeholder.png';
 
 export default class Userpick extends React.PureComponent {

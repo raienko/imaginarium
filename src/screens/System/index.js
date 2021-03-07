@@ -1,13 +1,13 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {fetchUser} from 'src/modules/user/actions';
+import * as system from 'src/scripts/system';
 import NetworkStatus from './NetworkStatus';
 import Sockets from './Sockets';
 
 export default class System extends React.PureComponent {
-  componentDidMount() {
-    fetchUser();
+  async componentDidMount() {
+    await system.handleAppLaunched();
   }
 
   render() {

@@ -4,18 +4,12 @@ import navigation from 'src/navigation';
 import BackButton from 'src/components/BackButton';
 import ButtonWithIcon from 'src/components/ButtonWithIcon';
 import IfAuthorized from 'src/components/IfAuthorized';
-import * as authActions from 'src/modules/auth/actions';
-import * as userActions from 'src/modules/user/actions';
+import * as auth from 'src/scripts/auth';
 import Screen from 'src/components/Screen';
 import H1 from 'src/components/H1';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 
 export default class Settings extends React.PureComponent {
-  logout = async () => {
-    await userActions.reset();
-    await authActions.logout();
-  };
-
   render() {
     return (
       <Screen style={styles.wrapper}>
@@ -25,13 +19,13 @@ export default class Settings extends React.PureComponent {
         <IfAuthorized>
           <ButtonWithIcon
             text="button.remove_account"
-            onPress={this.logout}
+            onPress={auth.removeAccount}
             iconName="trash"
             color={colors.red}
           />
           <ButtonWithIcon
             text="button.sign_out"
-            onPress={this.logout}
+            onPress={auth.logout}
             color={colors.gray}
             iconName="sign-out"
           />

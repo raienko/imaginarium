@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 
 export default class Header extends React.PureComponent {
   static propTypes = {

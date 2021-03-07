@@ -20,7 +20,7 @@ import CardsViewer from 'src/components/CardsViewer';
 import Table from 'src/components/Table';
 import TouchableIcon from 'src/components/TouchableIcon';
 import Popup from 'src/components/Popup';
-import colors from 'src/constants/colors';
+import colors from 'src/config/colors';
 
 const mapStateToProps = (state) => ({
   game: state.games.game,

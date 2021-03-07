@@ -2,8 +2,8 @@ import React from 'react';
 import {StyleSheet} from 'react-native';
 import Text from 'src/components/Text';
 import PropTypes from 'prop-types';
-import colors from 'src/constants/colors';
-import {offset} from 'src/constants/sizes';
+import colors from 'src/config/colors';
+import {offset} from 'src/config/sizes';
 
 export default class ErrorText extends React.PureComponent {
   static propTypes = {

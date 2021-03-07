@@ -1,4 +1,4 @@
-import signalQuality from 'src/constants/signalQuality';
+import signalQuality from 'src/config/signalQuality';
 import types from './types';
 
 export const initialState = {

@@ -3,12 +3,8 @@ import {TouchableOpacity, View, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {rem} from 'src/utils/units';
 import Text from 'src/components/Text';
-import {
-  elementWidth,
-  elementHeight,
-  elementFontSize,
-} from 'src/constants/sizes';
-import colors from 'src/constants/colors';
+import {elementWidth, elementHeight, elementFontSize} from 'src/config/sizes';
+import colors from 'src/config/colors';
 import {saturate} from 'src/utils/helpers';
 
 export default class Button extends React.PureComponent {

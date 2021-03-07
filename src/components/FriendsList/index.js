@@ -5,10 +5,10 @@ import H3 from 'src/components/H3';
 import PropTypes from 'prop-types';
 import Userpick from 'src/components/Userpick';
 import Icon from 'src/components/Icon';
-import {elementWidth, offset, borderRadius} from 'src/constants/sizes';
+import {elementWidth, offset, borderRadius} from 'src/config/sizes';
 import {rem} from 'src/utils/units';
-import shadow from 'src/constants/shadow';
-import colors from 'src/constants/colors';
+import shadow from 'src/config/shadow';
+import colors from 'src/config/colors';
 
 const fakeFriends = [
   {name: 'John', id: '1'},
