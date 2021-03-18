@@ -36,9 +36,7 @@ export default new (class Websocket extends EventBus {
   _handleSocketError = (err) => this.dispatch(events.error, err);
 
   _handleSocketMessage = (message) => {
-    console.log({message});
     const data = JSON.parse(message.data);
-    console.log({data});
     this.dispatch(events.message, data);
   };
 

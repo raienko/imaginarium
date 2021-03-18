@@ -78,8 +78,6 @@ export default connect(mapStateToProps)(
       const {game} = this.props;
       const association = 'Association';
 
-      console.log({game});
-
       return (
         <Screen style={styles.wrapper}>
           <Header style={styles.header}>
@@ -90,24 +88,11 @@ export default connect(mapStateToProps)(
             <H1 value={association} style={styles.association} />
           </Header>
           <Table>
-            <Slot index={0}>
-              <Character asset={0} />
-            </Slot>
-            <Slot index={1}>
-              <Character asset={1} />
-            </Slot>
-            <Slot index={2}>
-              <Character asset={2} />
-            </Slot>
-            <Slot index={3}>
-              <Character asset={3} />
-            </Slot>
-            <Slot index={4}>
-              <Character asset={4} />
-            </Slot>
-            <Slot index={5}>
-              <Character asset={5} />
-            </Slot>
+            {game?.users?.map((user, slot) => (
+              <Slot index={slot} key={slot}>
+                <Character asset={0} />
+              </Slot>
+            ))}
           </Table>
           <CardsStack
             cards={hand}
