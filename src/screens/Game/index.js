@@ -90,7 +90,7 @@ export default connect(mapStateToProps)(
           <Table>
             {game?.users?.map((user, slot) => (
               <Slot index={slot} key={slot}>
-                <Character asset={0} />
+                <Character asset={user.character} />
               </Slot>
             ))}
           </Table>

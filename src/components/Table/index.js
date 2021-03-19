@@ -27,7 +27,7 @@ export default class Table extends React.PureComponent {
 }
 
 export const width = rem(250);
-export const height = rem(350);
+export const height = rem(250);
 const borderWidth = rem(10);
 const borderRadius = rem(80);
 
