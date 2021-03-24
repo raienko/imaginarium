@@ -1,50 +1,20 @@
 import React from 'react';
-import {Animated, View, StyleSheet, TouchableOpacity} from 'react-native';
+import {
+  Animated,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Easing,
+} from 'react-native';
 import PropTypes from 'prop-types';
-import Card, {width} from 'src/components/Card';
+import Card from 'src/components/Card';
 import {rem} from 'src/utils/units';
-import FlippableCard from '../FlippableCard';
-
-const scale = 0.5;
-
-const transforms = [
-  {
-    rotation: -10,
-    position: {
-      left: rem(30),
-      top: rem(10),
-    },
-  },
-  {
-    rotation: -5,
-    position: {
-      left: rem(70),
-      top: rem(10),
-    },
-  },
-  {
-    rotation: 0,
-    position: {
-      top: rem(10),
-    },
-  },
-  {
-    rotation: 5,
-    position: {
-      right: rem(70),
-      top: rem(10),
-    },
-  },
-  {
-    rotation: 10,
-    position: {
-      right: rem(30),
-      top: rem(10),
-    },
-  },
-];
 
 export default class CardsStack extends React.PureComponent {
+  offset = [];
+
+  animation;
+
   static propTypes = {
     cards: PropTypes.array,
     onPress: PropTypes.func,
@@ -55,116 +25,64 @@ export default class CardsStack extends React.PureComponent {
     onPress: () => {},
   };
 
-  flippedCardPosition = new Animated.ValueXY();
-  flippedCardScale = new Animated.Value(1);
+  constructor(props) {
+    super(props);
+    const {cards} = props;
+    this.offset = cards.map(() => new Animated.Value(0));
+  }
 
   stack = [];
 
+  throw = (index) => this.animate(index, false);
+
+  show = (index) => this.animate(index, true);
+
+  animate = (index, show) =>
+    new Promise((resolve) => {
+      if (this.animation) {
+        this.animation.stop();
+      }
+
+      this.animation = Animated.timing(this.offset[index], {
+        toValue: show ? 0 : 200,
+        duration: 500,
+        easing: Easing.linear,
+        useNativeDriver: true,
+      });
+
+      this.animation.start(resolve);
+    });
+
   renderCard = (card, index) => {
     const {onPress} = this.props;
-    const offset = new Animated.ValueXY();
-    const opacity = new Animated.Value(1);
-
-    this.stack[index] = {
-      offset,
-      opacity,
+    const position = {
+      transform: [{translateY: this.offset[index]}],
     };
-
-    const {rotation, position} = transforms[index];
-
-    const transform = [
-      {rotate: `${rotation}deg`},
-      ...this.stack[index].offset.getTranslateTransform(),
-    ];
-
     return (
-      <Animated.View
-        key={card.id}
-        style={[
-          styles.card,
-          position,
-          {transform},
-          {opacity: this.stack[index].opacity},
-        ]}>
-        <Animated.View style={styles.draggable}>
-          <TouchableOpacity onPress={() => onPress(index)}>
-            <Card source={card.image} scale={scale} />
-          </TouchableOpacity>
-        </Animated.View>
+      <Animated.View style={position} key={index}>
+        <TouchableOpacity onPress={() => onPress(index)}>
+          <Card source={card.image} scale={0.45} />
+        </TouchableOpacity>
       </Animated.View>
     );
   };
 
-  throw = (index) => {
-    if (this.animation) {
-      this.animation.stop();
-    }
-
-    const card = this.stack[index];
-
-    const moveCardOutOfHand = Animated.timing(card.opacity, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-    });
-
-    this.flippedCardPosition.setValue({x: 0, y: 0});
-    this.flippedCardScale.setValue(1);
-
-    const throwFlippedCardOnTheTable = Animated.parallel([
-      Animated.timing(this.flippedCardPosition, {
-        toValue: {
-          x: 0,
-          y: -120,
-        },
-        duration: 300,
-        useNativeDriver: true,
-      }),
-    ]);
-
-    this.animation = Animated.sequence([
-      moveCardOutOfHand,
-      throwFlippedCardOnTheTable,
-    ]);
-
-    this.animation.start();
-  };
-
   render() {
     const {cards} = this.props;
-    const transform = [
-      ...this.flippedCardPosition.getTranslateTransform(),
-      {scale: this.flippedCardScale},
-    ];
-    return (
-      <View style={styles.wrapper}>
-        <Animated.View style={[styles.flipped, {transform}]}>
-          <FlippableCard flipped source={cards[0].image} scale={0.1} />
-        </Animated.View>
-        {cards.map(this.renderCard)}
-      </View>
-    );
+    return <View style={styles.wrapper}>{cards.map(this.renderCard)}</View>;
   }
 }
 
 const styles = StyleSheet.create({
   wrapper: {
     position: 'absolute',
-    bottom: rem(100),
+    bottom: rem(0),
     left: 0,
     right: 0,
-    zIndex: 999999,
+    zIndex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
     paddingBottom: rem(20),
-  },
-  card: {
-    position: 'absolute',
-  },
-  flipped: {
-    position: 'absolute',
-    bottom: rem(97),
-    zIndex: 9999999999,
   },
 });
